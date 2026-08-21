@@ -1,0 +1,15 @@
+[package]
+name = "vanguard-agent"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+vanguard-llm = { path = "../vanguard-llm" }
+vanguard-rag = { path = "../vanguard-rag" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tokio = { workspace = true }
+vanguard-tools = { version = "0.1.0", path = "../vanguard-tools" }
+tracing-subscriber = { workspace = true, features = ["env-filter"] }

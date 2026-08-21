@@ -1,0 +1,117 @@
+enum EngagementType {
+  INTERVIEW
+  INFRA_SURVEY
+  POC_TRACKING
+  TROUBLESHOOTING
+  SOW_PROPOSAL
+}
+
+enum EngagementStatus {
+  CREATED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum ArtifactType {
+  AUDIO
+  IMAGE
+  LOG
+  NOTE
+  DOCUMENT
+}
+
+enum InsightDimension {
+  FUNCTIONAL
+  PAIN_POINT
+  JOBS_TO_BE_DONE
+  LATENT_DESIRE
+  EMOTIONAL
+  SOCIAL
+  CONSTRAINT
+}
+
+enum KnowledgeCategory {
+  INDUSTRY_BACKGROUND
+  CUSTOMER_PATTERN
+  COMPETITOR_INSIGHT
+  METHODOLOGY
+  CASE_STUDY
+}
+
+type Team @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String!
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type User @table(key: "uid") {
+  uid: String! @default(expr: "auth.uid")
+  email: String! @unique
+  displayName: String!
+  team: Team!
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type Engagement @table {
+  id: UUID! @default(expr: "uuidV4()")
+  user: User!
+  team: Team!
+  type: EngagementType! @default(value: INTERVIEW)
+  status: EngagementStatus! @default(value: CREATED)
+  customerName: String!
+  title: String
+  context: String
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}
+
+type Artifact @table(name: "engagement_artifacts") {
+  id: UUID! @default(expr: "uuidV4()")
+  engagement: Engagement!
+  type: ArtifactType!
+  storageUrl: String!
+  fileName: String!
+  fileSizeBytes: Int64
+  transcript: String
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type Insight @table {
+  id: UUID! @default(expr: "uuidV4()")
+  engagement: Engagement!
+  user: User!
+  dimension: InsightDimension!
+  content: String!
+  confidence: Float @default(value: 0.85)
+  isPromoted: Boolean @default(value: false)
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type KnowledgeItem @table @index(fields: ["category", "teamId"], order: [ASC, ASC]) {
+  id: UUID! @default(expr: "uuidV4()")
+  team: Team!
+  title: String! @searchable
+  summary: String! @searchable
+  keywords: [String!]!
+  category: KnowledgeCategory!
+  content: String! @searchable
+  confidence: Float @default(value: 1.0)
+  source: String
+  createdBy: User
+  embedding: Vector! @col(size: 768)
+  createdAt: Timestamp! @default(expr: "request.time")
+  updatedAt: Timestamp! @default(expr: "request.time")
+}
+
+type TokenLog @table {
+  id: UUID! @default(expr: "uuidV4()")
+  user: User!
+  engagement: Engagement
+  modelName: String!
+  inputTokens: Int!
+  outputTokens: Int!
+  cachedTokens: Int @default(value: 0)
+  costUsd: Float!
+  timestamp: Timestamp! @default(expr: "request.time")
+}

@@ -1,0 +1,8 @@
+connectorId: "default"
+generate:
+  javascriptSdk:
+    outputDir: "../../vanguard-web/src/lib/dataconnect"
+    package: "@vanguard/dataconnect"
+  kotlinSdk:
+    outputDir: "../../vanguard-android/app/src/main/kotlin/com/evotensor/vanguard/dataconnect"
+    package: "com.evotensor.vanguard.dataconnect"
