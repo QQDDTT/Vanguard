@@ -32,17 +32,17 @@ function App() {
 
               <div className="security-badge-pill">
                 <ShieldCheck size={14} color="var(--color-success)" />
-                <span>2FA Verified ({session.username})</span>
+                <span>2FA 认证生效 ({session.username})</span>
               </div>
 
               <button
                 type="button"
                 className="logout-btn"
                 onClick={logout}
-                title="安全退出当前 2FA 会话"
+                title="安全注销当前 2FA 登录会话"
               >
                 <LogOut size={15} />
-                <span>退出登录</span>
+                <span>注销</span>
               </button>
             </div>
           </header>
