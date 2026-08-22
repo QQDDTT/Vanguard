@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { EngagementList } from './components/EngagementList';
 import { CreateEngagement } from './components/CreateEngagement';
 import { EngagementDetail } from './components/EngagementDetail';
-import { Terminal } from 'lucide-react';
+import { AuthGuard } from './components/AuthGuard';
+import { Terminal, ShieldCheck, LogOut } from 'lucide-react';
 import './index.css';
 
 function App() {
@@ -14,35 +15,57 @@ function App() {
   };
 
   return (
-    <div>
-      <header className="app-header">
-        <div className="app-title">
-          <Terminal size={32} color="var(--color-accent)" />
-          Vanguard FBE Platform
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-success)', boxShadow: '0 0 10px var(--color-success)' }}></div>
-          <span style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>Data Connect Emulator Active</span>
-        </div>
-      </header>
+    <AuthGuard>
+      {({ session, logout }) => (
+        <div>
+          <header className="app-header">
+            <div className="app-title">
+              <Terminal size={32} color="var(--color-accent)" />
+              <span>Vanguard FBE Platform</span>
+            </div>
 
-      <main>
-        {!activeEngagement ? (
-          <>
-            <CreateEngagement onCreated={handleCreated} />
-            <EngagementList 
-              key={refreshKey} 
-              onSelect={(id: string) => setActiveEngagement(id)} 
-            />
-          </>
-        ) : (
-          <EngagementDetail 
-            engagementId={activeEngagement} 
-            onBack={() => setActiveEngagement(null)} 
-          />
-        )}
-      </main>
-    </div>
+            <div className="header-status-area">
+              <div className="emulator-status-pill">
+                <div className="status-dot online"></div>
+                <span>Data Connect Active</span>
+              </div>
+
+              <div className="security-badge-pill">
+                <ShieldCheck size={14} color="var(--color-success)" />
+                <span>2FA Verified ({session.username})</span>
+              </div>
+
+              <button
+                type="button"
+                className="logout-btn"
+                onClick={logout}
+                title="安全退出当前 2FA 会话"
+              >
+                <LogOut size={15} />
+                <span>退出登录</span>
+              </button>
+            </div>
+          </header>
+
+          <main>
+            {!activeEngagement ? (
+              <>
+                <CreateEngagement onCreated={handleCreated} />
+                <EngagementList 
+                  key={refreshKey} 
+                  onSelect={(id: string) => setActiveEngagement(id)} 
+                />
+              </>
+            ) : (
+              <EngagementDetail 
+                engagementId={activeEngagement} 
+                onBack={() => setActiveEngagement(null)} 
+              />
+            )}
+          </main>
+        </div>
+      )}
+    </AuthGuard>
   );
 }
 
