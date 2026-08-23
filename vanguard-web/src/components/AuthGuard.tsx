@@ -8,7 +8,6 @@ import {
   Check,
   AlertTriangle,
   ShieldAlert,
-  Zap,
   RotateCcw,
 } from "lucide-react";
 import {
@@ -148,15 +147,6 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleQuickFill = () => {
-    if (!password) {
-      setPassword("vanguard2026!");
-    }
-    const currentCode = generateTOTPCodeSync(DEFAULT_TOTP_SECRET);
-    setTotpCode(currentCode);
-    setErrorMessage("");
-  };
-
   const handleResetLock = () => {
     resetLockout();
     setLockoutRemaining(0);
@@ -264,31 +254,19 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
                 <KeyRound size={15} />
                 Google Authenticator 动态码 (2FA)
               </label>
-              <div style={{ display: "flex", gap: "8px" }}>
-                <button
-                  type="button"
-                  className="auth-link-btn"
-                  onClick={handleQuickFill}
-                  style={{ color: "#38bdf8", display: "flex", alignItems: "center", gap: "3px", fontWeight: 600 }}
-                  title="自动计算并填入当前时间片的有效 6 位 TOTP 动态码"
-                >
-                  <Zap size={13} />
-                  一键填入实时码
-                </button>
-                <button
-                  type="button"
-                  className="auth-link-btn"
-                  onClick={() => setShowBindModal(true)}
-                >
-                  <QrCode size={14} />
-                  查看密钥
-                </button>
-              </div>
+              <button
+                type="button"
+                className="auth-link-btn"
+                onClick={() => setShowBindModal(true)}
+              >
+                <QrCode size={14} />
+                首次绑定 / 查看密钥
+              </button>
             </div>
             <input
               type="text"
               className="auth-input totp-input"
-              placeholder="6 位动态验证码 (如 123456 或点击上方一键填入)"
+              placeholder="6 位动态验证码 (如 123456)"
               maxLength={6}
               value={totpCode}
               onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ""))}
