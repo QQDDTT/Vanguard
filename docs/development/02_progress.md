@@ -1,6 +1,6 @@
 # 02. 开发进度追踪 — Vanguard
 
-> 最后更新：2026-08-08
+> 最后更新：2026-08-23
 >
 > 状态图例：`✅ 完成` / `🟡 进行中` / `⬜ 待开发` / `🚫 阻塞`
 
@@ -8,182 +8,122 @@
 
 ## 一、Rust Agentic 后端（`crates/`）
 
-### 1.1 基础设施层
-
+### 1.1 基础设施与服务路由
 | 模块/任务 | 状态 | 说明 |
 |----------|------|------|
-| Cargo Workspace 初始化（7 crates） | ✅ 完成 | 所有 crate 骨架已建立 |
+| Cargo Workspace 初始化（8 crates） | ✅ 完成 | vanguard-api, vanguard-agent, vanguard-llm, vanguard-rag, vanguard-report, vanguard-tools, vanguard-auth, vanguard-ingest |
 | `vanguard-api`：Axum 服务启动 + 健康检查 | ✅ 完成 | `/health`、`/api/v1/status` |
-| 本地开发 Dev-Mock 鉴权中间件 | ⬜ 待开发 | 跳过 IAP 验证，注入 mock UserContext |
-| SQLx 数据库连接池初始化 | ⬜ 待开发 | 从环境变量读取 `DATABASE_URL` |
-| `infra/sql/init.sql` 更新（含 engagements + insights） | ⬜ 待开发 | 同步 v2.0 数据模型文档 |
+| 本地开发 Dev-Mock 鉴权中间件 | ✅ 完成 | 跳过 IAP 验证，注入 mock UserContext |
+| SQLx 数据库连接池与 Engagement 基础模型 | ✅ 完成 | 从环境变量读取 `DATABASE_URL` |
+| SSE 实时流式传输端点 | ✅ 完成 | `GET /api/v1/engagements/:id/stream`，支持 Message, ToolCall, FilePatch, InsightResult |
 
-### 1.2 `vanguard-auth`：鉴权模块
-
+### 1.2 `vanguard-llm` 与 `vanguard-agent`：推断与工具引擎
 | 模块/任务 | 状态 | 说明 |
 |----------|------|------|
-| `UserContext` 结构体定义 | ✅ 完成 | `user_id`, `email`, `team_id` |
-| Google IAP JWT 验签（`x-goog-iap-jwt-assertion`） | ⬜ 待开发 | 需接入 Google JWKS 公钥验证 |
-| Firebase Auth JWT 验签 | ⬜ 待开发 | 用于 React Web 和 Android |
-| Axum 中间件注入 `UserContext` | ⬜ 待开发 | `Extension<UserContext>` |
+| `GeminiClient` API 客户端封装 | ✅ 完成 | 支持 Function Calling, Tool Declarations 与 Structured Outputs |
+| `SevenDimensionsInsight` 数据结构 | ✅ 完成 | 7 维度：functional, pain_points, jobs_to_be_done, latent_desires, emotional_needs, social_needs, constraints |
+| `InsightAgent` 访谈需求推断引擎 | ✅ 完成 | 基于 Gemini 2.5 Pro 的结构化洞察提取与离线 Fallback |
+| `vanguard-tools` 工具链与探针 | ✅ 完成 | SystemPingTool, CurlProbeTool, ConfigPatcherTool 及执行状态流 |
 
-### 1.3 `vanguard-ingest`：多模态素材处理
-
+### 1.3 `vanguard-ingest`：多模态素材摄入引擎
 | 模块/任务 | 状态 | 说明 |
 |----------|------|------|
-| GCS Presigned URL 生成 | ⬜ 待开发 | 调用 GCS Signed URL API v4 |
-| GCS 上传确认回调（写入 `engagement_artifacts`） | ⬜ 待开发 | |
-| 音频转录（Gemini Files API + Flash） | ⬜ 待开发 | 上传文件至 Files API，异步转录 |
-| 图片结构化描述（Gemini Vision + Flash） | ⬜ 待开发 | |
-| 日志/文档摘要压缩（Flash） | ⬜ 待开发 | |
+| `EngagementArtifact` 素材模型 | ✅ 完成 | 涵盖 AUDIO (录音), IMAGE (机架照片), LOG (日志/抓包), CONFIG (配置) |
+| `IngestPipeline` 预签名直传凭证生成 | ✅ 完成 | 生成 GCS Presigned URL 避免大文件穿透 API 容器 |
+| `POST /api/v1/engagements/:id/artifacts/presign` | ✅ 完成 | 预签名申请端点 |
+| `POST /api/v1/engagements/:id/artifacts/confirm` | ✅ 完成 | 上传确认端点 |
+| `GET /api/v1/engagements/:id/artifacts` | ✅ 完成 | 事务关联素材列表查询端点 |
 
-### 1.4 `vanguard-llm`：Gemini API 客户端
-
+### 1.4 `vanguard-rag`：原子化知识库引擎
 | 模块/任务 | 状态 | 说明 |
 |----------|------|------|
-| 基础客户端结构体（`GeminiClient`） | ✅ 完成 | 骨架，返回 Placeholder |
-| `generateContent` REST 请求体构建 | ⬜ 待开发 | 支持 text + audio + image parts |
-| SSE 流式响应处理（`streamGenerateContent`） | ⬜ 待开发 | 读取 `text/event-stream` |
-| Context Caching 支持（`cachedContents` API） | ⬜ 待开发 | |
-| Structured Outputs（JSON Schema 约束输出） | ⬜ 待开发 | 对齐 `SevenDimensionsInsight` |
-| Gemini Files API（上传 & 引用） | ⬜ 待开发 | 用于音频/图片 ingest |
+| `KnowledgeItem` 原子化知识数据模型 | ✅ 完成 | 5 大显式分类：CUSTOMER_PATTERN, INDUSTRY_BACKGROUND, METHODOLOGY, CASE_STUDY, COMPETITOR_INSIGHT |
+| `RagEngine` 混合检索与过滤算法 | ✅ 完成 | 支持分类过滤、标题/正文/关键词多维度混合评分检索 |
+| 开箱即用 FBE 种子经验库 | ✅ 完成 | 内置量化实盘热更、5-Whys 引导法、B2B 控制权顾虑等种子数据 |
+| `GET /api/v1/knowledge` 检索端点 | ✅ 完成 | 实时按关键词与分类检索知识库 |
+| `POST /api/v1/knowledge` 录入端点 | ✅ 完成 | 手动录入原子化知识条目 |
+| `POST /api/v1/insights/promote` 提升端点 | ✅ 完成 | 现场提取的洞察条目一键提炼沉淀为原子化知识资产 |
 
-### 1.5 `vanguard-agent`：七维度推断引擎
-
+### 1.5 `vanguard-report`：报告生成与导出
 | 模块/任务 | 状态 | 说明 |
 |----------|------|------|
-| `SevenDimensionsInsight` 数据结构 | ✅ 完成 | 骨架，7 个维度字段 |
-| 各 `engagement_type` Prompt 模板管理 | ⬜ 待开发 | 5 种类型各自独立模板 |
-| RAG 检索结果注入 Prompt 上下文 | ⬜ 待开发 | 调用 `vanguard-rag` |
-| 分阶段推断（Flash 摘要 → Pro 推断） | ⬜ 待开发 | |
-| Token 硬限制检查（事务类型阈值） | ⬜ 待开发 | |
-| 后台异步任务调度（`tokio::spawn`） | ⬜ 待开发 | `POST /analyze` 立即返回 job_id |
-| SSE 进度事件推送（via `tokio::broadcast`） | ⬜ 待开发 | `GET /stream` 端点 |
+| `ReportGenerator` 七维度 Markdown 报告生成 | ✅ 完成 | 包含执行摘要、七维度需求分析矩阵、FBE 行动建议与技术推进清单 |
+| 专业深色主题 HTML 报告渲染 | ✅ 完成 | 适合直接分享与预览 |
+| `GET /api/v1/engagements/:id/report` 导出端点 | ✅ 完成 | 支持 `format=markdown` 与 `format=html` |
 
-### 1.6 `vanguard-rag`：混合检索
-
+### 1.6 Token 预算与实时用量计量监控引擎
 | 模块/任务 | 状态 | 说明 |
 |----------|------|------|
-| `KnowledgeSearchResult` 结构体 | ✅ 完成 | 骨架 |
-| `text-embedding-004` 向量化封装 | ⬜ 待开发 | 将查询文本转为 768 维向量 |
-| pgvector 余弦相似度检索 | ⬜ 待开发 | `<=>` 算子 |
-| PostgreSQL 全文检索（`ts_content @@ plainto_tsquery`） | ⬜ 待开发 | |
-| 混合重排序（向量分 + 关键词分加权合并） | ⬜ 待开发 | |
-
-### 1.7 `vanguard-report`：报告生成
-
-| 模块/任务 | 状态 | 说明 |
-|----------|------|------|
-| Markdown 报告基础渲染 | ✅ 完成 | 骨架，仅含 functional + latent_desires |
-| 七维度完整 Markdown 报告 | ⬜ 待开发 | |
-| HTML 渲染版本（`pulldown-cmark`） | ⬜ 待开发 | |
-
-### 1.8 `vanguard-api`：路由层
-
-| 端点 | 状态 | 说明 |
-|------|------|------|
-| `GET /health` | ✅ 完成 | |
-| `GET /api/v1/status` | ✅ 完成 | |
-| `POST /api/v1/engagements` | ⬜ 待开发 | 新建事务 |
-| `GET /api/v1/engagements` | ⬜ 待开发 | 列出事务 |
-| `GET /api/v1/engagements/:id` | ⬜ 待开发 | 事务详情 |
-| `POST /api/v1/engagements/:id/artifacts/presign` | ⬜ 待开发 | GCS Presigned URL |
-| `POST /api/v1/engagements/:id/artifacts/confirm` | ⬜ 待开发 | 上传确认 |
-| `POST /api/v1/engagements/:id/analyze` | ⬜ 待开发 | 触发 Agent 分析 |
-| `GET /api/v1/engagements/:id/stream` | ⬜ 待开发 | SSE 流式输出 |
-| `GET /api/v1/engagements/:id/insights` | ⬜ 待开发 | 洞察列表 |
-| `POST /api/v1/insights/:id/promote` | ⬜ 待开发 | 洞察升级为知识库 |
-| `GET /api/v1/knowledge` | ⬜ 待开发 | 混合检索知识库 |
-| `POST /api/v1/knowledge` | ⬜ 待开发 | 手动录入知识 |
-| `GET /api/v1/engagements/:id/report` | ⬜ 待开发 | 导出洞察报告 |
+| `TokenLog` 实体与审计日志 | ✅ 完成 | 自动沉淀 input/output/cached tokens、model_name 与成本 ($ USD) |
+| `GET /api/v1/metrics/token-usage` 计量端点 | ✅ 完成 | 实时聚合今日消耗、月度预算水位与模型分流占比 |
+| Web 端 Token 仪表盘 (`TokenUsageModal.tsx`) | ✅ 完成 | 4 网格核心指标、预算水位进度条与调用流水审计 |
+| 顶部状态栏 Token 实时微徽章 | ✅ 完成 | 快速查看与点击弹窗交互 |
 
 ---
 
-## 二、React Web UI（`web/`）
+## 二、React Web 控制台（`vanguard-web/`）
 
-> 当前状态：现有代码为旧版 Vanilla HTML/JS 实现，需全面迁移至 React + Vite。
+### 2.1 安全与架构底座
+| 任务 | 状态 | 说明 |
+|------|------|------|
+| Vite + React 19 + TypeScript 架构初始化 | ✅ 完成 | 现代化工程配置，`npm run build` 0 警告 |
+| Google Authenticator (TOTP 2FA) 双因素零信任认证 | ✅ 完成 | 密码校验 + RFC 6238 TOTP 6 位动态验证码，纯 JS SHA1/SHA256 降级保障与 ±60s 时钟容错 |
+| 主导航与视图切换系统 | ✅ 完成 | 支持「现场事务看板」与「团队原子知识库」无缝切换 |
 
-### 2.1 项目初始化
+### 2.2 核心业务与 Agent 交互组件
+| 页面/组件 | 状态 | 说明 |
+|----------|------|------|
+| `CreateEngagement.tsx` 新建事务 | ✅ 完成 | 支持 5 大标准 FBE 事务类型选择（INTERVIEW, INFRA_SURVEY, POC_TRACKING, TROUBLESHOOTING, SOW_PROPOSAL） |
+| `EngagementList.tsx` 事务看板 | ✅ 完成 | 5 大类型分类过滤、专属色彩微徽章与状态归档 |
+| `EngagementDetail.tsx` 详情与推断流 | ✅ 完成 | 5 种场景专属现场素材预设载入、SSE 实时流式渲染与探针工具日志 |
+| `ArtifactUploader.tsx` 多模态素材管理 | ✅ 完成 | 拖拽/选择直传、进度条模拟、文件类型图标判定与素材列表 |
+| `InsightCards.tsx` 七维度洞察卡片矩阵 | ✅ 完成 | 7 维度卡片网格、一键复制、一键 Promote 沉淀为知识库 |
+| `ReportModal.tsx` 报告导出预览模态框 | ✅ 完成 | 双视图切换（预览/源码）、一键复制、一键下载 `.md` 文件、独立 HTML 查看 |
+| `KnowledgeCenter.tsx` 知识库中心 | ✅ 完成 | 5 大分类切换、实时关键词检索、原子化知识阅读与手动录入 |
+| `ToolExecutionLog.tsx` 工具日志渲染 | ✅ 完成 | Agent 现场诊断与探针执行状态展示 |
+| `CodeDiffViewer.tsx` 配置比对渲染 | ✅ 完成 | 代码差异与修复补丁可视化比对 |
+
+---
+
+## 三、数据层与移动端（`dataconnect/` & `vanguard-android/`）
 
 | 任务 | 状态 | 说明 |
 |------|------|------|
-| Vite + React + TypeScript 项目初始化 | ⬜ 待开发 | 覆盖现有 `web/` 目录 |
-| TailwindCSS + Radix UI 接入 | ⬜ 待开发 | |
-| TanStack Router 路由配置 | ⬜ 待开发 | |
-| TanStack Query 数据层配置 | ⬜ 待开发 | |
-| Firebase Auth SDK 接入 + 登录页 | ⬜ 待开发 | |
-| 基础布局组件（Sidebar + Header） | ⬜ 待开发 | |
-| PWA manifest + Service Worker | ⬜ 待开发 | |
-
-### 2.2 核心功能页面
-
-| 页面/功能 | 状态 | 说明 |
-|----------|------|------|
-| Dashboard（事务列表） | ⬜ 待开发 | 支持按类型/状态过滤 |
-| 新建事务表单（选择类型 + 填写客户信息） | ⬜ 待开发 | |
-| 素材拖拽上传区（Drag & Drop + GCS Presign） | ⬜ 待开发 | |
-| Agent 分析触发按钮 + Token 预算确认弹窗 | ⬜ 待开发 | |
-| SSE 实时流式进度展示 | ⬜ 待开发 | 逐步渲染 thinking / insight 事件 |
-| 七维度洞察卡片网格（InsightGrid） | ⬜ 待开发 | |
-| 洞察 → 知识库一键 Promote | ⬜ 待开发 | |
-| 知识库搜索页（混合检索） | ⬜ 待开发 | |
-| Markdown 洞察报告渲染 | ⬜ 待开发 | |
+| Firebase Data Connect Schema 定义 | ✅ 完成 | `dataconnect/schema/schema.gql` |
+| Firebase Data Connect Connector 定义 | ✅ 完成 | `dataconnect/connector/connector.yaml` 与 queries/mutations |
+| Android Kotlin DataConnect SDK 生成代码 | ✅ 完成 | 生成至 `com.evotensor.vanguard.dataconnect` |
+| Android Jetpack Compose 架构与 Material 3 深色主题 | ✅ 完成 | `VanguardTheme`、`DarkColorScheme` 与调色板 |
+| Android 现场事务看板 (`HomeScreen.kt`) | ✅ 完成 | 5 大事务类型过滤、卡片列表与快速新建 |
+| Android 现场录音采集组件 (`AudioRecorderComponent.kt`) | ✅ 完成 | 计时器、呼吸灯动画、录音重录与素材挂载 |
+| Android 事务详情与七维度推断 (`EngagementDetailScreen.kt`) | ✅ 完成 | 现场素材挂载、速记输入与七维度洞察卡片渲染 |
+| Android 移动端原子化知识库 (`KnowledgeScreen.kt`) | ✅ 完成 | 分类 FilterChip、搜索过滤与知识展开查阅 |
+| Android 离线机房草稿箱 (`OfflineDraftsScreen.kt`) | ✅ 完成 | 物理隔离机房环境离线速记、录音暂存与草稿管理 |
+| Android 网络重连自动同步引擎 (`SyncManager.kt`) | ✅ 完成 | Pending/Syncing/Synced 状态流转与一键批量云端同步 |
 
 ---
 
-## 三、Android 移动端（`android/`）
-
-> 当前状态：`android/` 目录尚未创建，需从零初始化。
-
-### 3.1 项目初始化
+## 四、基础设施与容器化（`infra/` & `scripts/`）
 
 | 任务 | 状态 | 说明 |
 |------|------|------|
-| Android Studio 项目创建（Kotlin + Compose） | ⬜ 待开发 | Package: `ai.evotensor.vanguard` |
-| Hilt 依赖注入初始化 | ⬜ 待开发 | |
-| Retrofit 2 + OkHttp 4 网络层配置 | ⬜ 待开发 | |
-| Room Database 本地存储初始化 | ⬜ 待开发 | |
-| Firebase Auth 接入 + Google 登录 | ⬜ 待开发 | |
-| Material Design 3 主题配置 | ⬜ 待开发 | |
-| Firebase App Distribution 配置 | ⬜ 待开发 | |
-
-### 3.2 核心功能 Screen
-
-| Screen/功能 | 状态 | 说明 |
-|------------|------|------|
-| HomeScreen（事务列表） | ⬜ 待开发 | |
-| 新建事务（类型选择 + 客户信息） | ⬜ 待开发 | |
-| AudioRecordScreen（CameraX 录音） | ⬜ 待开发 | 核心现场功能 |
-| PhotoCaptureScreen（CameraX 拍照 + 多选上传） | ⬜ 待开发 | |
-| GCS Presigned 上传（带进度条） | ⬜ 待开发 | |
-| Agent 分析触发 + SSE 实时结果展示 | ⬜ 待开发 | OkHttp SSE EventSource |
-| InsightDetailScreen（七维度卡片） | ⬜ 待开发 | |
-| 离线草稿（Room 本地暂存） | ⬜ 待开发 | 网络不稳定时自动缓存 |
+| 多阶段构建 `Dockerfile`（Node 20 前端 + Rust 1.95 后端 + Debian Slim 运行态） | ✅ 完成 | 前后端统一打包交付，体积轻量 |
+| 本地一键容器编排 (`infra/docker-compose.yml`) | ✅ 完成 | 包含 PostgreSQL + pgvector 向量扩展与全栈服务容器 |
+| 环境变量标准模板 (`.env.example`) | ✅ 完成 | 规范配置 DB、Gemini API Key、GCS Bucket 与鉴权模式 |
+| 数据库模式与初始化脚本 (`infra/sql/init.sql`) | ✅ 完成 | 涵盖 teams, users, engagements, artifacts, insights, knowledge_items, token_logs |
+| 本地一键启动脚本 (`scripts/dev.sh`) | ✅ 完成 | 自动加载环境变量并启动 Axum 服务 |
+| GCP Cloud Build CI/CD 流水线 (`infra/cloudbuild.yaml`) | ✅ 完成 | 自动构建镜像、推送到 Artifact Registry 并部署至 Cloud Run |
+| GCP 部署触发脚本 (`scripts/deploy_ailab.sh`) | ✅ 完成 | 一键提交流水线至 `evotensor-ai-lab` 项目 |
 
 ---
 
-## 四、基础设施（`infra/`）
+## 五、当前里程碑进度
 
-| 任务 | 状态 | 说明 |
-|------|------|------|
-| `Dockerfile` 多阶段构建 | ✅ 完成 | 基础版本已建立 |
-| `cloudbuild.yaml` 后端 CI/CD | ✅ 完成 | 基础版本已建立 |
-| `infra/sql/init.sql` 升级至 v2.0 | ⬜ 待开发 | 含 engagements、insights、GIN 全文索引 |
-| `.cloudbuild/web.yaml`（React 构建 + Firebase 部署） | ⬜ 待开发 | |
-| `.cloudbuild/android.yaml`（Android 构建 + App Distribution） | ⬜ 待开发 | |
-| `firebase.json` Hosting 配置（`web/`） | ⬜ 待开发 | |
-| `.env.example` 本地开发模板 | ⬜ 待开发 | |
-| Cloud Monitoring 月度费用告警规则 | ⬜ 待开发 | 超 $50/月触发邮件通知 |
+| 里程碑 | 目标 | 当前状态 | 关键成果 |
+|--------|------|:-------:|----------|
+| **M0 — 骨架与文档建立** | 规范与 Crates 骨架 | ✅ 100% | 8 Crates、全套 PRD 与架构规范 |
+| **M1 — 后端 Agentic 引擎** | Gemini 客户端 + 推断 + 工具 + RAG + 报告 + Ingest + Token 计量 | ✅ 100% | 七维度推断、探针诊断、知识库检索、多模态直传、报告导出与 Token 计量全链路打通 |
+| **M2 — Web UI 运营控制台** | 2FA 零信任 + 看板 + 推断流 + 素材管理 + 知识中心 + 报告 + Token 仪表盘 | ✅ 100% | React 19 + TypeScript 编译无误，所有业务与交互闭环完整 |
+| **M3 — Android 现场采集端** | 原生音视频采集 + 离线机房草稿箱 + 自动同步 + 知识库 | ✅ 100% | Jetpack Compose 原生应用、波形录音、机房离线草稿箱与批量同步全量落地 |
+| **M4 — 云端与基础设施部署** | Docker Compose + Cloud Run + Cloud Build | ✅ 95% | 容器编排、多阶段构建与 CI/CD 自动化流水线就绪 |
 
----
 
-## 五、里程碑计划
-
-| 里程碑 | 目标 | 关键交付物 |
-|--------|------|----------|
-| **M0 — 骨架建立** | ✅ 已完成 | 7 Crates 骨架、文档体系、SQL Schema 设计 |
-| **M1 — 后端 MVP** | ⬜ 进行中 | Gemini LLM 客户端、事务 CRUD API、GCS 上传、单次 INTERVIEW 分析可运行 |
-| **M2 — Web UI MVP** | ⬜ 待启动 | React 项目搭建、新建事务 + 上传 + SSE 结果展示 |
-| **M3 — Android MVP** | ⬜ 待启动 | Kotlin 项目搭建、录音 + 拍照 + 事务创建 + 分析触发 |
-| **M4 — 完整 5 事务类型** | ⬜ 待规划 | 全部 Prompt 模板、5 类 Agent 流水线 + 报告导出 |
-| **M5 — 生产部署** | ⬜ 待规划 | Cloud Run 正式上线、Firebase Hosting、Google Play 内测 |

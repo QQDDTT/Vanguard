@@ -15,7 +15,7 @@ import {
   checkLockout,
   clearSession,
   createSession,
-  getTOTPUri,
+  generateTOTPCodeSync,
   getValidSession,
   recordLoginFailure,
   verifyPassword,
@@ -285,25 +285,35 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
                   <span className="auth-secret-label">2FA 密钥 (Secret):</span>
                   <code className="auth-secret-code">{DEFAULT_TOTP_SECRET}</code>
                 </div>
+                <div className="auth-secret-row" style={{ marginTop: "8px", paddingTop: "8px", borderTop: "1px dashed rgba(255,255,255,0.1)" }}>
+                  <span className="auth-secret-label" style={{ color: "var(--color-accent)" }}>当前实时验证码:</span>
+                  <strong style={{ fontSize: "1.2rem", letterSpacing: "2px", color: "var(--color-accent)" }}>
+                    {generateTOTPCodeSync(DEFAULT_TOTP_SECRET)}
+                  </strong>
+                </div>
               </div>
 
-              <div style={{ display: "flex", gap: "10px", marginTop: "16px" }}>
+              <div style={{ display: "flex", gap: "10px", marginTop: "16px", flexWrap: "wrap" }}>
+                <button
+                  type="button"
+                  className="auth-copy-btn"
+                  onClick={() => {
+                    setTotpCode(generateTOTPCodeSync(DEFAULT_TOTP_SECRET));
+                    setShowBindModal(false);
+                    setErrorMessage("");
+                  }}
+                  style={{ background: "rgba(59, 130, 246, 0.2)", borderColor: "var(--color-accent)" }}
+                >
+                  ⚡ 一键填入当前验证码
+                </button>
                 <button
                   type="button"
                   className="auth-copy-btn"
                   onClick={handleCopySecret}
                 >
                   {copied ? <Check size={16} color="var(--color-success)" /> : <Copy size={16} />}
-                  {copied ? "已复制密钥到剪贴板" : "复制 2FA Secret 密钥"}
+                  {copied ? "已复制密钥" : "复制 2FA Secret 密钥"}
                 </button>
-                <a
-                  href={getTOTPUri()}
-                  className="auth-otpauth-link"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  打开 Authenticator 协议
-                </a>
               </div>
             </div>
 

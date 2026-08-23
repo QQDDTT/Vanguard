@@ -19,3 +19,9 @@ pub struct CreateEngagementRequest {
     pub customer_name: String,
     pub engagement_type: Option<String>,
 }
+
+#[derive(Debug, Deserialize, Default)]
+pub struct AnalyzeEngagementRequest {
+    pub transcript: Option<String>,
+}
+
