@@ -5,7 +5,8 @@ import { EngagementDetail } from './components/EngagementDetail';
 import { KnowledgeCenter } from './components/KnowledgeCenter';
 import { AuthGuard } from './components/AuthGuard';
 import { TokenUsageModal } from './components/TokenUsageModal';
-import { Terminal, ShieldCheck, LogOut, FolderKanban, BookOpen, Coins } from 'lucide-react';
+import { VanguardLogo } from './components/VanguardLogo';
+import { ShieldCheck, LogOut, FolderKanban, BookOpen, Coins } from 'lucide-react';
 import './index.css';
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
           <header className="app-header">
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <div className="app-title">
-                <Terminal size={32} color="var(--color-accent)" />
+                <VanguardLogo size={32} />
                 <span>Vanguard FBE Platform</span>
               </div>
 

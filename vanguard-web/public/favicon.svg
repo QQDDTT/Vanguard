@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- 背景渐变 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <!-- 边框发光渐变 -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#6366f1" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- V 左翼主渐变 (先锋天蓝) -->
+    <linearGradient id="vLeftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="30%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+
+    <!-- V 右翼主渐变 (量子极光紫蓝) -->
+    <linearGradient id="vRightGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="40%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- 核心先锋棱镜高光 (翠绿与青蓝交融) -->
+    <linearGradient id="corePrismGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="50%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+
+    <!-- 护盾内发光 -->
+    <radialGradient id="shieldGlow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 霓虹外发光滤镜 -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="subtleShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- 圆角外框底座 -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="4"/>
+
+  <!-- 背景辐射微光 -->
+  <circle cx="256" cy="240" r="180" fill="url(#shieldGlow)"/>
+
+  <!-- 零信任护盾外轮廓线 (科技几何切割) -->
+  <path d="M 256 70 
+           L 390 125 
+           C 390 260, 330 365, 256 420 
+           C 182 365, 122 260, 122 125 
+           Z" 
+        fill="none" 
+        stroke="#38bdf8" 
+        stroke-opacity="0.18" 
+        stroke-width="3" 
+        stroke-dasharray="6 4"/>
+
+  <!-- 内部几何护盾切面 -->
+  <path d="M 256 92 
+           L 370 140 
+           C 370 250, 318 340, 256 390 
+           C 194 340, 142 250, 142 140 
+           Z" 
+        fill="#0f172a" 
+        fill-opacity="0.45" 
+        stroke="rgba(255,255,255,0.06)" 
+        stroke-width="1.5"/>
+
+  <!-- Vanguard 标志性 "V" 巨翼徽标 (带先锋锐角与立体折面) -->
+  <g filter="url(#subtleShadow)">
+    <!-- V 左翼主翼面 -->
+    <path d="M 256 368 
+             L 146 150 
+             L 204 150 
+             L 256 278 
+             Z" 
+          fill="url(#vLeftGrad)" 
+          filter="url(#neonGlow)"/>
+
+    <!-- V 右翼主翼面 -->
+    <path d="M 256 368 
+             L 366 150 
+             L 308 150 
+             L 256 278 
+             Z" 
+          fill="url(#vRightGrad)" 
+          filter="url(#neonGlow)"/>
+
+    <!-- V 顶部几何先锋晶体 (顶端菱形能量核) -->
+    <polygon points="256,118 290,158 256,198 222,158" 
+             fill="url(#corePrismGrad)" 
+             stroke="#ffffff" 
+             stroke-width="1.5" 
+             stroke-opacity="0.8"/>
+
+    <!-- 底部汇聚点高亮刃芒 -->
+    <polygon points="256,330 266,370 256,392 246,370" 
+             fill="#ffffff" 
+             fill-opacity="0.9" 
+             filter="url(#neonGlow)"/>
+  </g>
+
+  <!-- 科技水平扫描线装饰 -->
+  <line x1="80" y1="256" x2="110" y2="256" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.4"/>
+  <line x1="402" y1="256" x2="432" y2="256" stroke="#6366f1" stroke-width="2" stroke-opacity="0.4"/>
+  <circle cx="72" cy="256" r="3" fill="#38bdf8" fill-opacity="0.6"/>
+  <circle cx="440" cy="256" r="3" fill="#6366f1" fill-opacity="0.6"/>
+</svg>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { VanguardLogo } from './VanguardLogo';
 import {
   ShieldCheck,
   User,
@@ -162,8 +163,8 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
     <div className="auth-container">
       <div className="glass-panel auth-card">
         <div className="auth-header">
-          <div className="auth-logo-badge">
-            <ShieldCheck size={36} color="var(--color-accent)" />
+          <div className="auth-logo-badge" style={{ background: 'transparent', border: 'none', padding: 0 }}>
+            <VanguardLogo size={56} />
           </div>
           <h1 className="auth-title">Vanguard FBE Platform</h1>
           <p className="auth-subtitle">双因素身份鉴权 · 零信任控制台</p>
