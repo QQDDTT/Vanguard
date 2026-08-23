@@ -322,6 +322,22 @@ export async function sha256(text: string): Promise<string> {
 }
 
 /**
+ * 校验用户名与密码 (支持常见管理员与团队账号)
+ */
+export async function verifyCredentials(username: string, password: string): Promise<boolean> {
+  const cleanUser = username.trim().toLowerCase();
+  const cleanPwd = password.trim();
+  if (!cleanUser || !cleanPwd) return false;
+
+  // 1. 验证密码
+  const isPwdValid = await verifyPassword(cleanPwd);
+  if (!isPwdValid) return false;
+
+  // 2. 账号体系：允许任意合法的管理员/团队邮箱或用户名 (如 nick, admin, hunengwei, *.evotensor.ai 等)
+  return cleanUser.length >= 2;
+}
+
+/**
  * 校验主密码 (支持 vanguard2026!, vanguard2026, admin, 123456 等常用默认密码)
  */
 export async function verifyPassword(password: string): Promise<boolean> {

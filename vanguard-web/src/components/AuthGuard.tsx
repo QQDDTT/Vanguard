@@ -1,26 +1,24 @@
 import { useState, useEffect } from "react";
 import {
   ShieldCheck,
+  User,
   Lock,
   KeyRound,
-  QrCode,
-  Copy,
-  Check,
+  Eye,
+  EyeOff,
   AlertTriangle,
   ShieldAlert,
   RotateCcw,
 } from "lucide-react";
 import {
-  DEFAULT_ACCOUNT,
   DEFAULT_TOTP_SECRET,
   checkLockout,
   clearSession,
   createSession,
-  generateTOTPCodeSync,
   getValidSession,
   recordLoginFailure,
   resetLockout,
-  verifyPassword,
+  verifyCredentials,
   verifyTOTPCode,
 } from "../lib/totp";
 import type { SessionInfo } from "../lib/totp";
@@ -31,12 +29,12 @@ interface AuthGuardProps {
 
 export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const [session, setSession] = useState<SessionInfo | null>(null);
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [totpCode, setTotpCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showBindModal, setShowBindModal] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [lockoutRemaining, setLockoutRemaining] = useState<number>(0);
 
   // 初始化检查现有 Session 和防爆破锁定状态
@@ -75,8 +73,14 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
       return;
     }
 
+    const cleanUser = username.trim();
+    if (!cleanUser) {
+      setErrorMessage("请输入管理员或团队账号");
+      return;
+    }
+
     if (!password) {
-      setErrorMessage("请输入管理员密码");
+      setErrorMessage("请输入访问密码");
       return;
     }
 
@@ -90,21 +94,21 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
     setErrorMessage("");
 
     try {
-      // 1. 验证主密码
-      const isPwdValid = await verifyPassword(password);
-      if (!isPwdValid) {
+      // 1. 验证账号与主密码
+      const isCredsValid = await verifyCredentials(cleanUser, password);
+      if (!isCredsValid) {
         const failure = recordLoginFailure();
         if (failure.locked) {
           setLockoutRemaining(failure.remainingSeconds);
           setErrorMessage(`连续错误次数超限！已触发安全锁定 15 分钟`);
         } else {
-          setErrorMessage(`管理员密码错误，剩余尝试次数: ${failure.remainingAttempts}`);
+          setErrorMessage(`账号或密码错误，剩余尝试次数: ${failure.remainingAttempts}`);
         }
         setIsLoading(false);
         return;
       }
 
-      // 2. 验证 TOTP 动态验证码 (支持 ±30s 时间漂移)
+      // 2. 验证 TOTP 动态验证码 (支持 ±180s 容错)
       const isTotpValid = await verifyTOTPCode(DEFAULT_TOTP_SECRET, cleanTotp);
       if (!isTotpValid) {
         const failure = recordLoginFailure();
@@ -121,7 +125,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
       }
 
       // 3. 校验成功，签发 2FA 会话凭据
-      const newSession = createSession("admin");
+      const newSession = createSession(cleanUser);
       setSession(newSession);
       setPassword("");
       setTotpCode("");
@@ -139,12 +143,6 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
     setPassword("");
     setTotpCode("");
     setErrorMessage("");
-  };
-
-  const handleCopySecret = () => {
-    navigator.clipboard.writeText(DEFAULT_TOTP_SECRET);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
   };
 
   const handleResetLock = () => {
@@ -233,37 +231,71 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
         <form onSubmit={handleLogin} className="auth-form">
           <div className="auth-field">
-            <label className="auth-label">
-              <Lock size={15} />
-              管理员密码
+            <label className="auth-label" htmlFor="username">
+              <User size={15} />
+              管理员 / 团队账号
             </label>
             <input
-              type="password"
+              id="username"
+              name="username"
+              type="text"
               className="auth-input"
-              placeholder="请输入管理员密码 (默认: vanguard2026!)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="例如: nick / admin"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               disabled={isLoading || isLocked}
-              autoComplete="current-password"
+              autoComplete="username"
+              required
             />
           </div>
 
           <div className="auth-field">
-            <div className="auth-label-row">
-              <label className="auth-label">
-                <KeyRound size={15} />
-                Google Authenticator 动态码 (2FA)
-              </label>
+            <label className="auth-label" htmlFor="password">
+              <Lock size={15} />
+              访问密码
+            </label>
+            <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                className="auth-input"
+                placeholder="请输入访问密码 (默认: vanguard2026!)"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={isLoading || isLocked}
+                autoComplete="current-password"
+                required
+                style={{ paddingRight: "40px", width: "100%" }}
+              />
               <button
                 type="button"
-                className="auth-link-btn"
-                onClick={() => setShowBindModal(true)}
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: "absolute",
+                  right: "12px",
+                  background: "none",
+                  border: "none",
+                  color: "var(--color-text-secondary)",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center"
+                }}
+                title={showPassword ? "隐藏密码" : "显示密码"}
               >
-                <QrCode size={14} />
-                首次绑定 / 查看密钥
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
+          </div>
+
+          <div className="auth-field">
+            <label className="auth-label" htmlFor="totp_code">
+              <KeyRound size={15} />
+              Google Authenticator 动态码 (2FA)
+            </label>
             <input
+              id="totp_code"
+              name="totp_code"
               type="text"
               className="auth-input totp-input"
               placeholder="6 位动态验证码 (如 123456)"
@@ -272,6 +304,8 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
               onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ""))}
               disabled={isLoading || isLocked}
               autoComplete="one-time-code"
+              inputMode="numeric"
+              required
             />
           </div>
 
@@ -297,91 +331,6 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
           <span>🔒 基于 RFC 6238 TOTP 协议与 AES/SHA-256 硬件级加密防护</span>
         </div>
       </div>
-
-      {/* 首次绑定 / 2FA 密钥查看浮窗 */}
-      {showBindModal && (
-        <div className="auth-modal-overlay" onClick={() => setShowBindModal(false)}>
-          <div
-            className="glass-panel auth-modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="auth-modal-header">
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <QrCode size={22} color="var(--color-accent)" />
-                <h3>绑定 Google Authenticator</h3>
-              </div>
-              <button
-                className="auth-close-btn"
-                onClick={() => setShowBindModal(false)}
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="auth-modal-body">
-              <p style={{ color: "var(--color-text-secondary)", fontSize: "0.9rem", lineHeight: 1.6 }}>
-                请打开手机上的 <strong>Google Authenticator</strong>、<strong>1Password</strong> 或{" "}
-                <strong>Microsoft Authenticator</strong>，选择【添加账户】并在【手动输入密钥】中填写以下信息：
-              </p>
-
-              <div className="auth-secret-box">
-                <div className="auth-secret-row">
-                  <span className="auth-secret-label">账号名称:</span>
-                  <span className="auth-secret-val">{DEFAULT_ACCOUNT}</span>
-                </div>
-                <div className="auth-secret-row">
-                  <span className="auth-secret-label">服务标识 (Issuer):</span>
-                  <span className="auth-secret-val">evotensor</span>
-                </div>
-                <div className="auth-secret-row">
-                  <span className="auth-secret-label">2FA 密钥 (Secret):</span>
-                  <code className="auth-secret-code">{DEFAULT_TOTP_SECRET}</code>
-                </div>
-                <div className="auth-secret-row" style={{ marginTop: "8px", paddingTop: "8px", borderTop: "1px dashed rgba(255,255,255,0.1)" }}>
-                  <span className="auth-secret-label" style={{ color: "var(--color-accent)" }}>当前实时验证码:</span>
-                  <strong style={{ fontSize: "1.2rem", letterSpacing: "2px", color: "var(--color-accent)" }}>
-                    {generateTOTPCodeSync(DEFAULT_TOTP_SECRET)}
-                  </strong>
-                </div>
-              </div>
-
-              <div style={{ display: "flex", gap: "10px", marginTop: "16px", flexWrap: "wrap" }}>
-                <button
-                  type="button"
-                  className="auth-copy-btn"
-                  onClick={() => {
-                    setTotpCode(generateTOTPCodeSync(DEFAULT_TOTP_SECRET));
-                    setShowBindModal(false);
-                    setErrorMessage("");
-                  }}
-                  style={{ background: "rgba(59, 130, 246, 0.2)", borderColor: "var(--color-accent)" }}
-                >
-                  ⚡ 一键填入当前验证码
-                </button>
-                <button
-                  type="button"
-                  className="auth-copy-btn"
-                  onClick={handleCopySecret}
-                >
-                  {copied ? <Check size={16} color="var(--color-success)" /> : <Copy size={16} />}
-                  {copied ? "已复制密钥" : "复制 2FA Secret 密钥"}
-                </button>
-              </div>
-            </div>
-
-            <div className="auth-modal-footer">
-              <button
-                type="button"
-                className="primary"
-                style={{ width: "100%", justifyContent: "center" }}
-                onClick={() => setShowBindModal(false)}
-              >
-                我已完成绑定，返回登录
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

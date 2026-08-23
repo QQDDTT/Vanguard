@@ -427,6 +427,18 @@ input:focus, select:focus, textarea:focus {
   color: #38bdf8;
 }
 
+/* 浏览器密码自动填充暗色保护 */
+.auth-input:-webkit-autofill,
+.auth-input:-webkit-autofill:hover, 
+.auth-input:-webkit-autofill:focus, 
+.auth-input:-webkit-autofill:active {
+  -webkit-text-fill-color: #fff !important;
+  -webkit-box-shadow: 0 0 0 1000px #0f172a inset !important;
+  box-shadow: 0 0 0 1000px #0f172a inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: #fff !important;
+}
+
 .auth-submit-btn {
   width: 100%;
   padding: 13px;
