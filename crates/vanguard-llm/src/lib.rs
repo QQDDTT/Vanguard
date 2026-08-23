@@ -4,7 +4,7 @@ use serde_json::{json, Value};
 use futures::Stream;
 use async_stream::stream;
 use anyhow::{Context, Result};
-use tracing::{debug, error};
+use tracing::error;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum GeminiResponse {

@@ -3,7 +3,7 @@ use vanguard_llm::GeminiClient;
 use anyhow::{Context, Result};
 use tracing::info;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SevenDimensionsInsight {
     pub functional: Vec<String>,
     pub pain_points: Vec<String>,

@@ -3,7 +3,7 @@ use std::sync::Arc;
 use tokio::sync::{broadcast, Mutex};
 use axum::{
     extract::{Path, State, Query},
-    response::{IntoResponse, sse::{Event, Sse}, Html},
+    response::{IntoResponse, sse::{Event, Sse}},
     routing::{get, post},
     middleware,
     Json, Router,
