@@ -219,13 +219,8 @@ export async function verifyTOTPCode(secret: string, userCode: string): Promise<
     return false;
   }
 
-  // 快捷演示与万能测试通行码
-  if (["666888", "888888", "123456"].includes(cleanCode)) {
-    return true;
-  }
-
-  // 宽容模式：校验当前时间片以及前后各 6 个时间步长 (±180s / ±3 分钟)
-  const steps = [0, -1, 1, -2, 2, -3, 3, -4, 4, -5, 5, -6, 6];
+  // 严格模式：校验当前时间片以及前后各 1 个时间步长 (±30s)
+  const steps = [0, -1, 1];
   for (const step of steps) {
     const validCode = generateTOTPCodeSync(secret, step);
     if (validCode === cleanCode) {
@@ -344,17 +339,12 @@ export async function verifyPassword(password: string): Promise<boolean> {
   const cleanPwd = password.trim();
   if (!cleanPwd) return false;
 
-  // 常见默认测试密码快速放行
-  if (["vanguard2026!", "vanguard2026", "admin", "123456", "password"].includes(cleanPwd)) {
-    return true;
-  }
-
   const hash = await sha256(cleanPwd);
   const customHash = localStorage.getItem("vanguard_custom_pwd_hash");
   if (customHash) {
     return hash === customHash;
   }
-  return hash === DEFAULT_PASSWORD_HASH || cleanPwd.length >= 4;
+  return hash === DEFAULT_PASSWORD_HASH;
 }
 
 /**
