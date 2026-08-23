@@ -205,8 +205,8 @@ async fn list_engagements(
                 customer_name: "幻方量化 · 高频策略回测引擎升级".to_string(),
                 engagement_type: "INFRA_SURVEY".to_string(),
                 status: "ACTIVE".to_string(),
-                created_at: chrono::Utc::now() - chrono::Duration::days(2),
-                updated_at: chrono::Utc::now(),
+                created_at: Some(chrono::Utc::now() - chrono::Duration::days(2)),
+                updated_at: Some(chrono::Utc::now()),
             },
             models::Engagement {
                 id: uuid::Uuid::parse_str("22222222-2222-2222-2222-222222222222").unwrap(),
@@ -214,8 +214,8 @@ async fn list_engagements(
                 customer_name: "九坤投资 · 分布式计算调度现场 PoC".to_string(),
                 engagement_type: "POC_TRACKING".to_string(),
                 status: "ACTIVE".to_string(),
-                created_at: chrono::Utc::now() - chrono::Duration::days(1),
-                updated_at: chrono::Utc::now(),
+                created_at: Some(chrono::Utc::now() - chrono::Duration::days(1)),
+                updated_at: Some(chrono::Utc::now()),
             },
         ];
         Json(serde_json::json!({ "data": mock_engagements })).into_response()
@@ -267,8 +267,8 @@ async fn create_engagement(
             customer_name: payload.customer_name,
             engagement_type: eng_type,
             status: "ACTIVE".to_string(),
-            created_at: chrono::Utc::now(),
-            updated_at: chrono::Utc::now(),
+            created_at: Some(chrono::Utc::now()),
+            updated_at: Some(chrono::Utc::now()),
         };
         Json(serde_json::json!({
             "status": "success",
