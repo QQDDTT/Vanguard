@@ -491,16 +491,20 @@ async fn get_engagement_report(
 
     let customer_name = match uuid::Uuid::parse_str(&id) {
         Ok(uid) => {
-            let res = sqlx::query_as::<_, models::Engagement>(
-                "SELECT * FROM engagements WHERE id = $1"
-            )
-            .bind(uid)
-            .fetch_optional(&state.db_pool)
-            .await;
+            if let Some(ref pool) = state.db_pool {
+                let res = sqlx::query_as::<_, models::Engagement>(
+                    "SELECT * FROM engagements WHERE id = $1"
+                )
+                .bind(uid)
+                .fetch_optional(pool)
+                .await;
 
-            match res {
-                Ok(Some(eng)) => eng.customer_name,
-                _ => format!("Engagement-{}", &id[..8.min(id.len())]),
+                match res {
+                    Ok(Some(eng)) => eng.customer_name,
+                    _ => format!("Engagement-{}", &id[..8.min(id.len())]),
+                }
+            } else {
+                format!("Engagement-{}", &id[..8.min(id.len())])
             }
         },
         Err(_) => format!("Engagement-{}", &id[..8.min(id.len())]),
