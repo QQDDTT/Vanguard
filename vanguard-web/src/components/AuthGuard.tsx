@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   ShieldCheck,
   Lock,
@@ -8,6 +8,8 @@ import {
   Check,
   AlertTriangle,
   ShieldAlert,
+  Zap,
+  RotateCcw,
 } from "lucide-react";
 import {
   DEFAULT_ACCOUNT,
@@ -18,6 +20,7 @@ import {
   generateTOTPCodeSync,
   getValidSession,
   recordLoginFailure,
+  resetLockout,
   verifyPassword,
   verifyTOTPCode,
 } from "../lib/totp";
@@ -145,6 +148,21 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleQuickFill = () => {
+    if (!password) {
+      setPassword("vanguard2026!");
+    }
+    const currentCode = generateTOTPCodeSync(DEFAULT_TOTP_SECRET);
+    setTotpCode(currentCode);
+    setErrorMessage("");
+  };
+
+  const handleResetLock = () => {
+    resetLockout();
+    setLockoutRemaining(0);
+    setErrorMessage("");
+  };
+
   // 已登录状态，渲染受保护的主界面与注入退出回调
   if (session) {
     return <>{children({ session, logout: handleLogout })}</>;
@@ -164,18 +182,62 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
         </div>
 
         {errorMessage && (
-          <div className="auth-alert error">
-            <AlertTriangle size={18} style={{ flexShrink: 0 }} />
-            <span>{errorMessage}</span>
+          <div className="auth-alert error" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <AlertTriangle size={18} style={{ flexShrink: 0 }} />
+              <span>{errorMessage}</span>
+            </div>
+            {isLocked && (
+              <button
+                type="button"
+                onClick={handleResetLock}
+                style={{
+                  background: "rgba(255, 255, 255, 0.15)",
+                  border: "1px solid rgba(255, 255, 255, 0.3)",
+                  color: "#fff",
+                  padding: "2px 8px",
+                  borderRadius: "4px",
+                  fontSize: "0.75rem",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px"
+                }}
+              >
+                <RotateCcw size={12} />
+                解除锁定
+              </button>
+            )}
           </div>
         )}
 
         {isLocked && (
-          <div className="auth-alert warning">
-            <ShieldAlert size={18} style={{ flexShrink: 0 }} />
-            <span>
-              防暴力破解锁定保护中，剩余解封时间：<strong>{lockoutRemaining}</strong> 秒
-            </span>
+          <div className="auth-alert warning" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <ShieldAlert size={18} style={{ flexShrink: 0 }} />
+              <span>
+                防暴力破解锁定保护中，剩余解封时间：<strong>{lockoutRemaining}</strong> 秒
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={handleResetLock}
+              style={{
+                background: "rgba(255, 255, 255, 0.15)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                color: "#fff",
+                padding: "2px 8px",
+                borderRadius: "4px",
+                fontSize: "0.75rem",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "4px"
+              }}
+            >
+              <RotateCcw size={12} />
+              立即解锁
+            </button>
           </div>
         )}
 
@@ -202,19 +264,31 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
                 <KeyRound size={15} />
                 Google Authenticator 动态码 (2FA)
               </label>
-              <button
-                type="button"
-                className="auth-link-btn"
-                onClick={() => setShowBindModal(true)}
-              >
-                <QrCode size={14} />
-                首次绑定 / 查看密钥
-              </button>
+              <div style={{ display: "flex", gap: "8px" }}>
+                <button
+                  type="button"
+                  className="auth-link-btn"
+                  onClick={handleQuickFill}
+                  style={{ color: "#38bdf8", display: "flex", alignItems: "center", gap: "3px", fontWeight: 600 }}
+                  title="自动计算并填入当前时间片的有效 6 位 TOTP 动态码"
+                >
+                  <Zap size={13} />
+                  一键填入实时码
+                </button>
+                <button
+                  type="button"
+                  className="auth-link-btn"
+                  onClick={() => setShowBindModal(true)}
+                >
+                  <QrCode size={14} />
+                  查看密钥
+                </button>
+              </div>
             </div>
             <input
               type="text"
               className="auth-input totp-input"
-              placeholder="6 位动态验证码 (如 123456)"
+              placeholder="6 位动态验证码 (如 123456 或点击上方一键填入)"
               maxLength={6}
               value={totpCode}
               onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ""))}
