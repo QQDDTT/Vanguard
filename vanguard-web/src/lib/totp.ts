@@ -9,7 +9,7 @@ export const DEFAULT_ACCOUNT = "evotensor:vanguard";
 export const DEFAULT_ISSUER = "evotensor";
 
 // 默认管理员密码的 SHA-256 哈希值 (预设初始密码: vanguard2026!)
-const DEFAULT_PASSWORD_HASH = "b4f2c9fa5f83863484f938d61dd2ffb1049ad5fcfdcbaea4c885cfbe2e7a1ce2"; // sha256("vanguard2026!")
+const DEFAULT_PASSWORD_HASH = "ec03b8b2b49f93f148aa1738dc958f399e0cc8852773ccc0b0c43912c505dec4"; // sha256("vanguard2026!")
 
 const STORAGE_SESSION_KEY = "vanguard_2fa_session";
 const STORAGE_LOCK_KEY = "vanguard_auth_lock";
