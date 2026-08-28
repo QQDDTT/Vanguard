@@ -67,7 +67,7 @@
 | 任务 | 状态 | 说明 |
 |------|------|------|
 | Vite + React 19 + TypeScript 架构初始化 | ✅ 完成 | 现代化工程配置，`npm run build` 0 警告 |
-| Google Authenticator (TOTP 2FA) 双因素零信任认证 | ✅ 完成 | 密码校验 + RFC 6238 TOTP 6 位动态验证码，纯 JS SHA1/SHA256 降级保障与 ±60s 时钟容错 |
+| Omni-Gate 全域统一零信任网关接入 | ✅ 完成 | 接入 Cloudflare Zero Trust 与 Omni-Gate 动态反向代理免登直通 |
 | 主导航与视图切换系统 | ✅ 完成 | 支持「现场事务看板」与「团队原子知识库」无缝切换 |
 
 ### 2.2 核心业务与 Agent 交互组件

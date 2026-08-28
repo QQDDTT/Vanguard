@@ -11,13 +11,12 @@
 ```mermaid
 graph TB
     subgraph ClientLayer ["客户端接入层"]
-        Web["🖥️ Vanguard Web 控制台<br>(React 19 + Vite + 2FA TOTP)"]
+        Web["🖥️ Vanguard Web 控制台<br>(React 19 + Vite)"]
         Mobile["📱 Vanguard Android 移动端<br>(Kotlin + Jetpack Compose)"]
     end
 
-    subgraph SecurityLayer ["安全与零信任层"]
-        TOTP["Google Authenticator (2FA / TOTP)"]
-        MockAuth["Dev-Mock / IAP JWT 鉴权"]
+    subgraph SecurityLayer ["全域安全网关层"]
+        OmniGate["🛡️ Omni-Gate 统一网关<br>(Cloudflare Zero Trust / MFA 统管)"]
     end
 
     subgraph BackendLayer ["Rust 异步核心 (vanguard-api)"]
@@ -43,7 +42,7 @@ graph TB
 ```
 
 - **全自主 Rust 后端**：基于 Axum 框架与 Tokio 异步运行时，拆分为 8 个独立核心 Crates。
-- **Web 零信任控制台**：React 19 + TypeScript + Vite，原生集成 Google Authenticator (TOTP 2FA) 双因素认证与 $\pm 60\text{s}$ 时钟容错。
+- **Web 控制台**：React 19 + TypeScript + Vite，接入全域统一 Omni-Gate 零信任动态代理网关。
 - **Android 原生现场采集端**：Kotlin 2.0 + Jetpack Compose Material 3，支持现场波形录音采集与 5 大事务看板。
 - **多模态与 LLM 引擎**：Gemini 2.5 Pro / Flash 深度推断与现场诊断探针（`system_ping`, `curl_probe`, `config_patcher`）。
 - **原子化 RAG 知识库**：5 大显式分类与混合检索，支持现场洞察一键 Promote 沉淀为团队标准资产。
