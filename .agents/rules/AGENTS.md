@@ -30,3 +30,29 @@ description: "Vanguard 平台核心设计规范与双层仓库开发方针"
 ## 3. 设计与内容规范
 - **全中文化**: 所有面向用户的文档、分析报告、静态页面文案及代码注释均遵守全中文规范。
 - **高水准视觉审美**: 生成的静态样板网站应保持现代、专业且精致的视觉设计（Dark Modern 或高品质主题），具备良好的排版、色彩搭配与响应式布局。
+
+## 4. 双层架构下的“登录”与“主页”概念递归消歧规范 (Concept Recursion & Anti-Blocking Rules)
+在具体案件的原型开发中，常常涉及**两套“登录”与“主页”概念的递归嵌套**。必须严格区分并遵循以下消歧规范与隔离铁律：
+
+### 4.1 概念层级划分 (Two Distinct Layers)
+1. **L1 平台展示门户层 (Showcase Portal Layer)**：
+   - **定位**: 面向项目决策者、投资人、合作方展示全案交付成果的**顶层汇报看板**。
+   - **门户主页 (Portal Home)**: 必须严格固定为 `site/index.html`。负责统揽展示四大设计规格书（DEL-01~04）、核心指标、业务白皮书及目标产品入口。
+   - **门户门禁 (Portal Gateway Auth)**: 若开启，属于平台级的商业机密保密保护层（例如 Gateway Access Code 弹窗），作用于全案资产。
+
+2. **L2 开发产品素材层 (Target Product Prototype / Asset Layer)**：
+   - **定位**: 作为交付物（如 DEL-01）所模拟的**目标业务软件系统本身**（例如客户定制的内部 CRM 系统）。
+   - **产品登录原型 (Product Prototype Login)**: 如 `site/crm-login.html`（办公室大门 VR 门禁）。**纯属视觉与交互设计素材**，用于向客户直观展示该业务系统未来的登录体验与品牌调性。
+   - **产品主页原型 (Product Prototype Home)**: 如 `site/crm-home.html`（执务室 VR 全景控制台）。属于进入该业务系统后的综合工作台。
+   - **产品业务功能页 (Product Feature Pages)**: 如 `site/prototype-crm.html`（业务台账）。属于系统内部具体业务模块。
+
+### 4.2 核心运行铁律 (Anti-Blocking Golden Rules)
+1. **产品登录原型绝不拦截原则 (No-Blocking Rule)**：
+   - 目标系统的登录页面仅作为“视觉交互演示素材”，**严禁在前端设置任何强制阻断内部页面访问的路由拦截守卫**。
+   - 评审人员必须能够通过直链随时直接打开、查看和评审任意内部产品页面（如 `crm-home.html`、`prototype-crm.html` 等），杜绝因未登录而强制重定向回登录页的情况。
+2. **主页命名与语义隔离 (Namespace Segregation)**：
+   - `index.html` 必须永远作为【L1 展示门户主页】，严禁被替换或重定向为某一个具体软件的原型主页。
+   - 目标产品的【L2 原型主页】必须使用业务命名前缀（如 `crm-home.html`、`app-home.html`），保持层级分明。
+3. **按钮与标识规范遵守**：
+   - 各层界面严格遵循全平台按钮“有文字无符号，有符号无文字”的铁律。
+   - 代码与注释中严谨标注层级标签（如 `[L1 Portal]` 与 `[L2 Target Product Prototype]`），杜绝认知混淆。
