@@ -1,47 +1,54 @@
-# 📚 Vanguard 文档库 (Documentation Center)
+# Vanguard 平台化设计与核心规范体系
 
-Vanguard 项目文档分为**业务相关**与**技术相关**两大模块：
-
----
-
-## 💼 业务相关文档 (Business Documentation)
-
-聚焦于 FBE 产品定位、客户需求分析框架、现场工作流以及知识库沉淀规范。
-
-- [01. 产品需求文档 (PRD)](business/01_product_requirements.md)
-  - 核心痛点、七维度需求挖掘框架、用户故事 (User Stories)。
-- [02. FBE 全生命周期事务扩展规范](business/02_engagement_workflows.md)
-  - 现场勘测、PoC 试点、竞品攻防、故障排查与 SOW 提案等 5 大扩展事务。
-- [03. Agent 知识库规范](business/03_knowledge_base_spec.md)
-  - 面向 Agent 的原子化知识库（200-500字）、5 大分类 Enum 与 JSON 契约。
+欢迎查阅 **Vanguard 平台化设计知识库**。本项目致力于通过**纯本地文档管理与高质感纯静态案例产物**，打造极简、零依赖、本地优先的知识资产与成果交付体系。
 
 ---
 
-## 🛠️ 技术相关文档 (Technical Documentation)
+## 1. 文档架构大纲
 
-涵盖系统架构、数据库模型、API 接口设计、Token 费用控制及云端部署指导。
-
-- [01. 全栈系统架构设计](technical/01_architecture.md)
-  - 系统总体拓扑、GCP+Rust Agentic 平台、GCP+React Web UI 及 GCP发布 Android 应用的全栈架构与依赖。
-- [02. 数据模型与 SQL Schema](technical/02_data_model.md)
-  - Postgres 行级隔离方案、pgvector 向量表及初始化 `init.sql` 说明。
-- [03. REST API 与 WebSocket 设计](technical/03_api_design.md)
-  - Google IAP 请求头解析、采访/事务 API 及 SSE 流式端点规范。
-- [📄 OpenAPI 3.0 契约文档](technical/openapi.yaml)
-  - **(重要)** 三大端 API 与数据结构的单一数据源 (Single Source of Truth)。
-- [04. Token 预算与用量控制](technical/04_token_budget.md)
-  - Gemini 2.5 Flash / Pro 模型路由策略、Context Caching 及 150K Token 硬限制。
-- [05. GCP AI Lab 部署指南](technical/05_deployment_ailab.md)
-  - 基于 Cloud Build 与 Cloud Run 的 CI/CD 及 GCP `evotensor-ai-lab` 部署指南。
+```text
+docs/
+├── README.md                               # 本导航索引文档
+├── platform/                               # 平台化总体架构与核心规范
+│   ├── 01_platform_overview.md             # 平台演进、核心哲学与四层架构模型
+│   ├── 02_case_lifecycle_spec.md           # 案例数据模型、元数据与生命周期流转规范
+│   ├── 03_static_generation_spec.md        # 静态网站产物设计系统、UI/UX 与交付规范
+│   └── 04_automation_powershell_spec.md    # Windows 原生 PowerShell 自动化与工具设计
+├── templates/                              # 标准化模版库
+│   ├── case_metadata_schema.json           # 案例元数据 JSON Schema 校验文件
+│   ├── case_template.md                    # 案例 Markdown 标准文档模板
+│   └── static_site_template.html           # 案例纯静态展示网站开箱即用模板
+└── guides/                                 # 实操指引手册
+    ├── case_authoring_guide.md             # 案例文档编写与沉淀实操指南
+    └── static_site_delivery_guide.md       # 静态产物生成与交付质检手册
+```
 
 ---
 
-## 🔨 开发文档 (Development)
+## 2. 核心文档快速链接
 
-记录开发方式、本地环境搭建与实时功能进度。
+### 🏛️ 平台化顶层设计
+- [01. 平台架构与方针总览](file:///g:/我的云端硬盘/workspace/Vanguard/docs/platform/01_platform_overview.md)：了解平台如何从 Server 架构转向纯本地文档化，以及四层架构划分。
+- [02. 案例模型与生命周期规范](file:///g:/我的云端硬盘/workspace/Vanguard/docs/platform/02_case_lifecycle_spec.md)：了解案例目录格式、`metadata.json` 规范与状态机定义。
+- [03. 静态产物设计系统规范](file:///g:/我的云端硬盘/workspace/Vanguard/docs/platform/03_static_generation_spec.md)：了解高水准纯静态网站的视觉规范、Design Tokens 与交付标准。
+- [04. 原生自动化与脚本规范](file:///g:/我的云端硬盘/workspace/Vanguard/docs/platform/04_automation_powershell_spec.md)：了解在 Windows 下利用原生 PowerShell 实现零依赖自动化。
 
-- [00. 开发文档总览](development/README.md)
-- [01. 开发环境与工作流指南](development/01_dev_guide.md)
-  - 本地 PostgreSQL、Rust/React/Android 开发启动方式、分支策略、代码规范。
-- [02. 开发进度追踪](development/02_progress.md)
-  - 三大端各模块功能完成状态与里程碑计划（持续更新）。
+### 📋 模版与标准样例
+- [案例 Markdown 结构模板](file:///g:/我的云端硬盘/workspace/Vanguard/docs/templates/case_template.md)
+- [案例元数据 Schema 校验规范](file:///g:/我的云端硬盘/workspace/Vanguard/docs/templates/case_metadata_schema.json)
+- [纯静态案例交互网站原型模版](file:///g:/我的云端硬盘/workspace/Vanguard/docs/templates/static_site_template.html)
+
+### 🚀 实操操作指引
+- [案例文档编写与沉淀指南](file:///g:/我的云端硬盘/workspace/Vanguard/docs/guides/case_authoring_guide.md)
+- [静态产物生成与交付指南](file:///g:/我的云端硬盘/workspace/Vanguard/docs/guides/static_site_delivery_guide.md)
+
+---
+
+## 3. 核心设计原则一览
+
+| 原则 | 核心内涵 |
+| :--- | :--- |
+| **无 Server 依赖** | 不启动、不维护任何后端或容器服务，彻底消除运维成本。 |
+| **本地优先 (Local-First)** | 一切知识沉淀与资产保留在本地文件系统中，由 Git 负责可靠版本回溯。 |
+| **纯静态即开即用** | 案例交付产物直接采用自包含 Vanilla HTML/CSS/JS，本地浏览器双击即可无缝浏览。 |
+| **Windows 原生工具** | 遵循轻量约束，仅使用 Windows 原生 PowerShell / CMD 进行自动化运维。 |

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VanguardCaseMetadata",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "category",
+    "status",
+    "author",
+    "created_at",
+    "updated_at",
+    "summary",
+    "tags",
+    "deliverables"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 2
+    },
+    "category": {
+      "type": "string",
+      "enum": ["市场调研", "技术评测", "运营策略", "投资分析", "产品规划", "其他"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "in_progress", "generated", "archived"]
+    },
+    "author": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "updated_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "deliverables": {
+      "type": "object",
+      "required": ["site_entry", "docs_entry"],
+      "properties": {
+        "site_entry": {
+          "type": "string"
+        },
+        "docs_entry": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

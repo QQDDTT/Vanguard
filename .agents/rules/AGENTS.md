@@ -1,23 +1,21 @@
 ---
 trigger: always_on
-description: "基础项目开发规范"
+description: "Vanguard 项目核心设计规范与开发方针"
 ---
 
-# 项目开发规范
+# Vanguard 项目规范与开发方针
 
-## 1. 核心架构约束 (Core Architecture Constraints)
-- **本地定位**: 本地开发环境（宿主机）仅作为**轻量级代码编辑与版本控制节点**。
-- **GCP 优先原则 (GCP Cloud-First)**: 所有构建、环境打包及运行任务**推荐通过 GCP 调度技能转交至云端节点全权执行**。
+## 1. 核心架构方针 (Core Architecture Guidelines)
+- **纯本地文档驱动**: 本项目不再部署任何后端 Server 服务（不采用 Cloud Run、容器化 API 或远端数据库服务），以本地文档管理与知识沉淀为核心。
+- **案例产物静态化**: 针对具体业务或研究案例，其可视化报告与交付产物以**纯静态网站 (Vanilla HTML / CSS / JavaScript)** 形式生成，支持直接在本地浏览器中双击或离线预览，无需安装复杂运行环境。
 
-## 2. 行为准则 (Behavioral Guidelines)
-- 在执行代码编译或启动服务等指令时，Agent 应该自动挂载或使用云端调度工具，将任务派发至 GCP 服务器。
-- 不推荐在本地进行重度计算或大体积依赖下载。
+## 2. 环境与工具约束 (Environment & Tooling Constraints)
+- **本地环境规范**:
+  - 宿主机严格禁止安装和使用 Python、Node.js、Go、Rust、Java 等编程语言运行时及对应包管理器（npm、pip、cargo 等）。
+  - 本地自动化与文件处理脚本仅允许使用 Windows 原生内置的 **PowerShell** 或 **批处理 (BAT / CMD)**。
+- **纯静态原则**:
+  - 静态网站产物不依赖本地动态构建打包工具（如 vite、webpack），直接产出结构清晰、语义化且样式精美的 HTML/CSS/JS 静态文件。
 
-## 3. 设计规范要求
-- **全中文化**: 所有面向用户的日志、文档以及代码注释必须遵守中文规范（见全局约束）。
-
-## 4. 专属部署规则 (Specific Deployment Rules)
-- **引擎服务部署**: 核心引擎代码请由 `cloudbuild.yaml` 构建并最终部署为 Cloud Run 服务 `vanguard-engine` (us-central1)。
-
-- **网络与路由详情 (Network Details)**:
-  - 网关域名: vanguard-web.evotensor.dev
+## 3. 设计与内容规范
+- **全中文化**: 所有面向用户的文档、分析报告、静态页面文案及代码注释均遵守全中文规范。
+- **高水准视觉审美**: 生成的静态案例网站应保持现代、专业且精致的视觉设计，具备良好的排版、色彩搭配与响应式布局。
