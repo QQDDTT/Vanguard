@@ -75,9 +75,9 @@ stateDiagram-v2
 
 | 阶段 | 状态码 | 核心任务 | 准出条件 (Exit Criteria) |
 | :--- | :--- | :--- | :--- |
-| **草稿阶段** | `draft` | 案例立项、目录初始化、核心问题定义 | 创建 `metadata.json`，完成 `docs/01_overview.md` 的背景定义。 |
-| **调研推进** | `in_progress` | 收集原始资料、数据比对、推理分析 | 完成 `docs/02_research.md` 与结论篇撰写，所有关键数据有据可循。 |
-| **产物生成** | `generated` | 将 Markdown 分析提炼转化为纯静态网站 | `site/index.html` 成功生成，样式与交互无报错，本地浏览器正常呈现。 |
+| **草稿立项** | `draft` | 案例立项、目录初始化、核心问题定义 | 本地创建 `metadata.json`，完成 `docs/01_overview.md` 的背景定义。 |
+| **详细设计推进** | `in_progress` | 业务SOP梳理、系统功能规划与样板开发 | 1. 建立案件同名公开仓库 `Vanguard-<CaseName>` (Public)；<br>2. 结构化设计文档完整归档至案例仓库 `docs/`；<br>3. 完成高保真**设计展示样板网页** (`site/index.html`)；<br>4. 配置 GitHub Actions 自动部署工作流与独立域名文件 (`site/CNAME`)。 |
+| **产物生成定稿** | `generated` | 样板网页多端核验通过，完成线上部署发布 | 案件仓库主分支推送后，GitHub Actions 自动化部署至 GitHub Pages 成功，线上独立域名正常访问，本地双击（`file:///`）0 报错。 |
 | **归档持久** | `archived` | 案例关闭、索引更新、永久归档 | 元数据状态置为 `archived`，更新全局案例索引表。 |
 
 ---

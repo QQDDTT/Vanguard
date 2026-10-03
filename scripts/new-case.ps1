@@ -101,9 +101,13 @@ if (Test-Path $TemplateDocPath) {
     $DocContent | Set-Content -Path $TargetDocPath -Encoding UTF8
 }
 
-# 4. 基于模板初始化纯静态网站产物
+# 4. 基于模板初始化纯静态网站产物与域名配置
 $TemplateSitePath = "docs\templates\static_site_template.html"
 $TargetSitePath = Join-Path $SiteDir "index.html"
+$TargetCnamePath = Join-Path $SiteDir "CNAME"
+
+# 自动生成 CNAME 示例域名
+"$CaseId.example.com" | Set-Content -Path $TargetCnamePath -Encoding UTF8
 
 if (Test-Path $TemplateSitePath) {
     $SiteContent = Get-Content $TemplateSitePath -Raw -Encoding UTF8
@@ -113,9 +117,20 @@ if (Test-Path $TemplateSitePath) {
     $SiteContent | Set-Content -Path $TargetSitePath -Encoding UTF8
 }
 
+# 5. 基于模板配置 GitHub Actions 自动部署工作流
+$WorkflowDir = Join-Path $CaseDir ".github\workflows"
+New-Item -ItemType Directory -Force -Path $WorkflowDir | Out-Null
+$TemplateWfPath = "docs\templates\github_pages_workflow.yml"
+$TargetWfPath = Join-Path $WorkflowDir "deploy-pages.yml"
+
+if (Test-Path $TemplateWfPath) {
+    Copy-Item $TemplateWfPath -Destination $TargetWfPath -Force
+}
+
 Write-Host "==========================================================" -ForegroundColor Green
 Write-Host " 案例 [$CaseId] 标准化脚手架已生成成功！" -ForegroundColor Green
 Write-Host " 1. 案例文档入口: $TargetDocPath" -ForegroundColor White
 Write-Host " 2. 静态产物入口: $TargetSitePath (浏览器直接双击打开)" -ForegroundColor White
-Write-Host " 3. 元数据配置: $MetaJsonPath" -ForegroundColor White
+Write-Host " 3. 元数据配置:   $MetaJsonPath" -ForegroundColor White
+Write-Host " 4. 推荐公开仓库: Vanguard-$CaseId (Public，自动部署 GitHub Pages)" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Green

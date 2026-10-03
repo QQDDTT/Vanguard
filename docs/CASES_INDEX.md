@@ -1,7 +1,7 @@
 ﻿# Vanguard 平台全量案例资产索引 (Cases Index)
 
-> **自动构建时间**：2026-10-03 12:16:21  
-> **案例总数**：1 个 | **已交付产物**：1 个 | **调研推进中**：0 个 | **草稿**：0 个 | **已归档**：0 个
+> **自动构建时间**：2026-10-03 13:44:11  
+> **案例总数**：1 个 | **已交付产物**：0 个 | **调研推进中**：1 个 | **草稿**：0 个 | **已归档**：0 个
 
 ---
 
@@ -9,7 +9,7 @@
 
 | 案例 ID | 案例标题 | 所属分类 | 状态 | 负责人 | 更新日期 | 产物直达 | 文档入口 |
 | :--- | :--- | :--- | :---: | :--- | :---: | :---: | :---: |
-| `sentis-crm-system` | **Sentis 房产中介内部综合业务管理系统规划** | 产品规划 | 🟢 已生成 | Vanguard 平台架构组 | 2026-10-03 | [查看静态网站](../cases/sentis-crm-system/site/index.html) | [查阅文档](../cases/sentis-crm-system/docs/01_overview.md) |
+| `sentis-crm-system` | **Sentis 房产中介内部综合业务管理系统规划** | 产品规划 | 🟡 调研中 | Vanguard 平台架构组 | 2026-10-03 | [查看静态网站](../cases/sentis-crm-system/site/index.html) | [查阅文档](../cases/sentis-crm-system/docs/04_project_schedule.md) |
 
 ---
 
@@ -17,6 +17,6 @@
 
 ### 📌 Sentis 房产中介内部综合业务管理系统规划 (sentis-crm-system)
 - **分类**：产品规划 | **负责人**：Vanguard 平台架构组 | **最新更新**：2026-10-03
-- **核心摘要**：针对日本不动产中介 Sentis 公司的核心买卖签约、银行贷款审查、金融契约与交房决算全业务链路，设计端到端的公司内部业务管理系统，消除信息割裂与流程遗漏风险。
-- **快速入口**：[浏览静态网页产物](../cases/sentis-crm-system/site/index.html) | [查阅深度分析文档](../cases/sentis-crm-system/docs/01_overview.md)
+- **核心摘要**：基于株式会社 SENTIS（代表：阿部翔平）商业定位与《創業計画書》《売買契約の流れ》核心资料，规划集「小红书/私域海外集客、高额不动产（2~10億円）跨国交易风控、全流程智能Checklist与决算倒排」于一体的高人效内部业务管理系统。当前处于核心业务引擎详细设计阶段。
+- **快速入口**：[浏览静态网页产物](../cases/sentis-crm-system/site/index.html) | [查阅深度分析文档](../cases/sentis-crm-system/docs/04_project_schedule.md)
 

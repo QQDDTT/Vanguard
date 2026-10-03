@@ -83,11 +83,44 @@
 
 ---
 
-## 4. 产物交付与质检标准清单 (QA Checklist)
+## 4. GitHub Pages 托管与自定义域名挂载规范
+
+为满足设计阶段在线公开展示、跨地域评审与域名品牌化访问需求，所有静态样板网页产物均遵循 GitHub Pages 托管标准：
+
+### 4.1 目录组织与 CNAME 配置
+每个案例的静态样板发布目录中，必须包含域名配置文件 `CNAME`：
+
+```text
+site/
+├── CNAME                   # 记录自定义域名（例如：sentis.example.com，纯文本单行）
+├── index.html              # 样板网站入口主页
+├── css/                    # 视觉样式文件
+└── js/                     # 原生交互脚本
+```
+
+### 4.2 资源引用与路径铁律 (Relative Path Only)
+- **严禁使用绝对根路径**：如 `<link href="/css/main.css">`。在 GitHub Pages（尤其是 `username.github.io/repo/` 子路径模式）下会导致 404 资源丢失。
+- **强制使用相对路径**：统一使用 `./css/main.css` 或相对同级目录引用，确保无论是：
+  1. 本地双击离线打开（`file:///.../site/index.html`）；
+  2. GitHub 默认二级域名（`https://username.github.io/repo/`）；
+  3. 挂载自定义域名（`https://sentis.example.com/`）；
+  三者均能 100% 正常渲染与加载。
+
+### 4.3 自定义域名 DNS 解析规范
+在域名服务商处配置以下记录即可完成域名挂载：
+- **子域名（如 `realty.yourdomain.com`）**：添加 `CNAME` 记录指向 `username.github.io.`
+- **Apex 主域名（如 `yourdomain.com`）**：添加 `A` 记录指向 GitHub Pages IP 地址群，并配合 `www` CNAME 记录。
+- **强制启用 HTTPS**：在 GitHub 仓库 Settings -> Pages 中勾选“Enforce HTTPS”，确保 SSL 自动颁发。
+
+---
+
+## 5. 产物交付与质检标准清单 (QA Checklist)
 
 在宣布某个案例静态网站产物交付前，必须核对以下项目：
 
 - [ ] **直接双击可开**：脱离任何本地 HTTP 服务器（使用 `file:///` 协议打开），图片、样式表与脚本均能正常加载，无 404 或 CORS 报错。
+- [ ] **GitHub Pages 线上部署就绪**：目录中已配置合规的 `CNAME` 文件，推送到部署分支后可即时生效。
+- [ ] **自定义域名解析无异常**：线上通过挂载的域名正常访问，全站资源均通过 HTTPS 加载且无证书告警。
 - [ ] **全中文化呈现**：页面所有标题、指标说明、图表图例均为规范中文。
 - [ ] **响应式验证**：窄屏（手机端视图）无水平溢出滚动条，卡片自然换行。
 - [ ] **交互流畅度**：按钮悬停状态有柔和缓动动画（Transition: 0.2s~0.3s ease），无卡顿与突兀跳跃。

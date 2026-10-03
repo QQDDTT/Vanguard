@@ -11,8 +11,11 @@
 ### 1.2 核心定位
 **Vanguard** 确立了全新的**“纯本地文档驱动 + 案例静态化产物”**平台化方针：
 - **无 Server 架构 (Serverless / No-Server)**：彻底摒弃本地与远端常驻 Server 进程，无需启动任何后端服务。
-- **文档资产中心 (Document as Source of Truth)**：所有知识、调研、案例分析以结构化 Markdown 文件存放在本地文件系统，通过 Git 实现全量可追溯的版本管理。
-- **案例定制静态产物 (Case-Driven Static Artifacts)**：针对具体业务或研究案例，按需生成自包含、即开即用的高水准纯静态网站（HTML/CSS/JS），无需任何运行时即可本地双击浏览或快速分发。
+- **主平台仓库与案件独立仓分层 (Two-Tier Repository Architecture)**：
+  - **主平台仓库 (`Vanguard`) - [Private]**：仅保存平台通用的架构规范、流程 SOP、自动化脚本与标准模板体系，通过 `.gitignore` 阻断案件业务数据入库。
+  - **案件同名仓库 (`Vanguard-<CaseName>`) - [Public]**：专门用于持久化管理各个案件的业务文档（`docs/`）与静态展示样板网页（`site/`）。
+- **设计展示样板网页 (Design Showcase Web)**：设计阶段不仅产出 Markdown 设计文档，还必须同步构建高质感纯静态样板网页（Vanilla HTML/CSS/JS），用于方案的直观展示、流程推演与评审。
+- **GitHub Actions 自动发布与独立域名挂载**：案件独立仓库配置 GitHub Actions 工作流，代码推送后自动将 `site/` 部署至 **GitHub Pages** 并通过 `CNAME` 挂载独立域名。
 - **零环境依赖 (Zero-Runtime Constraint)**：严格执行不依赖 Node.js/Python 的原则，自动化能力完全依托 Windows 原生 PowerShell 与批处理脚本。
 
 ---

@@ -1,0 +1,47 @@
+# ==============================================================================
+# Vanguard 案件展示样板网页自动化部署工作流 (GitHub Actions)
+# 作用: 监听 main 分支变动，自动将 site/ 静态样板网页发布至 GitHub Pages 并挂载域名
+# ==============================================================================
+
+name: 部署设计展示样板网页至 GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'site/**'
+  workflow_dispatch:
+
+# 授予 GitHub Pages 部署所需的最小权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 避免并发部署冲突
+concurrency:
+  group: 'github-pages'
+  cancel-in-progress: false
+
+jobs:
+  deploy-showcase:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出案件代码资产
+        uses: actions/checkout@v4
+
+      - name: 初始化 GitHub Pages 运行环境
+        uses: actions/configure-pages@v5
+
+      - name: 归档上传 site 样板网页静态资源
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'site'
+
+      - name: 自动化部署至 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

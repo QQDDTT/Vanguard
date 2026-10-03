@@ -15,3 +15,8 @@ Desktop.ini
 cases/*
 !cases/.gitkeep
 
+# 环境变量与私密凭据
+.env
+.env.*
+*.token
+

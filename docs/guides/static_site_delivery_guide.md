@@ -50,11 +50,42 @@ cases/{case_id}/site/
 
 ---
 
-## 4. 本地交付质检标准 (Acceptance Criteria)
+## 4. GitHub Pages 部署与自定义域名挂载实操
 
-在向用户或利益相关方交付案例产物前，必须执行以下 4 项核查：
+### 4.1 创建 CNAME 配置文件
+在案例的 `site/` 根目录下创建 `CNAME` 文件，写入绑定的自定义域名：
+```bash
+# 例如在 cases/{case_id}/site/CNAME 中写入
+sentis.example.com
+```
 
-1. **协议无关性**：在 Edge/Chrome 浏览器中直接按下 `Ctrl + O` 打开本地 `site/index.html`，控制台 Console 保持 0 Error。
-2. **无外链失效风险**：断开网络连接（飞行模式）下刷新页面，页面排版、字体与样式保持完全一致，不发生崩溃或闪烁。
-3. **移动端适配度**：使用浏览器开发者工具切换为手机模式（如 390px 视口），页面文字大小合理，无横向滚动条。
-4. **元数据状态同步**：案例根目录下的 `metadata.json` 中的 `status` 字段已同步更新为 `generated`。
+### 4.2 部署到 GitHub Pages 分支 (推荐 gh-pages)
+通过 Git 纯命令行操作，将案例静态产物发布至指定托管分支（无需安装外部部署工具）：
+```powershell
+# 1. 确保当前工作区已提交
+# 2. 将特定案例的 site 目录推送到远端 gh-pages 分支
+git subtree push --prefix cases/sentis-crm-system/site origin gh-pages
+```
+
+### 4.3 DNS 域名解析配置
+前往域名管理后台（如 Cloudflare, 阿里云, GoDaddy 等）添加记录：
+- **记录类型**：`CNAME`
+- **主机记录**：`sentis`（或自定义二级前缀）
+- **记录值**：`{your-github-username}.github.io.`
+- **代理状态 / TTL**：自动或默认
+
+### 4.4 校验上线效果
+1. 访问 `https://{your-github-username}.github.io/{repo}/` 验证基础页面；
+2. 访问 `https://sentis.example.com/` 验证独立域名与 SSL 自动证书颁发。
+
+---
+
+## 5. 交付质检标准 (Acceptance Criteria)
+
+在向用户或利益相关方交付案例产物前，必须执行以下 5 项核查：
+
+1. **协议无关性 (双模可用)**：本地按下 `Ctrl + O`（`file:///` 协议）与线上通过 GitHub Pages / 绑定域名访问，样式排版与交互逻辑完全一致。
+2. **CNAME 与独立域名正常生效**：线上域名访问无证书安全告警，全站资源均通过 HTTPS 加载。
+3. **无外链失效风险**：页面所有静态资源（CSS、JS、矢量图）均为本地相对路径或内联，不依赖不稳定外部 CDN。
+4. **移动端适配度**：使用移动设备或开发者工具视口模式切换（375px~430px），页面元素自适应无溢出横向滚动。
+5. **元数据状态同步**：案例根目录下的 `metadata.json` 中的 `status` 字段已同步更新。
