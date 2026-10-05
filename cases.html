@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title id="pageTitle">交付产品与案件清单 - Vanguard 先锋架构实验室</title>
+  <meta name="description" id="pageMetaDesc" content="Vanguard 平台交付产品与商业案件清单。展示面向不同行业的数字化中枢、合规业务SOP规约与高保真纯静态仿真系统。">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="shortcut icon" href="./favicon.ico">
+
+  <style>
+    /* ==========================================================================
+       Vanguard Case Directory - High Density Industrial Obsidian
+       高信息密度资产清单风格：清晰工整、法理脱敏规范、结构严谨
+       ========================================================================== */
+    :root {
+      --vg-bg-base: #06080d;
+      --vg-bg-surface: #0b0f17;
+      --vg-bg-card: rgba(16, 22, 34, 0.75);
+      --vg-bg-card-hover: rgba(22, 30, 46, 0.9);
+      --vg-bg-glass: rgba(8, 12, 19, 0.88);
+
+      --vg-border-subtle: rgba(255, 255, 255, 0.08);
+      --vg-border-light: rgba(255, 255, 255, 0.14);
+      --vg-border-accent: rgba(56, 189, 248, 0.38);
+
+      --vg-text-primary: #f8fafc;
+      --vg-text-secondary: #94a3b8;
+      --vg-text-muted: #64748b;
+      --vg-text-dim: #475569;
+
+      --vg-accent-blue: #2563eb;
+      --vg-accent-cyan: #06b6d4;
+      --vg-accent-indigo: #6366f1;
+      --vg-accent-emerald: #10b981;
+      --vg-accent-amber: #f59e0b;
+
+      --vg-gradient-primary: linear-gradient(135deg, #2563eb 0%, #6366f1 50%, #06b6d4 100%);
+      --vg-gradient-headline: linear-gradient(135deg, #ffffff 20%, #38bdf8 70%, #818cf8 100%);
+
+      --vg-radius-sm: 8px;
+      --vg-radius-md: 14px;
+      --vg-radius-lg: 20px;
+
+      --vg-font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --vg-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--vg-bg-base);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.14) 0%, transparent 60%),
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 40px 40px, 40px 40px;
+      color: var(--vg-text-primary);
+      font-family: var(--vg-font-sans);
+      font-size: 14.5px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* 顶栏 Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 68px;
+      background: var(--vg-bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--vg-border-subtle);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 16px;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--vg-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: rgba(14, 19, 32, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .brand-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #ffffff;
+    }
+
+    .brand-subtitle {
+      font-size: 9.5px;
+      font-family: var(--vg-font-mono);
+      color: var(--vg-accent-cyan);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--vg-border-light);
+      border-radius: 9999px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-back-home:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .lang-switch-capsule {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--vg-border-light);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--vg-text-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      outline: none;
+      font-family: var(--vg-font-sans);
+    }
+
+    .lang-btn:hover {
+      color: #ffffff;
+    }
+
+    .lang-btn.is-active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+    }
+
+    /* 主体内容 */
+    .main-content {
+      flex: 1;
+      padding: 40px 0 60px 0;
+    }
+
+    /* 页面标题栏 */
+    .page-header-block {
+      margin-bottom: 32px;
+    }
+
+    .page-eyebrow {
+      font-family: var(--vg-font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--vg-accent-cyan);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .page-title {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .page-desc {
+      font-size: 14.5px;
+      color: var(--vg-text-secondary);
+      max-width: 820px;
+      line-height: 1.65;
+    }
+
+    /* 合规脱敏与机密保护告示牌 (Security & De-identification Notice) */
+    .compliance-alert-box {
+      margin-bottom: 32px;
+      background: rgba(16, 22, 34, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-left: 4px solid var(--vg-accent-cyan);
+      border-radius: var(--vg-radius-sm);
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--vg-text-secondary);
+      line-height: 1.55;
+    }
+
+    .compliance-alert-box svg {
+      width: 20px;
+      height: 20px;
+      color: var(--vg-accent-cyan);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .compliance-alert-box strong {
+      color: #ffffff;
+    }
+
+    /* 重点案件卡片 (Featured Product Showcase - Sentis Real Estate CRM) */
+    .case-featured-card {
+      background: var(--vg-bg-card);
+      border: 1px solid var(--vg-border-light);
+      border-radius: var(--vg-radius-lg);
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(14px);
+    }
+
+    .case-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .case-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 9999px;
+      color: var(--vg-accent-emerald);
+      font-family: var(--vg-font-mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .badge-category {
+      padding: 4px 10px;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 9999px;
+      color: #38bdf8;
+      font-family: var(--vg-font-mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .badge-code {
+      font-family: var(--vg-font-mono);
+      font-size: 11px;
+      color: var(--vg-text-muted);
+    }
+
+    .case-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
+    }
+
+    .case-desc {
+      font-size: 14px;
+      color: var(--vg-text-secondary);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    /* 四大工业级交付物闭环规格表 (DEL-01~04) */
+    .deliv-spec-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(6, 8, 13, 0.5);
+      border: 1px solid var(--vg-border-subtle);
+      border-radius: var(--vg-radius-sm);
+      overflow: hidden;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .deliv-spec-table th {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--vg-text-muted);
+      border-bottom: 1px solid var(--vg-border-subtle);
+      font-family: var(--vg-font-mono);
+      font-size: 11px;
+    }
+
+    .deliv-spec-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--vg-text-secondary);
+    }
+
+    .deliv-spec-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .deliv-code-cell {
+      font-family: var(--vg-font-mono);
+      font-weight: 700;
+      color: var(--vg-accent-cyan);
+      white-space: nowrap;
+      width: 80px;
+    }
+
+    .deliv-name-cell {
+      color: #ffffff;
+      font-weight: 600;
+      width: 220px;
+    }
+
+    .case-actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-launch-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--vg-gradient-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--vg-radius-sm);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-launch-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.6);
+    }
+
+    .btn-launch-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--vg-border-light);
+      border-radius: var(--vg-radius-sm);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-launch-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* 次级/预告案例网格 (Secondary Pipeline Cases) */
+    .secondary-section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .secondary-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .secondary-case-card {
+      background: var(--vg-bg-card);
+      border: 1px solid var(--vg-border-subtle);
+      border-radius: var(--vg-radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .sec-badge {
+      display: inline-block;
+      font-family: var(--vg-font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .sec-case-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .sec-case-desc {
+      font-size: 13px;
+      color: var(--vg-text-secondary);
+      line-height: 1.55;
+    }
+
+    .sec-case-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: var(--vg-font-mono);
+      font-size: 11px;
+      color: var(--vg-text-muted);
+    }
+
+    /* 页脚 */
+    .site-footer {
+      border-top: 1px solid var(--vg-border-subtle);
+      padding: 24px 0;
+      background: rgba(6, 8, 13, 0.7);
+      font-size: 12px;
+      color: var(--vg-text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-link {
+      color: var(--vg-text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      .secondary-cases-grid {
+        grid-template-columns: 1fr;
+      }
+      .deliv-spec-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶栏 Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="./index.html" class="brand-link" title="返回 Vanguard 平台主页">
+        <div class="brand-badge"><img src="./favicon.svg" alt="Vanguard Logo" width="38" height="38"></div>
+        <div>
+          <div class="brand-title" data-i18n="brand_title">VANGUARD 先锋平台</div>
+          <div class="brand-subtitle" data-i18n="brand_subtitle">ARCHITECTURE & STRATEGY STUDIO</div>
+        </div>
+      </a>
+
+      <div class="header-right">
+        <a href="./index.html" class="btn-back-home" title="返回平台官方门户">
+          <span>←</span>
+          <span data-i18n="btn_back_home">返回主页</span>
+        </a>
+
+        <!-- 国际化语言切换 -->
+        <div class="lang-switch-capsule" role="radiogroup" aria-label="语言切换">
+          <button type="button" class="lang-btn is-active" data-lang="zh" aria-checked="true" title="简体中文">中</button>
+          <button type="button" class="lang-btn" data-lang="ja" aria-checked="false" title="日本語">日</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-checked="false" title="English">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体内容 -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- 页面标题 -->
+      <div class="page-header-block">
+        <div class="page-eyebrow" data-i18n="page_eyebrow">PORTFOLIO & CASE DIRECTORY</div>
+        <h1 class="page-title" data-i18n="page_title">平台交付产品与商业案件清单</h1>
+        <p class="page-desc" data-i18n="page_desc">
+          本页面汇总 Vanguard 架构实验室孵化及交付的行业数字化中枢系统与系统仿真样板。依托纯静态无运维交付体系，支持独立域名线上即时评审与本地离线完整运行。
+        </p>
+      </div>
+
+      <!-- 合规与客户信息脱敏声明 -->
+      <div class="compliance-alert-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div>
+          <strong data-i18n="alert_title">客户机密保护与数据脱敏声明：</strong>
+          <span data-i18n="alert_content">本清单所展示的项目均为平台工程化交付资产。根据商业保密公约，原型系统内所出现的真实客户信息、企业敏感数据与交易隐私均已进行全面的 Mock 仿真与脱敏规约处理，仅供各方进行系统架构评测、业务流程复核与视觉交互评审。</span>
+        </div>
+      </div>
+
+      <!-- 重点案件卡片：Sentis 不动产中介数字化全景业务中枢 CRM -->
+      <article class="case-featured-card">
+        <div class="case-card-header">
+          <div>
+            <div class="case-badge-row">
+              <span class="badge-status" data-i18n="sentis_status">● 交付就绪 (Review Ready)</span>
+              <span class="badge-category" data-i18n="sentis_cat">不动产中介 / 宅地建物取引</span>
+              <span class="badge-code">ASSET-ID: VGD-CASE-01</span>
+            </div>
+            <h2 class="case-title" style="margin-top:10px;" data-i18n="sentis_title">Sentis 不动产中介数字化全景业务中枢 CRM</h2>
+          </div>
+
+          <div class="case-actions-bar">
+            <a href="https://sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="btn-launch-primary" title="访问 Sentis 案件线上公开展示网站">
+              <span>↗</span>
+              <span data-i18n="btn_sentis_launch">访问线上展示网站</span>
+            </a>
+            <a href="https://github.com/QQDDTT/Vanguard-Sentis" target="_blank" rel="noopener noreferrer" class="btn-launch-secondary" title="查看 GitHub 开源设计规格书">
+              <span>📄</span>
+              <span data-i18n="btn_sentis_repo">设计规格书</span>
+            </a>
+          </div>
+        </div>
+
+        <p class="case-desc" data-i18n="sentis_desc">
+          针对高端不动产中介、置业顾问咨询及房屋资产管理企业打造的数字化中枢全案。深度覆盖房源与客源全生命周期管理、房客源双向匹配台账、智能带看与签约流程规约、执务室 VR 全景控制台，以及严格对齐行业法规的宅建合规倒排机制。
+        </p>
+
+        <!-- 工业级交付规格表 -->
+        <table class="deliv-spec-table">
+          <thead>
+            <tr>
+              <th data-i18n="th_code">交付标号</th>
+              <th data-i18n="th_name">交付物名称</th>
+              <th data-i18n="th_scope">规格定义与技术范围</th>
+              <th data-i18n="th_state">交付状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="deliv-code-cell">DEL-01</td>
+              <td class="deliv-name-cell" data-i18n="del_01_name">系统设计与交互规范书</td>
+              <td data-i18n="del_01_scope">包含整体架构拓扑、色彩系统 Tokens、响应式排版标准及无阻塞交互规范</td>
+              <td><span style="color:var(--vg-accent-emerald); font-weight:700;">✓ 已规约</span></td>
+            </tr>
+            <tr>
+              <td class="deliv-code-cell">DEL-02</td>
+              <td class="deliv-name-cell" data-i18n="del_02_name">标准作业程序规约 (SOP)</td>
+              <td data-i18n="del_02_scope">覆盖从客源拓客、房源建档、带看推演到签约法务审查的全业务链 Checklist</td>
+              <td><span style="color:var(--vg-accent-emerald); font-weight:700;">✓ 已规约</span></td>
+            </tr>
+            <tr>
+              <td class="deliv-code-cell">DEL-03</td>
+              <td class="deliv-name-cell" data-i18n="del_03_name">数据模型与实体关系 (ER)</td>
+              <td data-i18n="del_03_scope">不动产标的物属性、权属人关系、中介佣金结算及合同状态机数据字典</td>
+              <td><span style="color:var(--vg-accent-emerald); font-weight:700;">✓ 已规约</span></td>
+            </tr>
+            <tr>
+              <td class="deliv-code-cell">DEL-04</td>
+              <td class="deliv-name-cell" data-i18n="del_04_name">高保真沉浸式仿真样板</td>
+              <td data-i18n="del_04_scope">门禁登录原型、执务室 VR 全景控制台、动态房产台账纯静态自包含可交互系统</td>
+              <td><span style="color:var(--vg-accent-emerald); font-weight:700;">✓ 部署上线</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <!-- 更多演进案例预告 -->
+      <div class="secondary-section-title">
+        <span>◈</span>
+        <span data-i18n="sec_section_title">规划与概念推演中资产 (Pipeline & Concepts)</span>
+      </div>
+
+      <div class="secondary-cases-grid">
+        <div class="secondary-case-card">
+          <div>
+            <span class="sec-badge" style="color:var(--vg-accent-indigo);" data-i18n="case_2_badge">PLANNING / 规划推演</span>
+            <h3 class="sec-case-title" data-i18n="case_2_title">Quant-Matrix：微架构量化金融资产交易工作台</h3>
+            <p class="sec-case-desc" data-i18n="case_2_desc">
+              专注微秒级特征工程调度、多策略回测矩阵可视化与风控限额自动处置的无服务器推演工作台样板。
+            </p>
+          </div>
+          <div class="sec-case-footer">
+            <span>ASSET-ID: CASE-PLN-02</span>
+            <span data-i18n="case_state_pending">待解密发布</span>
+          </div>
+        </div>
+
+        <div class="secondary-case-card">
+          <div>
+            <span class="sec-badge" style="color:var(--vg-accent-cyan);" data-i18n="case_3_badge">CONCEPT / 概念设计</span>
+            <h3 class="sec-case-title" data-i18n="case_3_title">Aether-Compliance：跨法域多币种数字合规风控引擎</h3>
+            <p class="sec-case-desc" data-i18n="case_3_desc">
+              针对跨国贸易与合规支付结算的离线身份核验（eKYC）与资金路径自动化穿透审计模型。
+            </p>
+          </div>
+          <div class="sec-case-footer">
+            <span>ASSET-ID: CASE-PLN-03</span>
+            <span data-i18n="case_state_pending">待解密发布</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        © 2026 Vanguard Architecture Studio. All Rights Reserved.
+      </div>
+      <div class="footer-links">
+        <a href="./index.html" class="footer-link" data-i18n="footer_home">返回平台主页</a>
+        <span>·</span>
+        <a href="https://github.com/QQDDTT/Vanguard" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub 仓库</a>
+        <span>·</span>
+        <a href="https://sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Sentis CRM</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 国际化语言字典与切换系统 -->
+  <script>
+    const I18N_DICT = {
+      zh: {
+        page_title: "平台交付产品与商业案件清单",
+        brand_title: "VANGUARD 先锋平台",
+        brand_subtitle: "ARCHITECTURE & STRATEGY STUDIO",
+        btn_back_home: "返回主页",
+        page_eyebrow: "PORTFOLIO & CASE DIRECTORY",
+        page_desc: "本页面汇总 Vanguard 架构实验室孵化及交付的行业数字化中枢系统与系统仿真样板。依托纯静态无运维交付体系，支持独立域名线上即时评审与本地离线完整运行。",
+        alert_title: "客户机密保护与数据脱敏声明：",
+        alert_content: "本清单所展示的项目均为平台工程化交付资产。根据商业保密公约，原型系统内所出现的真实客户信息、企业敏感数据与交易隐私均已进行全面的 Mock 仿真与脱敏规约处理，仅供各方进行系统架构评测、业务流程复核与视觉交互评审。",
+        sentis_status: "● 交付就绪 (Review Ready)",
+        sentis_cat: "不动产中介 / 宅地建物取引",
+        sentis_title: "Sentis 不动产中介数字化全景业务中枢 CRM",
+        sentis_desc: "针对高端不动产中介、置业顾问咨询及房屋资产管理企业打造的数字化中枢全案。深度覆盖房源与客源全生命周期管理、房客源双向匹配台账、智能带看与签约流程规约、执务室 VR 全景控制台，以及严格对齐行业法规的宅建合规倒排机制。",
+        btn_sentis_launch: "访问线上展示网站",
+        btn_sentis_repo: "设计规格书",
+        th_code: "交付标号",
+        th_name: "交付物名称",
+        th_scope: "规格定义与技术范围",
+        th_state: "交付状态",
+        del_01_name: "系统设计与交互规范书",
+        del_01_scope: "包含整体架构拓扑、色彩系统 Tokens、响应式排版标准及无阻塞交互规范",
+        del_02_name: "标准作业程序规约 (SOP)",
+        del_02_scope: "覆盖从客源拓客、房源建档、带看推演到签约法务审查的全业务链 Checklist",
+        del_03_name: "数据模型与实体关系 (ER)",
+        del_03_scope: "不动产标的物属性、权属人关系、中介佣金结算及合同状态机数据字典",
+        del_04_name: "高保真沉浸式仿真样板",
+        del_04_scope: "门禁登录原型、执务室 VR 全景控制台、动态房产台账纯静态自包含可交互系统",
+        sec_section_title: "规划与概念推演中资产 (Pipeline & Concepts)",
+        case_2_badge: "PLANNING / 规划推演",
+        case_2_title: "Quant-Matrix：微架构量化金融资产交易工作台",
+        case_2_desc: "专注微秒级特征工程调度、多策略回测矩阵可视化与风控限额自动处置的无服务器推演工作台样板。",
+        case_3_badge: "CONCEPT / 概念设计",
+        case_3_title: "Aether-Compliance：跨法域多币种数字合规风控引擎",
+        case_3_desc: "针对跨国贸易与合规支付结算的离线身份核验（eKYC）与资金路径自动化穿透审计模型。",
+        case_state_pending: "待解密发布",
+        footer_home: "返回平台主页"
+      },
+
+      ja: {
+        page_title: "納品成果物 & 商業案件カタログ",
+        brand_title: "VANGUARD 先鋒プラットフォーム",
+        brand_subtitle: "ARCHITECTURE & STRATEGY STUDIO",
+        btn_back_home: "ホームへ戻る",
+        page_eyebrow: "PORTFOLIO & CASE DIRECTORY",
+        page_desc: "本ページは Vanguard アーキテクチャラボが開発・納品した各業界のDX中枢システムと高精細シミュレータを一覧化したものです。独自ドメインHTTPSオンライン閲覧とローカル完全オフライン稼働に対応しています。",
+        alert_title: "顧客機密保持およびデータ匿名化方針：",
+        alert_content: "本カタログに掲載されている成果物はすべてプラットフォーム公式納品資産です。機密保持規約に基づき、実機プロトタイプ内の実在顧客情報・企業内部データ・取引履歴は完全にモック化・匿名化処理が施されており、仕様検証およびUI/UX評価専用となっています。",
+        sentis_status: "● 納品検証完了 (Review Ready)",
+        sentis_cat: "不動産仲介 / 宅地建物取引",
+        sentis_title: "Sentis 不動産仲介DXパノラマ業務中枢 CRM",
+        sentis_desc: "高級不動産仲介・売買・賃貸管理企業向けDX中枢全案。物件・顧客ライフサイクル管理、マッチング台帳、案内・契約SOP規約、執務室VR操作コンソール、宅建業法コンプライアンス逆算管理を完全統合。",
+        btn_sentis_launch: "オンライン展示サイト",
+        btn_sentis_repo: "設計仕様書",
+        th_code: "成果物番号",
+        th_name: "成果物名称",
+        th_scope: "仕様定義および技術スコープ",
+        th_state: "納品状況",
+        del_01_name: "システム設計・UI/UX仕様書",
+        del_01_scope: "全体アーキテクチャトポロジー、デザインTokens、レスポンシブ規格、非ブロッキング画面遷移規約",
+        del_02_name: "標準作業手順規約 (SOP)",
+        del_02_scope: "集客・物件仕入れ・案内シミュレーションから契約法務審査までの全チェーンChecklist",
+        del_03_name: "データモデル・エンティティ関係 (ER)",
+        del_03_scope: "不動産物件属性、権利関係者、仲介手数料精算および契約ステートマシン辞書",
+        del_04_name: "高精細没入型シミュレータ試作",
+        del_04_scope: "入退室門禁プロトタイプ、執務室VR操作コンソール、動的物件台帳の自立型静的モックアップ",
+        sec_section_title: "企画・概念推論中パイプライン (Pipeline & Concepts)",
+        case_2_badge: "PLANNING / 企画推論中",
+        case_2_title: "Quant-Matrix：超低遅延クオンツ取引コンソール",
+        case_2_desc: "マイクロ秒単位の特徴量パイプライン、バックテスト可視化、リスクリミット自動執行を備えたサーバーレスワークベンチ。",
+        case_3_badge: "CONCEPT / 概念設計",
+        case_3_title: "Aether-Compliance：クロスボーダー多通貨法務監査エンジン",
+        case_3_desc: "国際貿易・決済決済向けのオフライン本人確認（eKYC）および資金移動パス自動追跡監査モデル。",
+        case_state_pending: "順次公開予定",
+        footer_home: "ホームへ戻る"
+      },
+
+      en: {
+        page_title: "Product Deliverables & Case Directory",
+        brand_title: "VANGUARD PLATFORM",
+        brand_subtitle: "ARCHITECTURE & STRATEGY STUDIO",
+        btn_back_home: "Back to Home",
+        page_eyebrow: "PORTFOLIO & CASE DIRECTORY",
+        page_desc: "A centralized directory of production-grade digital hubs and high-fidelity simulation systems incubated and delivered by Vanguard Architecture Studio. Fully optimized for independent domain HTTPS access and offline execution.",
+        alert_title: "Confidentiality & Data De-identification Notice:",
+        alert_content: "All projects displayed in this directory are platform architectural deliverables. Pursuant to commercial non-disclosure agreements, all genuine customer identities, proprietary operational metrics, and transaction details have been fully anonymized and synthesized with mock data for technical and architectural review.",
+        sentis_status: "● Review Ready",
+        sentis_cat: "Real Estate Brokerage & Asset Management",
+        sentis_title: "Sentis Real Estate Brokerage Panoramic CRM",
+        sentis_desc: "A comprehensive digital operations hub tailored for luxury real estate agencies and property asset management firms. Covers customer & listing lifecycle tracking, smart matching ledgers, showing & closing SOP checklists, VR executive console, and regulatory compliance workflows.",
+        btn_sentis_launch: "Launch Live Prototype",
+        btn_sentis_repo: "Design Specifications",
+        th_code: "Spec ID",
+        th_name: "Deliverable Name",
+        th_scope: "Scope & Architectural Definition",
+        th_state: "Status",
+        del_01_name: "System Architecture & Interaction Spec",
+        del_01_scope: "System topology, design tokens, responsive standards, and non-blocking navigation rules",
+        del_02_name: "Standard Operating Procedure (SOP)",
+        del_02_scope: "Full-lifecycle checklist covering prospecting, property intake, showing, and legal review",
+        del_03_name: "Data Model & Entity Relationship (ER)",
+        del_03_scope: "Property attributes, ownership mappings, brokerage commissions, and contract state machines",
+        del_04_name: "High-Fidelity Immersive Simulation",
+        del_04_scope: "Gate login prototype, executive VR office console, dynamic property ledgers in pure static bundle",
+        sec_section_title: "Pipeline & Concept Deductions",
+        case_2_badge: "PLANNING",
+        case_2_title: "Quant-Matrix: Micro-Architecture Quantitative Trading Workbench",
+        case_2_desc: "Serverless workbench simulation focused on sub-millisecond feature pipelines, backtest matrix visualization, and automated risk throttling.",
+        case_3_badge: "CONCEPT",
+        case_3_title: "Aether-Compliance: Cross-Border Multi-Currency Audit Engine",
+        case_3_desc: "Autonomous auditing model for offline eKYC verification and capital flow tracking in cross-border settlements.",
+        case_state_pending: "Under Development",
+        footer_home: "Back to Home"
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const langBtns = Array.from(document.querySelectorAll(".lang-btn"));
+      const pageTitleEl = document.getElementById("pageTitle");
+      const pageMetaDescEl = document.getElementById("pageMetaDesc");
+
+      const applyLanguage = (lang) => {
+        if (!I18N_DICT[lang]) lang = "zh";
+
+        document.documentElement.lang = (lang === "zh") ? "zh-CN" : lang;
+
+        langBtns.forEach(btn => {
+          const isActive = (btn.getAttribute("data-lang") === lang);
+          btn.classList.toggle("is-active", isActive);
+          btn.setAttribute("aria-checked", isActive ? "true" : "false");
+        });
+
+        const dict = I18N_DICT[lang];
+
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) {
+            el.innerHTML = dict[key];
+          }
+        });
+
+        if (dict.page_title && pageTitleEl) {
+          document.title = `${dict.page_title} - Vanguard 先锋平台`;
+        }
+
+        try {
+          localStorage.setItem("vanguard_lang", lang);
+        } catch (e) {}
+      };
+
+      langBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          applyLanguage(btn.getAttribute("data-lang"));
+        });
+      });
+
+      let initialLang = "zh";
+      try {
+        const stored = localStorage.getItem("vanguard_lang");
+        if (stored && I18N_DICT[stored]) {
+          initialLang = stored;
+        } else {
+          const browserLang = (navigator.language || "").toLowerCase();
+          if (browserLang.startsWith("ja")) initialLang = "ja";
+          else if (browserLang.startsWith("en")) initialLang = "en";
+        }
+      } catch (e) {}
+
+      applyLanguage(initialLang);
+    });
+  </script>
+</body>
+</html>

@@ -97,7 +97,7 @@
     }
 
     /* ==========================================================================
-       1. Global Fixed Header 极简顶栏导航 (仅保留 Logo、项目名称与国际化按钮)
+       1. Global Fixed Header 极简顶栏导航
        ========================================================================== */
     .site-header {
       position: fixed;
@@ -181,11 +181,35 @@
       white-space: nowrap;
     }
 
-    /* 国际化语言切换分段胶囊 (i18n Segmented Capsule) */
+    /* 顶栏快捷入口与国际化 */
     .header-actions {
       display: flex;
       align-items: center;
+      gap: 10px;
       flex-shrink: 0;
+    }
+
+    .header-cases-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--vg-border-light);
+      border-radius: 9999px;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .header-cases-btn:hover {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      transform: translateY(-1px);
     }
 
     .lang-switch-capsule {
@@ -246,7 +270,6 @@
       height: 100%;
     }
 
-    /* 每一个画面 (Slide Screen) - 幻灯推移景深 */
     .deck-slide {
       position: absolute;
       inset: 0;
@@ -278,7 +301,6 @@
       z-index: 1;
     }
 
-    /* 画面内部滑动与自适应居中容器 (去掉HUD后下边距自然通透) */
     .deck-slide-inner {
       width: 100%;
       height: 100%;
@@ -301,10 +323,7 @@
       border-radius: 4px;
     }
 
-    /* ==========================================================================
-       3. 渐进式逐层显现动画 (Keynote-grade Progressive Reveal Animation)
-       避免内容同时一股脑出现，营造电影般分层徐徐道来的高级叙事节奏
-       ========================================================================== */
+    /* 逐层显现动画 */
     .deck-slide .slide-reveal {
       opacity: 0;
       transform: translateY(22px);
@@ -325,8 +344,7 @@
     .deck-slide.is-active .reveal-delay-5 { transition-delay: 0.62s; }
 
     /* ==========================================================================
-       4. 画面 1: 品牌愿景与核心主旨 (Screen 1 - Vision & Manifesto)
-       极致开阔、无任何卡片挤压，大气震撼
+       3. 画面 1: 品牌愿景与核心主旨 (Screen 1 - Vision & Manifesto)
        ========================================================================== */
     .screen-vision-layout {
       width: 100%;
@@ -452,7 +470,7 @@
     }
 
     /* ==========================================================================
-       5. 画面 2: 数字工作台与四大硬指标 (Screen 2 - Workbench & Metrics)
+       4. 画面 2: 数字工作台与四大硬指标 (Screen 2 - Workbench & Metrics)
        ========================================================================== */
     .screen-workbench-layout {
       width: 100%;
@@ -601,7 +619,7 @@
     }
 
     /* ==========================================================================
-       6. 画面 3: 核心开发理念与哲学 (Screen 3 - Development Creed)
+       5. 画面 3: 核心开发理念与哲学 (Screen 3 - Development Creed)
        ========================================================================== */
     .screen-creed-layout {
       width: 100%;
@@ -707,7 +725,7 @@
     }
 
     /* ==========================================================================
-       7. 画面 4: 服务矩阵与能力 (Screen 4 - Services & Capabilities)
+       6. 画面 4: 服务矩阵与能力 (Screen 4 - Services & Capabilities)
        ========================================================================== */
     .screen-services-layout {
       width: 100%;
@@ -782,170 +800,7 @@
     }
 
     /* ==========================================================================
-       8. 画面 5: 精选商业案件展台 (Screen 5 - Portfolio & Sentis CRM)
-       ========================================================================== */
-    .screen-cases-layout {
-      width: 100%;
-      max-width: 1060px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      margin: auto 0;
-    }
-
-    .case-flagship-box {
-      background: var(--vg-bg-card);
-      border: 1px solid var(--vg-border-light);
-      border-radius: var(--vg-radius-xl);
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      gap: 24px;
-      align-items: center;
-      backdrop-filter: blur(16px);
-      box-shadow: var(--vg-shadow-lg);
-    }
-
-    .case-visual-col {
-      position: relative;
-      border-radius: var(--vg-radius-lg);
-      overflow: hidden;
-      border: 1px solid var(--vg-border-subtle);
-      aspect-ratio: 16 / 10;
-    }
-
-    .case-visual-col img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s ease;
-    }
-
-    .case-visual-col:hover img {
-      transform: scale(1.025);
-    }
-
-    .case-tag-pill {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      padding: 5px 12px;
-      background: rgba(6, 8, 13, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 9999px;
-      font-family: var(--vg-font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--vg-accent-emerald);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(8px);
-    }
-
-    .case-detail-col {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      text-align: left;
-    }
-
-    .case-title {
-      font-size: 21px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.4px;
-    }
-
-    .case-summary {
-      font-size: 13.5px;
-      color: var(--vg-text-secondary);
-      line-height: 1.6;
-    }
-
-    .case-deliv-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
-
-    .deliv-chip {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--vg-border-subtle);
-      border-radius: var(--vg-radius-sm);
-      padding: 7px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .deliv-chip-code {
-      font-family: var(--vg-font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--vg-accent-cyan);
-    }
-
-    .deliv-chip-name {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: #ffffff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .case-actions-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-top: 4px;
-    }
-
-    .btn-case-launch {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      background: var(--vg-gradient-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: var(--vg-radius-sm);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 700;
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
-      transition: all 0.2s ease;
-    }
-
-    .btn-case-launch:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.6);
-    }
-
-    .btn-case-doc {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--vg-border-light);
-      border-radius: var(--vg-radius-sm);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
-
-    .btn-case-doc:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    /* ==========================================================================
-       9. 画面 6: 工匠精神与自研哲学 (Screen 6 - Artisan Creed)
+       7. 画面 5: 工匠精神与自研哲学 (Screen 5 - Artisan Creed & Footer)
        ========================================================================== */
     .screen-artisan-layout {
       width: 100%;
@@ -1066,7 +921,7 @@
     }
 
     /* ==========================================================================
-       10. 移动端与不同视窗响应式 (Mobile Responsive)
+       8. 移动端与不同视窗响应式 (Mobile Responsive)
        ========================================================================== */
     @media (max-width: 900px) {
       .services-quad-grid {
@@ -1074,10 +929,6 @@
       }
       .creed-duo-grid {
         grid-template-columns: 1fr;
-      }
-      .case-flagship-box {
-        grid-template-columns: 1fr;
-        padding: 18px;
       }
       .artisan-box-grid {
         grid-template-columns: 1fr;
@@ -1104,9 +955,6 @@
       .hero-metrics-grid {
         grid-template-columns: 1fr;
       }
-      .case-deliv-grid {
-        grid-template-columns: 1fr;
-      }
       .artisan-pillars-row {
         grid-template-columns: 1fr;
       }
@@ -1124,7 +972,7 @@
 <body>
 
   <!-- ======================================================================
-       1. Global Fixed Header 极简顶栏导航 (仅保留 Logo、项目名称与国际化按钮)
+       1. Global Fixed Header 极简顶栏导航
        ====================================================================== -->
   <header class="site-header">
     <div class="container header-inner">
@@ -1136,8 +984,13 @@
         </div>
       </a>
 
-      <!-- 仅保留国际化语言切换按钮 -->
+      <!-- 案件清单快捷入口与国际化语言切换 -->
       <div class="header-actions">
+        <a href="./cases.html" class="header-cases-btn" title="查看平台交付产品与商业案件清单">
+          <span>📋</span>
+          <span data-i18n="header_cases">案件清单</span>
+        </a>
+
         <div class="lang-switch-capsule" role="radiogroup" aria-label="语言切换 / Language Switcher">
           <button type="button" class="lang-btn is-active" data-lang="zh" aria-checked="true" title="简体中文">中</button>
           <button type="button" class="lang-btn" data-lang="ja" aria-checked="false" title="日本語">日</button>
@@ -1148,7 +1001,7 @@
   </header>
 
   <!-- ======================================================================
-       2. Fullpage Slide Deck 幻灯舞台容器 (共 6 幕，阶梯式渐进展开)
+       2. Fullpage Slide Deck 幻灯舞台容器 (共 5 幕，阶梯式渐进展开)
        ====================================================================== -->
   <main class="deck-container" id="deckContainer">
     <div class="deck-track" id="deckTrack">
@@ -1180,18 +1033,18 @@
             </p>
 
             <div class="hero-cta-group slide-reveal reveal-delay-4">
-              <button type="button" class="btn-hero-primary" data-slide-target="4" title="查阅案例展台">
-                <span>🚀</span>
-                <span data-i18n="btn_view_cases">查阅案例展台</span>
-              </button>
+              <a href="./cases.html" class="btn-hero-primary" title="查阅平台交付产品与案件清单">
+                <span>📋</span>
+                <span data-i18n="btn_view_cases">查阅案件清单</span>
+              </a>
               <button type="button" class="btn-hero-secondary" data-slide-target="2" title="了解开发理念">
                 <span>📖</span>
                 <span data-i18n="btn_view_creed">开发理念宣言</span>
               </button>
             </div>
 
-            <div class="scroll-guide-hint slide-reveal reveal-delay-5" data-slide-target="1" title="向下滑动探索">
-              <span data-i18n="hero_scroll_hint">↓ 向下滚动或滑动探索下一幕</span>
+            <div class="scroll-guide-hint slide-reveal reveal-delay-5" data-slide-target="1" title="向下滑动探索核心硬指标">
+              <span data-i18n="hero_scroll_hint">↓ 向下滚动探索核心硬指标</span>
             </div>
           </div>
         </div>
@@ -1381,73 +1234,9 @@
       </section>
 
       <!-- ==================================================================
-           幕 5: 精选商业案件展台 (Screen 5 - Portfolio Showcase)
+           幕 5: 工匠精神与自研哲学 (Screen 5 - Artisan Creed & Footer)
            ================================================================== -->
-      <section class="deck-slide" data-slide-index="4" id="slide-cases">
-        <div class="deck-slide-inner">
-          <div class="screen-cases-layout">
-            <div class="screen-header-block slide-reveal reveal-delay-1">
-              <div class="screen-eyebrow" data-i18n="cases_eyebrow">PORTFOLIO & CASE STUDIES</div>
-              <h2 class="screen-title" data-i18n="cases_title">精选商业案件展台</h2>
-              <p class="screen-desc" data-i18n="cases_desc">
-                所有交付物均以高标准公开展出，支持线上独立域名访问与本地离线浏览双模交互。
-              </p>
-            </div>
-
-            <div class="case-flagship-box slide-reveal reveal-delay-2">
-              <div class="case-visual-col">
-                <img src="./assets/images/sentis-showcase.jpg" alt="Sentis CRM 数字化中枢系统界面" loading="lazy">
-                <div class="case-tag-pill">
-                  <span>★</span>
-                  <span data-i18n="case_flagship_pill">FLAGSHIP CASE · SENTIS CRM</span>
-                </div>
-              </div>
-
-              <div class="case-detail-col">
-                <h3 class="case-title" data-i18n="case_title">Sentis 汽车数字化全景业务中枢 CRM</h3>
-                <p class="case-summary" data-i18n="case_summary">
-                  针对豪华汽车经销与定制改装企业打造的数字化中枢全案。融合客户全生命周期管理、智能业务台账、执务室 VR 全景操控台与工业级合规 SOP 倒排机制。
-                </p>
-
-                <div class="case-deliv-grid">
-                  <div class="deliv-chip">
-                    <span class="deliv-chip-code">DEL-01</span>
-                    <span class="deliv-chip-name" data-i18n="deliv_1_name">系统设计与交互规范书</span>
-                  </div>
-                  <div class="deliv-chip">
-                    <span class="deliv-chip-code">DEL-02</span>
-                    <span class="deliv-chip-name" data-i18n="deliv_2_name">标准作业程序规约 (SOP)</span>
-                  </div>
-                  <div class="deliv-chip">
-                    <span class="deliv-chip-code">DEL-03</span>
-                    <span class="deliv-chip-name" data-i18n="deliv_3_name">数据模型与实体关系 (ER)</span>
-                  </div>
-                  <div class="deliv-chip">
-                    <span class="deliv-chip-code">DEL-04</span>
-                    <span class="deliv-chip-name" data-i18n="deliv_4_name">高保真沉浸式仿真样板</span>
-                  </div>
-                </div>
-
-                <div class="case-actions-row">
-                  <a href="https://sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="btn-case-launch" title="在线直接体验 Sentis 展台">
-                    <span>↗</span>
-                    <span data-i18n="btn_case_launch">在线展示网站</span>
-                  </a>
-                  <a href="https://github.com/QQDDTT/Vanguard-Sentis" target="_blank" rel="noopener noreferrer" class="btn-case-doc" title="查阅完整设计与技术文档">
-                    <span>📄</span>
-                    <span data-i18n="btn_case_doc">设计规格书</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================================================================
-           幕 6: 工匠精神与自研哲学 (Screen 6 - Artisan Creed)
-           ================================================================== -->
-      <section class="deck-slide" data-slide-index="5" id="slide-artisan">
+      <section class="deck-slide" data-slide-index="4" id="slide-artisan">
         <div class="deck-slide-inner">
           <div class="screen-artisan-layout">
             <div class="screen-header-block slide-reveal reveal-delay-1">
@@ -1492,11 +1281,11 @@
             <div class="screen-footer-bar slide-reveal reveal-delay-3">
               <div data-i18n="footer_copy">© 2026 Vanguard Architecture Studio. All Rights Reserved.</div>
               <div class="screen-footer-links">
+                <a href="./cases.html" class="screen-footer-link" data-i18n="footer_cases">案件清单</a>
+                <span>·</span>
                 <a href="https://github.com/QQDDTT/Vanguard" target="_blank" rel="noopener noreferrer" class="screen-footer-link" data-i18n="footer_github">GitHub 仓库</a>
                 <span>·</span>
-                <a href="https://vanguard.evotensor.dev" class="screen-footer-link" data-i18n="footer_portal">官方门户</a>
-                <span>·</span>
-                <a href="https://sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="screen-footer-link">Sentis CRM</a>
+                <a href="./index.html" class="screen-footer-link" data-i18n="footer_portal">官方门户</a>
               </div>
             </div>
           </div>
@@ -1507,7 +1296,7 @@
   </main>
 
   <!-- ======================================================================
-       3. 国际化 (i18n) 语言字典 (中 / 日 / 英 6 幕完整对应)
+       3. 国际化 (i18n) 语言字典 (中 / 日 / 英 5 幕完整对应)
        ====================================================================== -->
   <script>
     const I18N_DICT = {
@@ -1516,14 +1305,15 @@
         page_meta_desc: "Vanguard 平台官方门户。秉承前沿部署、AI协同进化、极客DIY掌控与追求卓越的开发理念，提供复杂业务架构设计、业务SOP规约、高保真原型仿真与零运维静态资产体系构建。",
         brand_title: "VANGUARD 先锋平台",
         brand_subtitle: "ARCHITECTURE & STRATEGY STUDIO",
+        header_cases: "案件清单",
 
         // Screen 1: Vision
         hero_eyebrow: "<span>FRONTIER DEPLOYMENT</span><span>•</span><span>AI-AUGMENTED</span><span>•</span><span>RADICAL DIY</span><span>•</span><span>EXCELLENCE</span>",
         hero_title: '重塑数字交付范式<br><span class="highlight">以极客工匠精神打造前沿无运维资产</span>',
         hero_desc: "Vanguard (先锋) 是一个专注复杂业务顶层设计、业务 SOP 规约化、高保真系统仿真与零运维静态体系构建的数字架构实验室。摒弃臃肿的微服务堆叠与云厂商绑定，坚持<strong>前沿部署、AI 协同推演、极简手搓与追求卓越</strong>。",
-        btn_view_cases: "查阅案例展台",
+        btn_view_cases: "查阅案件清单",
         btn_view_creed: "开发理念宣言",
-        hero_scroll_hint: "↓ 向下滚动或滑动探索下一幕",
+        hero_scroll_hint: "↓ 向下滚动探索核心硬指标",
 
         // Screen 2: Workbench & Metrics
         workbench_eyebrow: "ARCHITECTURE WORKBENCH & METRICS",
@@ -1586,21 +1376,7 @@
         service_4_chip_2: "Actions 部署",
         service_4_chip_3: "纯静态包",
 
-        // Screen 5: Cases
-        cases_eyebrow: "PORTFOLIO & CASE STUDIES",
-        cases_title: "精选商业案件展台",
-        cases_desc: "所有交付物均以高标准公开展出，支持线上独立域名访问与本地离线浏览双模交互。",
-        case_flagship_pill: "FLAGSHIP CASE · SENTIS CRM",
-        case_title: "Sentis 汽车数字化全景业务中枢 CRM",
-        case_summary: "针对豪华汽车经销与定制改装企业打造的数字化中枢全案。融合客户全生命周期管理、智能业务台账、执务室 VR 全景操控台与工业级合规 SOP 倒排机制。",
-        deliv_1_name: "系统设计与交互规范书",
-        deliv_2_name: "标准作业程序规约 (SOP)",
-        deliv_3_name: "数据模型与实体关系 (ER)",
-        deliv_4_name: "高保真沉浸式仿真样板",
-        btn_case_launch: "在线展示网站",
-        btn_case_doc: "设计规格书",
-
-        // Screen 6: Artisan & Footer
+        // Screen 5: Artisan & Footer
         artisan_eyebrow: "ARCHITECT PROFILE",
         artisan_title: "工匠精神与自研哲学",
         artisan_desc: "真正的掌控力源自对商业机理的穿透力、底层技术的熟稔与视觉审美的偏执追求。",
@@ -1614,6 +1390,7 @@
         pillar_3_title: "💎 像素美学",
         pillar_3_desc: "架构与工业美感相融合，提供震撼第一眼的精致体验。",
         footer_copy: "© 2026 Vanguard Architecture Studio. All Rights Reserved.",
+        footer_cases: "案件清单",
         footer_github: "GitHub 仓库",
         footer_portal: "官方门户"
       },
@@ -1623,14 +1400,15 @@
         page_meta_desc: "Vanguard 公式ポータル。最先端デプロイ、AI協調進化、徹底したDIY、卓越性の追求を理念とし、複雑な業務アーキテクチャ設計、SOP規約化、高精細プロトタイプ、ゼロ運用静的資産体系を提供します。",
         brand_title: "VANGUARD 先鋒プラットフォーム",
         brand_subtitle: "ARCHITECTURE & STRATEGY STUDIO",
+        header_cases: "案件カタログ",
 
         // Screen 1: Vision
         hero_eyebrow: "<span>FRONTIER DEPLOYMENT</span><span>•</span><span>AI-AUGMENTED</span><span>•</span><span>RADICAL DIY</span><span>•</span><span>EXCELLENCE</span>",
         hero_title: 'デジタル納品のパラダイム刷新<br><span class="highlight">職人哲学が生み出すゼロ運用資産</span>',
         hero_desc: "Vanguard (先鋒) は、複雑なビジネス要件の最上流設計、業務SOP規約化、高精細空間シミュレーション、ゼロ運用静的システム構築に特化したアーキテクチャラボです。冗長なマイクロサービスやクラウド囲い込みを排し、<strong>最先端デプロイ・AI協調進化・徹底したDIY・卓越性の追求</strong>を貫きます。",
-        btn_view_cases: "案件実績を見る",
+        btn_view_cases: "案件カタログを見る",
         btn_view_creed: "開発理念マニフェスト",
-        hero_scroll_hint: "↓ 下へスクロールして次の幕へ",
+        hero_scroll_hint: "↓ 下へスクロールして主要指標へ",
 
         // Screen 2: Workbench & Metrics
         workbench_eyebrow: "ARCHITECTURE WORKBENCH & METRICS",
@@ -1693,21 +1471,7 @@
         service_4_chip_2: "Actions 自動化",
         service_4_chip_3: "自立静的パック",
 
-        // Screen 5: Cases
-        cases_eyebrow: "PORTFOLIO & CASE STUDIES",
-        cases_title: "厳選商用案件ショールーム",
-        cases_desc: "すべての納品物は高水準で公開され、独自ドメインHTTPSオンライン閲覧とローカル完全オフライン稼働を両立しています。",
-        case_flagship_pill: "FLAGSHIP CASE · SENTIS CRM",
-        case_title: "Sentis 高級車DX全景業務中枢 CRM",
-        case_summary: "高級車ディーラー・カスタマイズ企業向けDX中枢全案。顧客ライフサイクル管理、スマート台帳、執務室VR操作コンソール、厳格な法務SOPを統合。",
-        deliv_1_name: "システム設計・UI/UX仕様書",
-        deliv_2_name: "標準作業手順規約 (SOP)",
-        deliv_3_name: "データモデル・エンティティ関係 (ER)",
-        deliv_4_name: "高精細没入型シミュレータ試作",
-        btn_case_launch: "オンライン展示サイト",
-        btn_case_doc: "設計仕様書",
-
-        // Screen 6: Artisan & Footer
+        // Screen 5: Artisan & Footer
         artisan_eyebrow: "ARCHITECT PROFILE",
         artisan_title: "クラフトマンシップ & 開発哲学",
         artisan_desc: "真の掌握力は、ビジネス機理への洞察、基盤技術への精通、そして視覚美学への偏執的追求から生まれます。",
@@ -1721,6 +1485,7 @@
         pillar_3_title: "💎 研ぎ澄まされた美学",
         pillar_3_desc: "アーキテクチャと工業美学を融合し、一目で心を掴む体験を提供。",
         footer_copy: "© 2026 Vanguard Architecture Studio. All Rights Reserved.",
+        footer_cases: "案件カタログ",
         footer_github: "GitHub リポジトリ",
         footer_portal: "公式ポータル"
       },
@@ -1730,14 +1495,15 @@
         page_meta_desc: "Vanguard official portal. Founded on Frontier Deployment, AI Symbiosis, Radical DIY, and Pursuit of Excellence. Providing top-tier system architecture, SOP specification, high-fidelity prototypes, and zero-ops static digital assets.",
         brand_title: "VANGUARD PLATFORM",
         brand_subtitle: "ARCHITECTURE & STRATEGY STUDIO",
+        header_cases: "Case Directory",
 
         // Screen 1: Vision
         hero_eyebrow: "<span>FRONTIER DEPLOYMENT</span><span>•</span><span>AI-AUGMENTED</span><span>•</span><span>RADICAL DIY</span><span>•</span><span>EXCELLENCE</span>",
         hero_title: 'Redefining Digital Delivery<br><span class="highlight">Artisan Craftsmanship Meets Zero-Ops Static Assets</span>',
         hero_desc: "Vanguard is a digital architecture studio dedicated to strategic system design, business SOP engineering, high-fidelity simulation, and self-contained static deliverables. Rejecting bloated container stacks and cloud lock-ins, we champion <strong>Frontier Deployment, AI Symbiosis, Radical DIY, and Excellence</strong>.",
-        btn_view_cases: "Explore Portfolio",
+        btn_view_cases: "Explore Case Directory",
         btn_view_creed: "Read Manifesto",
-        hero_scroll_hint: "↓ Scroll or swipe down to explore",
+        hero_scroll_hint: "↓ Scroll down to explore core metrics",
 
         // Screen 2: Workbench & Metrics
         workbench_eyebrow: "ARCHITECTURE WORKBENCH & METRICS",
@@ -1800,21 +1566,7 @@
         service_4_chip_2: "Actions CI/CD",
         service_4_chip_3: "Static Bundle",
 
-        // Screen 5: Cases
-        cases_eyebrow: "PORTFOLIO & CASE STUDIES",
-        cases_title: "Featured Case Studies",
-        cases_desc: "All deliverables are publicly showcased with full dual-mode support for custom domain HTTPS access and offline local inspection.",
-        case_flagship_pill: "FLAGSHIP CASE · SENTIS CRM",
-        case_title: "Sentis Automotive Executive Hub CRM",
-        case_summary: "A comprehensive digital operations hub for luxury vehicle distribution and custom coachbuilding. Integrates lifecycle management, smart ledgers, VR office consoles, and SOP checklists.",
-        deliv_1_name: "System Architecture & Interaction Spec",
-        deliv_2_name: "Standard Operating Procedure (SOP)",
-        deliv_3_name: "Data Model & Entity Relationship (ER)",
-        deliv_4_name: "High-Fidelity Immersive Simulation",
-        btn_case_launch: "Online Showcase",
-        btn_case_doc: "Design Specs",
-
-        // Screen 6: Artisan & Footer
+        // Screen 5: Artisan & Footer
         artisan_eyebrow: "ARCHITECT PROFILE",
         artisan_title: "Craftsman Spirit & Self-Reliance",
         artisan_desc: "True mastery comes from penetrating commercial mechanisms, mastering foundational technologies, and an uncompromising pursuit of visual excellence.",
@@ -1828,6 +1580,7 @@
         pillar_3_title: "💎 Pixel-Level Aesthetics",
         pillar_3_desc: "Fusing architecture with industrial beauty for a mesmerizing first impression.",
         footer_copy: "© 2026 Vanguard Architecture Studio. All Rights Reserved.",
+        footer_cases: "Case Directory",
         footer_github: "GitHub Repo",
         footer_portal: "Official Portal"
       }
@@ -1903,7 +1656,7 @@
       applyLanguage(initialLang);
 
       // -------------------------------------------------------------
-      // 2. Fullpage Slide Deck 幻灯切幕引擎 (支持滚轮、触摸、键盘及内链跳转)
+      // 2. Fullpage Slide Deck 幻灯切幕引擎 (5 幕)
       // -------------------------------------------------------------
       const slides = Array.from(document.querySelectorAll(".deck-slide"));
       const brandHomeLink = document.getElementById("brandHomeLink");
@@ -1973,7 +1726,7 @@
         });
       }
 
-      // 智能鼠标滚轮切幕 (支持幕内溢出安全滚动检测)
+      // 鼠标滚轮切幕
       let wheelCooldown = false;
       window.addEventListener("wheel", (e) => {
         if (wheelCooldown || isAnimating) return;
@@ -2005,7 +1758,7 @@
         }
       }, { passive: true });
 
-      // 移动端触屏滑动手势 (Touch Swipe Up / Down)
+      // 触屏滑动切幕
       let touchStartY = 0;
       let touchStartX = 0;
       let touchEndY = 0;
