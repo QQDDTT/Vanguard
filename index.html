@@ -15,19 +15,20 @@
 
   <style>
     /* ==========================================================================
-       Vanguard Platform Design System - Deep Space Obsidian (深邃黑曜石与高精微光)
+       Vanguard Keynote Design System - Deep Space Obsidian & Precision Glow
+       参考苹果与Stripe产品发布会设计语言：呼吸感留白、沉浸式大图、精致动效与视差渐入
        ========================================================================== */
     :root {
-      --vg-bg-base: #07090e;
-      --vg-bg-surface: #0e121a;
-      --vg-bg-card: #131824;
-      --vg-bg-card-hover: #182030;
-      --vg-bg-glass: rgba(14, 18, 26, 0.88);
+      --vg-bg-base: #06080d;
+      --vg-bg-surface: #0b0f17;
+      --vg-bg-card: rgba(16, 22, 34, 0.75);
+      --vg-bg-card-hover: rgba(22, 30, 46, 0.85);
+      --vg-bg-glass: rgba(11, 15, 23, 0.82);
 
-      --vg-border-subtle: rgba(255, 255, 255, 0.07);
-      --vg-border-light: rgba(255, 255, 255, 0.12);
-      --vg-border-accent: rgba(37, 99, 235, 0.35);
-      --vg-border-glow: rgba(56, 189, 248, 0.5);
+      --vg-border-subtle: rgba(255, 255, 255, 0.08);
+      --vg-border-light: rgba(255, 255, 255, 0.14);
+      --vg-border-accent: rgba(56, 189, 248, 0.35);
+      --vg-border-glow: rgba(56, 189, 248, 0.6);
 
       --vg-text-primary: #f8fafc;
       --vg-text-secondary: #94a3b8;
@@ -41,21 +42,22 @@
       --vg-accent-amber: #f59e0b;
 
       --vg-gradient-primary: linear-gradient(135deg, #2563eb 0%, #6366f1 50%, #06b6d4 100%);
-      --vg-gradient-text: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-      --vg-gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+      --vg-gradient-text: linear-gradient(180deg, #ffffff 10%, #94a3b8 100%);
+      --vg-gradient-headline: linear-gradient(135deg, #ffffff 20%, #38bdf8 70%, #818cf8 100%);
+      --vg-gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 100%);
 
-      --vg-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-      --vg-shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
-      --vg-shadow-lg: 0 20px 48px -10px rgba(0, 0, 0, 0.7);
-      --vg-shadow-glow: 0 0 30px rgba(37, 99, 235, 0.2);
+      --vg-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --vg-shadow-md: 0 12px 32px -4px rgba(0, 0, 0, 0.6);
+      --vg-shadow-lg: 0 24px 64px -12px rgba(0, 0, 0, 0.8);
+      --vg-shadow-glow: 0 0 40px rgba(37, 99, 235, 0.25);
 
-      --vg-radius-sm: 6px;
-      --vg-radius-md: 10px;
-      --vg-radius-lg: 16px;
-      --vg-radius-xl: 22px;
+      --vg-radius-sm: 8px;
+      --vg-radius-md: 14px;
+      --vg-radius-lg: 20px;
+      --vg-radius-xl: 28px;
 
-      --vg-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      --vg-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+      --vg-font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --vg-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     }
 
     * {
@@ -75,73 +77,88 @@
     body {
       background-color: var(--vg-bg-base);
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 100% 40%, rgba(6, 182, 212, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 0% 70%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 90% 30%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 10% 65%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
       color: var(--vg-text-primary);
       font-family: var(--vg-font-sans);
-      font-size: 15px;
-      line-height: 1.65;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
-    /* 容器基准 */
     .container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 24px;
-      box-sizing: border-box;
+    }
+
+    /* 章节过渡平滑渐入 (Keynote Reveal Animation) */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ==========================================================================
-       1. Global Header 顶栏导航
+       1. Global Header 悬浮玻璃导航顶栏
        ========================================================================== */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 100;
+      height: 72px;
       background: var(--vg-bg-glass);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--vg-border-subtle);
+      transition: background 0.3s ease;
     }
 
     .header-inner {
-      height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      height: 100%;
+      gap: 20px;
     }
 
     .brand-link {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       text-decoration: none;
       color: inherit;
       min-width: 0;
-      flex-shrink: 1;
+      flex-shrink: 0;
     }
 
     .brand-badge {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: var(--vg-radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
       flex-shrink: 0;
       overflow: hidden;
-      background: rgba(14, 19, 32, 0.9);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(14, 19, 32, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    .brand-link:hover .brand-badge {
+      transform: scale(1.05);
     }
 
     .brand-badge img {
@@ -158,13 +175,11 @@
     }
 
     .brand-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.4px;
       color: #ffffff;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .brand-subtitle {
@@ -174,29 +189,27 @@
       letter-spacing: 0.8px;
       text-transform: uppercase;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .header-nav {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
       list-style: none;
     }
 
     .nav-link {
       color: var(--vg-text-secondary);
       text-decoration: none;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 500;
-      transition: color 0.15s ease;
+      transition: color 0.2s ease;
       white-space: nowrap;
     }
 
@@ -207,7 +220,7 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex-shrink: 0;
     }
 
@@ -215,12 +228,12 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 12px;
+      padding: 5px 12px;
       background: rgba(16, 185, 129, 0.1);
       border: 1px solid rgba(16, 185, 129, 0.25);
       border-radius: 9999px;
       color: var(--vg-accent-emerald);
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 600;
       font-family: var(--vg-font-mono);
       white-space: nowrap;
@@ -244,76 +257,74 @@
     .btn-header-cta {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      background: rgba(255, 255, 255, 0.05);
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--vg-border-light);
       border-radius: var(--vg-radius-sm);
       color: #ffffff;
       text-decoration: none;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 600;
       transition: all 0.2s ease;
       white-space: nowrap;
-      cursor: pointer;
     }
 
     .btn-header-cta:hover {
       background: var(--vg-accent-blue);
       border-color: var(--vg-accent-blue);
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
     }
 
     /* ==========================================================================
-       2. Hero 视窗看板 (Vision & Creed)
+       2. Hero 视窗看板 (Keynote Showcase Visual)
        ========================================================================== */
     .hero-section {
-      padding: 72px 0 54px 0;
-      text-align: center;
+      padding: 80px 0 90px 0;
       position: relative;
+      text-align: center;
     }
 
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 5px 14px;
-      background: rgba(37, 99, 235, 0.1);
-      border: 1px solid rgba(37, 99, 235, 0.3);
+      padding: 6px 16px;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
       border-radius: 9999px;
-      font-family: var(--vg-font-mono);
-      font-size: 11.5px;
-      font-weight: 700;
       color: #38bdf8;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
+      font-family: var(--vg-font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
       margin-bottom: 24px;
+      text-transform: uppercase;
     }
 
     .hero-title {
-      font-size: 42px;
+      font-size: 52px;
+      line-height: 1.15;
       font-weight: 900;
-      line-height: 1.25;
-      letter-spacing: -1.2px;
+      letter-spacing: -1.5px;
+      margin-bottom: 22px;
       color: #ffffff;
-      margin-bottom: 20px;
-      background: var(--vg-gradient-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      word-break: keep-all;
-      overflow-wrap: break-word;
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .hero-title span.highlight {
-      background: var(--vg-gradient-primary);
+    .hero-title .highlight {
+      background: var(--vg-gradient-headline);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: inline-block;
     }
 
     .hero-desc {
-      font-size: 16.5px;
+      font-size: 17.5px;
       color: var(--vg-text-secondary);
-      max-width: 820px;
+      max-width: 780px;
       margin: 0 auto 36px auto;
       line-height: 1.7;
     }
@@ -322,78 +333,343 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 16px;
+      margin-bottom: 56px;
       flex-wrap: wrap;
-      margin-bottom: 54px;
     }
 
     .btn-hero-primary {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 26px;
+      gap: 10px;
+      padding: 14px 28px;
       background: var(--vg-gradient-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--vg-radius-md);
       color: #ffffff;
       text-decoration: none;
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 700;
-      border-radius: var(--vg-radius-md);
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .btn-hero-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 12px 32px rgba(37, 99, 235, 0.6);
     }
 
     .btn-hero-secondary {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      background: rgba(255, 255, 255, 0.04);
+      gap: 10px;
+      padding: 14px 28px;
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--vg-border-light);
-      color: var(--vg-text-primary);
-      text-decoration: none;
-      font-size: 14.5px;
-      font-weight: 600;
       border-radius: var(--vg-radius-md);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
       transition: all 0.2s ease;
+      backdrop-filter: blur(8px);
     }
 
     .btn-hero-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
     }
 
-    /* 核心 KPI 矩阵 */
-    .hero-metrics-grid {
+    /* Hero 大画幅发布会级视觉展台 (Workbench Keynote Canvas) */
+    .hero-visual-container {
+      position: relative;
+      max-width: 1160px;
+      margin: 0 auto;
+      border-radius: var(--vg-radius-xl);
+      padding: 8px;
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.25) 0%, rgba(99, 102, 241, 0.1) 40%, rgba(255, 255, 255, 0.02) 100%);
+      box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(37, 99, 235, 0.2);
+    }
+
+    .hero-visual-frame {
+      position: relative;
+      width: 100%;
+      border-radius: calc(var(--vg-radius-xl) - 6px);
+      overflow: hidden;
+      background: #080b12;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-visual-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-visual-container:hover .hero-visual-img {
+      transform: scale(1.015);
+    }
+
+    .hero-visual-overlay-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 16px 22px;
+      background: rgba(6, 8, 13, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--vg-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .caption-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .caption-desc {
+      font-size: 12.5px;
+      color: var(--vg-text-muted);
+    }
+
+    /* 四大无服务器/零依赖核心指标浮动条 */
+    .hero-metrics-pill-bar {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      width: 100%;
-      box-sizing: border-box;
+      gap: 14px;
+      margin-top: 36px;
+      max-width: 1160px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .hero-metric-card {
+    .metric-pill {
       background: var(--vg-bg-card);
       border: 1px solid var(--vg-border-subtle);
-      border-radius: var(--vg-radius-lg);
-      padding: 22px 18px;
+      border-radius: var(--vg-radius-md);
+      padding: 18px 20px;
       text-align: left;
-      position: relative;
-      overflow: hidden;
+      backdrop-filter: blur(10px);
       transition: all 0.25s ease;
     }
 
-    .hero-metric-card:hover {
+    .metric-pill:hover {
       border-color: var(--vg-border-accent);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       box-shadow: var(--vg-shadow-md);
     }
 
-    .hero-metric-card::before {
+    .metric-pill-val {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: var(--vg-font-mono);
+      letter-spacing: -0.5px;
+      margin-bottom: 2px;
+      background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .metric-pill-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--vg-text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .metric-pill-note {
+      font-size: 11.5px;
+      color: var(--vg-text-muted);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       3. 通用章节框架与标题样式
+       ========================================================================== */
+    .section-block {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-header {
+      margin-bottom: 56px;
+      text-align: center;
+    }
+
+    .section-eyebrow {
+      font-family: var(--vg-font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--vg-accent-cyan);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--vg-text-secondary);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       4. 开发理念展示厅 (Cinematic Creed Showcases)
+       Apple发布会式图文交替展台，呼吸感大图配合精炼阐释
+       ========================================================================== */
+    .creed-showcase-row {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      align-items: center;
+      gap: 56px;
+      margin-bottom: 84px;
+    }
+
+    .creed-showcase-row.reverse {
+      grid-template-columns: 1.15fr 1fr;
+    }
+
+    .creed-showcase-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .creed-content-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .creed-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--vg-border-light);
+      border-radius: var(--vg-radius-sm);
+      font-family: var(--vg-font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--vg-accent-cyan);
+      width: fit-content;
+    }
+
+    .creed-heading {
+      font-size: 30px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.6px;
+      line-height: 1.25;
+    }
+
+    .creed-lead-text {
+      font-size: 15.5px;
+      color: var(--vg-text-secondary);
+      line-height: 1.75;
+    }
+
+    .creed-feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+      margin-top: 6px;
+    }
+
+    .creed-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .creed-feature-bullet {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* 展台大图外框 */
+    .creed-visual-card {
+      position: relative;
+      border-radius: var(--vg-radius-lg);
+      padding: 6px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid var(--vg-border-light);
+      box-shadow: var(--vg-shadow-lg);
+      overflow: hidden;
+    }
+
+    .creed-visual-img {
+      width: 100%;
+      height: auto;
+      border-radius: calc(var(--vg-radius-lg) - 4px);
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .creed-visual-card:hover .creed-visual-img {
+      transform: scale(1.02);
+    }
+
+    /* ==========================================================================
+       5. 核心专业服务体系 (Service Matrix)
+       ========================================================================== */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--vg-bg-card);
+      border: 1px solid var(--vg-border-subtle);
+      border-radius: var(--vg-radius-lg);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
       content: "";
       position: absolute;
       top: 0;
@@ -402,832 +678,508 @@
       height: 2px;
       background: var(--vg-gradient-primary);
       opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-
-    .hero-metric-card:hover::before {
-      opacity: 1;
-    }
-
-    .metric-value {
-      font-family: var(--vg-font-mono);
-      font-size: 26px;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1.1;
-      margin-bottom: 6px;
-    }
-
-    .metric-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--vg-text-secondary);
-      margin-bottom: 4px;
-    }
-
-    .metric-sub {
-      font-size: 11px;
-      color: var(--vg-text-muted);
-      line-height: 1.4;
-    }
-
-    /* ==========================================================================
-       3. 核心开发理念板块 (Core Philosophies)
-       ========================================================================== */
-    .section-block {
-      padding: 64px 0;
-      position: relative;
-    }
-
-    .section-header {
-      margin-bottom: 40px;
-    }
-
-    .section-eyebrow {
-      font-family: var(--vg-font-mono);
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--vg-accent-cyan);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-eyebrow::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--vg-accent-cyan);
-      display: inline-block;
-    }
-
-    .section-title {
-      font-size: 28px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.6px;
-      margin-bottom: 10px;
-    }
-
-    .section-desc {
-      font-size: 14.5px;
-      color: var(--vg-text-secondary);
-      max-width: 720px;
-      line-height: 1.6;
-    }
-
-    .philosophy-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .philosophy-card {
-      background: var(--vg-bg-card);
-      border: 1px solid var(--vg-border-subtle);
-      border-radius: var(--vg-radius-lg);
-      padding: 32px 28px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: all 0.25s ease;
-      box-sizing: border-box;
-    }
-
-    .philosophy-card:hover {
-      border-color: var(--vg-border-accent);
-      background: var(--vg-bg-card-hover);
-      box-shadow: var(--vg-shadow-md);
-      transform: translateY(-3px);
-    }
-
-    .philo-icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--vg-radius-md);
-      background: rgba(37, 99, 235, 0.12);
-      border: 1px solid rgba(37, 99, 235, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: #38bdf8;
-    }
-
-    .philo-title {
-      font-size: 18.5px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .philo-tag {
-      font-family: var(--vg-font-mono);
-      font-size: 10.5px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--vg-text-secondary);
-    }
-
-    .philo-desc {
-      font-size: 13.5px;
-      color: var(--vg-text-secondary);
-      line-height: 1.7;
-      margin-bottom: 18px;
-      flex: 1;
-    }
-
-    .philo-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      border-top: 1px solid var(--vg-border-subtle);
-      padding-top: 16px;
-    }
-
-    .philo-feature-item {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      font-size: 12.5px;
-      color: var(--vg-text-muted);
-    }
-
-    .philo-feature-item span.bullet {
-      color: var(--vg-accent-cyan);
-      font-size: 12px;
-    }
-
-    /* ==========================================================================
-       4. 核心专业服务体系 (Service Matrix)
-       ========================================================================== */
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .service-card {
-      background: var(--vg-bg-surface);
-      border: 1px solid var(--vg-border-subtle);
-      border-radius: var(--vg-radius-lg);
-      padding: 26px 22px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: all 0.25s ease;
-      box-sizing: border-box;
+      transition: opacity 0.3s ease;
     }
 
     .service-card:hover {
-      border-color: rgba(99, 102, 241, 0.4);
-      background: var(--vg-bg-card);
-      transform: translateY(-3px);
+      border-color: var(--vg-border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--vg-shadow-md);
+      background: var(--vg-bg-card-hover);
     }
 
-    .service-num {
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-header {
+      margin-bottom: 16px;
+    }
+
+    .service-number {
       font-family: var(--vg-font-mono);
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--vg-accent-indigo);
-      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--vg-accent-cyan);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
     }
 
     .service-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-
-    .service-desc {
-      font-size: 13px;
-      color: var(--vg-text-secondary);
-      line-height: 1.6;
-      margin-bottom: 16px;
-      flex: 1;
-    }
-
-    .service-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .service-badge {
-      font-size: 10.5px;
-      font-family: var(--vg-font-mono);
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--vg-text-muted);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    /* ==========================================================================
-       5. 案件展台与公开展示入口 (Case Studies & Project Showcase)
-       ========================================================================== */
-    .case-card-featured {
-      background: var(--vg-bg-card);
-      border: 1px solid var(--vg-border-accent);
-      border-radius: var(--vg-radius-xl);
-      padding: 36px 32px;
-      box-shadow: var(--vg-shadow-lg), 0 0 30px rgba(37, 99, 235, 0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 32px;
-      box-sizing: border-box;
-    }
-
-    .case-card-featured::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--vg-gradient-primary);
-    }
-
-    .case-top-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .case-badge-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .case-badge-active {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      font-family: var(--vg-font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--vg-accent-emerald);
-    }
-
-    .case-badge-cat {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      font-family: var(--vg-font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      background: rgba(37, 99, 235, 0.12);
-      border: 1px solid rgba(37, 99, 235, 0.3);
-      color: #38bdf8;
-    }
-
-    .case-code-tag {
-      font-family: var(--vg-font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--vg-text-muted);
-    }
-
-    .case-header-content h3 {
-      font-size: 24px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 10px;
-      letter-spacing: -0.4px;
-    }
-
-    .case-header-content p {
-      font-size: 14.5px;
-      color: var(--vg-text-secondary);
-      line-height: 1.7;
-      max-width: 980px;
-    }
-
-    /* 成果物一览快照条 */
-    .case-deliverables-pill-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    .deliverable-pill-item {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--vg-border-subtle);
-      border-radius: var(--vg-radius-md);
-      padding: 14px 16px;
-    }
-
-    .pill-code {
-      font-family: var(--vg-font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--vg-accent-cyan);
-      margin-bottom: 4px;
-    }
-
-    .pill-title {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .pill-sub {
-      font-size: 11px;
-      color: var(--vg-text-muted);
-      line-height: 1.4;
-    }
-
-    /* 底部操作行动条 */
-    .case-action-bar {
-      border-top: 1px solid var(--vg-border-subtle);
-      padding-top: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .case-action-info {
-      font-size: 12.5px;
-      color: var(--vg-text-muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .case-buttons-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-launch-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: #ffffff;
-      color: #090d16;
-      border-radius: var(--vg-radius-sm);
-      font-size: 13.5px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
-      cursor: pointer;
-    }
-
-    .btn-launch-primary:hover {
-      background: var(--vg-accent-blue);
-      color: #ffffff;
-      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
-    }
-
-    .btn-launch-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--vg-border-light);
-      color: var(--vg-text-primary);
-      border-radius: var(--vg-radius-sm);
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.15s ease;
-    }
-
-    .btn-launch-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: #cbd5e1;
-    }
-
-    /* 次级/预告案例网格 */
-    .secondary-cases-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .secondary-case-card {
-      background: var(--vg-bg-surface);
-      border: 1px solid var(--vg-border-subtle);
-      border-radius: var(--vg-radius-lg);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.2s ease;
-    }
-
-    .secondary-case-card:hover {
-      border-color: var(--vg-border-light);
-      background: var(--vg-bg-card);
-    }
-
-    .sec-case-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 8px 0 6px 0;
-    }
-
-    .sec-case-desc {
-      font-size: 13px;
-      color: var(--vg-text-secondary);
-      line-height: 1.6;
-      margin-bottom: 16px;
-      flex: 1;
-    }
-
-    .sec-case-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--vg-border-subtle);
-      padding-top: 14px;
-      font-size: 12px;
-      color: var(--vg-text-muted);
-    }
-
-    /* ==========================================================================
-       6. 作者档案与自我评价 (Author Profile & Philosophy)
-       ========================================================================== */
-    .author-container-card {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(14, 18, 26, 0.95) 50%, rgba(99, 102, 241, 0.05) 100%);
-      border: 1px solid var(--vg-border-accent);
-      border-radius: var(--vg-radius-xl);
-      padding: 44px 40px;
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 40px;
-      align-items: start;
-      box-shadow: var(--vg-shadow-lg);
-      box-sizing: border-box;
-    }
-
-    .author-badge-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding-right: 20px;
-      border-right: 1px solid var(--vg-border-subtle);
-    }
-
-    .author-avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 24px;
-      background: var(--vg-gradient-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      font-family: var(--vg-font-mono);
-      font-size: 40px;
-      font-weight: 900;
-      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
-      margin-bottom: 18px;
-    }
-
-    .author-name {
-      font-size: 20px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 4px;
-    }
-
-    .author-role {
-      font-family: var(--vg-font-mono);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--vg-accent-cyan);
-      margin-bottom: 16px;
-      letter-spacing: 0.5px;
-    }
-
-    .author-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 100%;
-      text-align: left;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 14px 16px;
-      border-radius: var(--vg-radius-md);
-      border: 1px solid var(--vg-border-subtle);
-      font-size: 12px;
-      color: var(--vg-text-secondary);
-    }
-
-    .author-stat-item {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .author-stat-item strong {
-      color: #ffffff;
-      font-family: var(--vg-font-mono);
-    }
-
-    .author-content-col {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .author-manifesto-title {
       font-size: 22px;
       font-weight: 800;
       color: #ffffff;
       letter-spacing: -0.4px;
+      line-height: 1.35;
     }
 
-    .author-manifesto-text {
+    .service-desc {
       font-size: 14.5px;
       color: var(--vg-text-secondary);
-      line-height: 1.75;
+      line-height: 1.7;
+      margin-bottom: 24px;
     }
 
-    .author-traits-grid {
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .service-tag {
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--vg-border-subtle);
+      border-radius: var(--vg-radius-sm);
+      font-size: 12px;
+      color: var(--vg-text-muted);
+      font-family: var(--vg-font-mono);
+    }
+
+    /* ==========================================================================
+       6. 旗舰案件展台 (Featured Showcase: Sentis CRM)
+       大画幅产品渲染图 + 全景成果物矩阵 + 直达按钮
+       ========================================================================== */
+    .showcase-featured-wrapper {
+      background: linear-gradient(180deg, rgba(16, 22, 34, 0.8) 0%, rgba(11, 15, 23, 0.95) 100%);
+      border: 1px solid var(--vg-border-light);
+      border-radius: var(--vg-radius-xl);
+      padding: 40px;
+      box-shadow: var(--vg-shadow-lg);
+      backdrop-filter: blur(16px);
+      position: relative;
+    }
+
+    .showcase-visual-box {
+      border-radius: var(--vg-radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-bottom: 36px;
+      position: relative;
+      background: #090d14;
+    }
+
+    .showcase-visual-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .showcase-visual-box:hover img {
+      transform: scale(1.015);
+    }
+
+    .showcase-live-tag {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: rgba(6, 8, 13, 0.88);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      font-family: var(--vg-font-mono);
+    }
+
+    .showcase-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .showcase-info-col h3 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .showcase-info-col p {
+      font-size: 15px;
+      color: var(--vg-text-secondary);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .showcase-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-showcase-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--vg-gradient-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--vg-radius-md);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14.5px;
+      font-weight: 700;
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+      transition: all 0.2s ease;
+    }
+
+    .btn-showcase-launch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.6);
+    }
+
+    .btn-showcase-doc {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--vg-border-light);
+      border-radius: var(--vg-radius-md);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14.5px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-showcase-doc:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .showcase-deliverables-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .deliv-card-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--vg-border-subtle);
+      border-radius: var(--vg-radius-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: border-color 0.2s ease;
+    }
+
+    .deliv-card-item:hover {
+      border-color: var(--vg-border-accent);
+    }
+
+    .deliv-code-badge {
+      font-family: var(--vg-font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--vg-accent-cyan);
+      margin-bottom: 2px;
+    }
+
+    .deliv-card-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .deliv-card-status {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--vg-accent-emerald);
+      font-family: var(--vg-font-mono);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       7. 作者档案与工匠精神 (Master Craftsman Profile)
+       ========================================================================== */
+    .artisan-section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: center;
+      background: var(--vg-bg-card);
+      border: 1px solid var(--vg-border-subtle);
+      border-radius: var(--vg-radius-xl);
+      padding: 48px;
+      backdrop-filter: blur(16px);
+    }
+
+    .artisan-visual-col {
+      border-radius: var(--vg-radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--vg-border-light);
+      box-shadow: var(--vg-shadow-lg);
+    }
+
+    .artisan-visual-col img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .artisan-text-col h3 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .artisan-role-sub {
+      font-family: var(--vg-font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--vg-accent-cyan);
+      letter-spacing: 0.8px;
+      margin-bottom: 18px;
+    }
+
+    .artisan-bio {
+      font-size: 15px;
+      color: var(--vg-text-secondary);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .artisan-points-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      margin-top: 10px;
     }
 
-    .author-trait-box {
-      background: rgba(255, 255, 255, 0.02);
+    .artisan-point-card {
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid var(--vg-border-subtle);
       border-radius: var(--vg-radius-md);
-      padding: 14px;
+      padding: 16px;
     }
 
-    .trait-label {
-      font-size: 13px;
+    .artisan-point-title {
+      font-size: 13.5px;
       font-weight: 700;
       color: #ffffff;
       margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
-    .trait-desc {
-      font-size: 11.5px;
+    .artisan-point-desc {
+      font-size: 12px;
       color: var(--vg-text-muted);
       line-height: 1.5;
     }
 
     /* ==========================================================================
-       7. 页脚与公开声明 (Global Footer)
+       8. 全局页脚 (Global Footer)
        ========================================================================== */
     .site-footer {
       border-top: 1px solid var(--vg-border-subtle);
       background: var(--vg-bg-surface);
-      padding: 48px 0 36px 0;
-      margin-top: auto;
+      padding: 60px 0 40px 0;
+      margin-top: 40px;
     }
 
-    .footer-inner {
+    .footer-top {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
+      align-items: flex-start;
+      gap: 48px;
       flex-wrap: wrap;
-      gap: 32px;
-      padding-bottom: 32px;
+      padding-bottom: 40px;
       border-bottom: 1px solid var(--vg-border-subtle);
     }
 
-    .footer-brand-side {
-      max-width: 420px;
+    .footer-brand-col {
+      max-width: 440px;
+    }
+
+    .footer-brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .footer-brand-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      letter-spacing: -0.3px;
     }
 
     .footer-brand-desc {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--vg-text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    .footer-nav-col {
+    .footer-links-col {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      font-size: 13px;
+      gap: 12px;
     }
 
-    .footer-nav-title {
+    .footer-col-title {
+      font-family: var(--vg-font-mono);
       font-size: 12px;
       font-weight: 700;
       color: #ffffff;
-      font-family: var(--vg-font-mono);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
       margin-bottom: 4px;
     }
 
-    .footer-nav-link {
+    .footer-link {
+      font-size: 13.5px;
       color: var(--vg-text-muted);
       text-decoration: none;
       transition: color 0.15s ease;
     }
 
-    .footer-nav-link:hover {
+    .footer-link:hover {
       color: var(--vg-accent-cyan);
     }
 
     .footer-bottom-bar {
-      padding-top: 24px;
+      padding-top: 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--vg-text-dim);
     }
 
     /* ==========================================================================
-       8. 移动端极简响应式规范 (Mobile Responsive & Zero Horizontal Overflow)
+       9. 移动端极简响应式规范 (Mobile Responsive & Zero Horizontal Overflow)
        严格遵守平台第 7 节响应式标准：零水平溢出，按钮符号化，标题不折行
        ========================================================================== */
-
-    /* 1. 中屏设备 (<= 1024px) */
     @media (max-width: 1024px) {
-      .hero-metrics-grid {
+      .hero-title {
+        font-size: 40px;
+      }
+      .hero-metrics-pill-bar {
         grid-template-columns: repeat(2, 1fr);
       }
-      .service-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .creed-showcase-row,
+      .creed-showcase-row.reverse {
+        grid-template-columns: 1fr;
+        gap: 36px;
       }
-      .case-deliverables-pill-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .author-container-card {
+      .showcase-body-grid {
         grid-template-columns: 1fr;
         gap: 28px;
+      }
+      .artisan-section-grid {
+        grid-template-columns: 1fr;
         padding: 32px 24px;
       }
-      .author-badge-col {
-        border-right: none;
-        border-bottom: 1px solid var(--vg-border-subtle);
-        padding-right: 0;
-        padding-bottom: 24px;
+      .service-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    /* 2. 平板端 (<= 768px) */
     @media (max-width: 768px) {
       .header-nav .nav-links {
-        display: none; /* 移动端隐藏中间长文字导航条，节约横向宽度 */
-      }
-      .philosophy-grid {
-        grid-template-columns: 1fr;
-      }
-      .secondary-cases-grid {
-        grid-template-columns: 1fr;
+        display: none;
       }
       .hero-title {
-        font-size: 30px;
-        letter-spacing: -0.6px;
+        font-size: 32px;
+        letter-spacing: -0.8px;
       }
       .hero-desc {
-        font-size: 14.5px;
+        font-size: 15px;
       }
-      .author-traits-grid {
+      .hero-metrics-pill-bar {
         grid-template-columns: 1fr;
+      }
+      .artisan-points-grid {
+        grid-template-columns: 1fr;
+      }
+      .section-title {
+        font-size: 28px;
+      }
+      .creed-heading {
+        font-size: 24px;
+      }
+      .showcase-featured-wrapper {
+        padding: 24px 18px;
       }
     }
 
-    /* 3. 手机端核心规范 (<= 640px) - 按钮符号化与绝对零水平滚动条 */
+    /* 手机端极窄规范 (<= 640px) */
     @media (max-width: 640px) {
       body {
-        font-size: 13.5px;
+        font-size: 14px;
       }
 
       .container {
-        padding: 0 14px;
+        padding: 0 16px;
       }
 
       .site-header {
-        height: 56px;
+        height: 60px;
       }
 
-      .header-inner {
-        height: 56px;
-      }
-
-      /* 品牌标题保持单行，不换行 */
       .brand-title {
         font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
       .brand-subtitle {
-        display: none; /* 极窄下隐藏次要副标题，维持整体性 */
+        font-size: 9.5px;
       }
 
-      /* 移动端统一按钮符号化规范：隐藏文字标签，转为紧凑纯图标展示 */
-      .btn-header-cta .btn-text,
-      .btn-hero-primary .btn-text,
-      .btn-hero-secondary .btn-text,
-      .btn-launch-primary .btn-text,
-      .btn-launch-secondary .btn-text {
-        display: none !important;
+      .hero-section {
+        padding: 48px 0 60px 0;
       }
 
-      .btn-header-cta {
-        width: 34px;
-        height: 34px;
+      .hero-title {
+        font-size: 26px;
+        letter-spacing: -0.5px;
+        line-height: 1.25;
+      }
+
+      .hero-desc {
+        font-size: 13.5px;
+        margin-bottom: 28px;
+      }
+
+      /* 移动端按钮纯符号化：节约横向宽度，防折行破版 */
+      .btn-hero-primary,
+      .btn-hero-secondary {
+        width: 48px;
+        height: 48px;
         padding: 0;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border-radius: var(--vg-radius-sm);
-        font-size: 14px;
-        flex-shrink: 0;
+        border-radius: var(--vg-radius-md);
+        font-size: 20px;
       }
 
-      .portal-tag-badge {
-        padding: 3px 8px;
-        font-size: 10.5px;
+      .btn-hero-primary .btn-text,
+      .btn-hero-secondary .btn-text {
+        display: none;
       }
 
-      .hero-section {
-        padding: 36px 0 32px 0;
-      }
-
-      .hero-title {
-        font-size: clamp(21px, 6vw, 26px);
-        line-height: 1.3;
-        margin-bottom: 14px;
-        word-break: keep-all;
-        overflow-wrap: break-word;
-      }
-
-      .hero-desc {
-        font-size: 13px;
-        line-height: 1.6;
-        margin-bottom: 24px;
-      }
-
-      .hero-cta-group {
-        gap: 8px;
-        margin-bottom: 32px;
-      }
-
-      .btn-hero-primary,
-      .btn-hero-secondary {
+      .btn-showcase-launch,
+      .btn-showcase-doc {
         width: 44px;
         height: 44px;
         padding: 0;
@@ -1238,116 +1190,29 @@
         font-size: 18px;
       }
 
-      .hero-metrics-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
+      .btn-showcase-launch .btn-text,
+      .btn-showcase-doc .btn-text {
+        display: none;
       }
 
-      .hero-metric-card {
-        padding: 14px 12px;
+      .btn-header-cta {
+        padding: 6px 10px;
+        font-size: 12px;
       }
 
-      .metric-value {
-        font-size: 20px;
+      .hero-visual-overlay-caption {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 12px 14px;
+      }
+
+      .caption-desc {
+        font-size: 11px;
       }
 
       .section-block {
-        padding: 40px 0;
-      }
-
-      .section-title {
-        font-size: 22px;
-      }
-
-      .service-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .service-card {
-        padding: 18px 16px;
-      }
-
-      .philosophy-card {
-        padding: 22px 18px;
-      }
-
-      .case-card-featured {
-        padding: 22px 16px;
-        border-radius: var(--vg-radius-lg);
-      }
-
-      .case-header-content h3 {
-        font-size: 18px;
-      }
-
-      .case-deliverables-pill-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .case-action-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        gap: 8px;
-      }
-
-      .case-action-info {
-        font-size: 11px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .case-buttons-group {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        flex-shrink: 0;
-      }
-
-      /* 案件直达按钮符号化紧凑图标 */
-      .btn-launch-primary {
-        width: 36px;
-        height: 36px;
-        padding: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--vg-radius-sm);
-        font-size: 15px;
-      }
-
-      .btn-launch-secondary {
-        width: 36px;
-        height: 36px;
-        padding: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--vg-radius-sm);
-        font-size: 14px;
-      }
-
-      .author-container-card {
-        padding: 22px 16px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        gap: 20px;
-      }
-    }
-
-    /* 4. 超窄屏手机 (<= 380px) */
-    @media (max-width: 380px) {
-      .hero-metrics-grid {
-        grid-template-columns: 1fr;
-      }
-      .brand-title {
-        max-width: 140px;
+        padding: 64px 0;
       }
     }
   </style>
@@ -1360,7 +1225,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="./index.html" class="brand-link" title="Vanguard 平台首页">
-        <div class="brand-badge"><img src="./favicon.svg" alt="Vanguard Logo" width="36" height="36"></div>
+        <div class="brand-badge"><img src="./favicon.svg" alt="Vanguard Logo" width="40" height="40"></div>
         <div class="brand-text-wrap">
           <span class="brand-title">VANGUARD 先锋平台</span>
           <span class="brand-subtitle">ARCHITECTURE & STRATEGY STUDIO</span>
@@ -1370,9 +1235,9 @@
       <nav class="header-nav">
         <ul class="nav-links">
           <li><a href="#creed" class="nav-link">开发理念</a></li>
-          <li><a href="#services" class="nav-link">服务内容</a></li>
+          <li><a href="#services" class="nav-link">服务矩阵</a></li>
           <li><a href="#cases" class="nav-link">案件展台</a></li>
-          <li><a href="#author" class="nav-link">作者档案</a></li>
+          <li><a href="#author" class="nav-link">工匠档案</a></li>
         </ul>
 
         <div class="header-actions">
@@ -1381,8 +1246,8 @@
             <span>PUBLIC PLATFORM</span>
           </div>
           <a href="https://github.com/QQDDTT/Vanguard" target="_blank" rel="noopener noreferrer" class="btn-header-cta" title="访问 GitHub 开源仓库">
-            <span class="btn-symbol">⚡</span>
-            <span class="btn-text">GitHub 仓库</span>
+            <span>⚡</span>
+            <span>GitHub 仓库</span>
           </a>
         </div>
       </nav>
@@ -1390,7 +1255,7 @@
   </header>
 
   <!-- ======================================================================
-       2. Hero 视窗看板 (Vision & Creed)
+       2. Hero 视窗看板 (Vision & Keynote Workbench)
        ====================================================================== -->
   <section class="hero-section">
     <div class="container">
@@ -1415,146 +1280,126 @@
       </p>
 
       <div class="hero-cta-group">
-        <a href="#cases" class="btn-hero-primary" title="探索案例清单与展示网站">
-          <span class="btn-symbol">🚀</span>
+        <a href="#cases" class="btn-hero-primary" title="探索案例清单与展示网站" aria-label="探索案例展台">
+          <span>🚀</span>
           <span class="btn-text">查阅案例展台</span>
         </a>
-        <a href="#creed" class="btn-hero-secondary" title="阅读平台开发理念宣言">
-          <span class="btn-symbol">📖</span>
+        <a href="#creed" class="btn-hero-secondary" title="阅读平台开发理念宣言" aria-label="开发理念宣言">
+          <span>📖</span>
           <span class="btn-text">开发理念宣言</span>
         </a>
       </div>
 
-      <!-- 四大核心指标矩阵 -->
-      <div class="hero-metrics-grid">
-        <div class="hero-metric-card">
-          <div class="metric-value">0 运行依赖</div>
-          <div class="metric-label">无本地环境捆绑</div>
-          <div class="metric-sub">免除 Node/Python/Java 安装，Windows 原生自动化脚本处理流程</div>
+      <!-- Hero 大画幅发布会级全息工作台视窗 -->
+      <div class="hero-visual-container reveal-on-scroll">
+        <div class="hero-visual-frame">
+          <img src="./assets/images/hero-workbench.jpg" alt="Vanguard 先锋架构实验室数字工作台" class="hero-visual-img" loading="eager">
+          <div class="hero-visual-overlay-caption">
+            <div class="caption-title">
+              <span style="color:var(--vg-accent-cyan);">◈</span>
+              <span>VANGUARD ARCHITECTURE WORKBENCH 2.0</span>
+            </div>
+            <div class="caption-desc">纯静态自包含交付体系 · Windows 原生自动化管道 · 工业级高保真仿真</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 四大核心指标矩阵药丸条 -->
+      <div class="hero-metrics-pill-bar reveal-on-scroll">
+        <div class="metric-pill">
+          <div class="metric-pill-val">0 运行依赖</div>
+          <div class="metric-pill-name">无本地环境捆绑</div>
+          <div class="metric-pill-note">免除 Node/Python/Java 安装，Windows 原生自动化脚本驱动全部工作流</div>
         </div>
 
-        <div class="hero-metric-card">
-          <div class="metric-value">0 Server 进程</div>
-          <div class="metric-label">彻底消除运维腐化</div>
-          <div class="metric-sub">无常驻后端服务器与数据库开销，永久纯静态离线可用</div>
+        <div class="metric-pill">
+          <div class="metric-pill-val">0 Server 进程</div>
+          <div class="metric-pill-name">彻底消除运维腐化</div>
+          <div class="metric-pill-note">无常驻后端服务器与数据库开销，永久纯静态离线可用与边缘 CDN 纳秒响应</div>
         </div>
 
-        <div class="hero-metric-card">
-          <div class="metric-value">&lt; 100ms</div>
-          <div class="metric-label">全球边缘直达时延</div>
-          <div class="metric-sub">GitHub Actions 自动化投递，Cloudflare Anycast 毫秒首屏</div>
+        <div class="metric-pill">
+          <div class="metric-pill-val">100% 相对路径</div>
+          <div class="metric-pill-name">双模无缝兼容</div>
+          <div class="metric-pill-note">本地双击离线 file:/// 协议与线上自定义独立域名 HTTPS 均享完整交互</div>
         </div>
 
-        <div class="hero-metric-card">
-          <div class="metric-value">100% 深度掌控</div>
-          <div class="metric-label">像素级自主打磨</div>
-          <div class="metric-sub">从商业机理、法务风控到交互原型，拒绝黑盒框架绑架</div>
+        <div class="metric-pill">
+          <div class="metric-pill-val">DEL 标号体系</div>
+          <div class="metric-pill-name">工业级资产规约</div>
+          <div class="metric-pill-note">DEL-01~04 交付物闭环，全中文严谨文档与全屏零横向溢出响应式标准</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ======================================================================
-       3. 核心开发理念深度推演 (Core Philosophies)
+       3. 四大开发理念展示厅 (Cinematic Creed Showcases)
        ====================================================================== -->
-  <section class="section-block" id="creed">
+  <section class="section-block" id="creed" style="border-top: 1px solid var(--vg-border-subtle);">
     <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">DEVELOPMENT PHILOSOPHY</div>
-        <h2 class="section-title">四大核心开发理念</h2>
+      <div class="section-header reveal-on-scroll">
+        <div class="section-eyebrow">DEVELOPMENT CREED</div>
+        <h2 class="section-title">核心开发理念与设计哲学</h2>
         <p class="section-desc">
-          我们深信，最好的软件与系统架构不仅在于“能跑”，更在于极简的生命周期成本、绝对的控制权与极具冲击力的工程美学。
+          我们坚信优秀的数字架构不应被冗余的技术栈绑架。前沿并非复杂的同义词，极致的克制与精巧才是优雅的终极形态。
         </p>
       </div>
 
-      <div class="philosophy-grid">
-        <!-- 理念 1: 前沿部署 -->
-        <article class="philosophy-card">
-          <div class="philo-icon-box">🌐</div>
-          <h3 class="philo-title">
-            <span>前沿部署 (Frontier Deployment)</span>
-            <span class="philo-tag">Zero-Server</span>
-          </h3>
-          <p class="philo-desc">
-            废黜传统繁重的虚拟机、Docker 容器与易腐化的后端服务集群。拥抱边缘计算与 Static-First 范式，通过 GitHub Actions 自动化 CI/CD 与全球 Anycast CDN 边缘网络，实现免维护、高容灾、自包含的永久可用交付物。
+      <!-- 理念 1: 前沿部署与无服务器基础设施 -->
+      <div class="creed-showcase-row reveal-on-scroll">
+        <div class="creed-content-col">
+          <div class="creed-tag-badge">FRONTIER DEPLOYMENT</div>
+          <h3 class="creed-heading">前沿部署与无服务器静态体系<br><span style="color:var(--vg-accent-cyan);">消除运维熵增，拥抱永恒数字资产</span></h3>
+          <p class="creed-lead-text">
+            摒弃复杂的微服务容器群与常驻后端数据库。以纯静态（Pure Static）前端作为核心呈现载体，结合 Cloudflare 全球边缘 CDN 与 GitHub Pages 自动化分发，实现 0 停机维护、0 漏洞面与永久持久化。
           </p>
-          <ul class="philo-features">
-            <li class="philo-feature-item">
-              <span class="bullet">▹</span>
-              <span>双模兼容：支持本地双击离线浏览（<code>file:///</code>）与全球独立域名托管</span>
+          <ul class="creed-feature-list">
+            <li class="creed-feature-item">
+              <span class="creed-feature-bullet">✓</span>
+              <span><strong>边缘瞬时加载</strong>：基于 Global Anycast CDN 节点就近接入，TTFB 降至毫秒级。</span>
             </li>
-            <li class="philo-feature-item">
-              <span class="bullet">▹</span>
-              <span>零月度基础设施开销，彻底杜绝服务器停机与安全漏洞修补负担</span>
+            <li class="creed-feature-item">
+              <span class="creed-feature-bullet">✓</span>
+              <span><strong>终身免运维</strong>：没有数据库宕机、没有漏洞修补补丁、无后端内存溢出风险。</span>
+            </li>
+            <li class="creed-feature-item">
+              <span class="creed-feature-bullet">✓</span>
+              <span><strong>极速 CI/CD</strong>：Git 提交即触发轻量 Actions，秒级完成全球静态资源同步。</span>
             </li>
           </ul>
-        </article>
+        </div>
+        <div class="creed-visual-card">
+          <img src="./assets/images/frontier-infra.jpg" alt="前沿无服务器与边缘网络架构示意图" class="creed-visual-img" loading="lazy">
+        </div>
+      </div>
 
-        <!-- 理念 2: AI 协同进化 -->
-        <article class="philosophy-card">
-          <div class="philo-icon-box">🧠</div>
-          <h3 class="philo-title">
-            <span>AI 协同进化 (AI-Augmented)</span>
-            <span class="philo-tag">Ultra Velocity</span>
-          </h3>
-          <p class="philo-desc">
-            将前沿人工智能大模型视作平行的架构结对助手与智能数字副官。从自然语言业务资料到系统 ER 模型、状态机、高保真原型样板的全链路推演，建立从模糊商业构想到精确技术规范的数倍速跃迁。
+      <!-- 理念 2: AI 协同进化与单兵人效跃迁 -->
+      <div class="creed-showcase-row reverse reveal-on-scroll">
+        <div class="creed-visual-card">
+          <img src="./assets/images/ai-symbiosis.jpg" alt="人机协同推演与AI架构实验室" class="creed-visual-img" loading="lazy">
+        </div>
+        <div class="creed-content-col">
+          <div class="creed-tag-badge">AI-AUGMENTED SYMBIOISIS</div>
+          <h3 class="creed-heading">AI 深度协同进化与逻辑推演<br><span style="color:var(--vg-accent-indigo);">从自然语言到工业级架构的数倍速跃迁</span></h3>
+          <p class="creed-lead-text">
+            将大模型视作平行架构结对助手与智能数字副官。从自然语言业务资料到系统 ER 关系图、业务状态机、高保真仿真样板的全链路推演，一人即可完成数十人团队才能交付的深度解决方案。
           </p>
-          <ul class="philo-features">
-            <li class="philo-feature-item">
-              <span class="bullet">▹</span>
-              <span>大模型深度推演：自动化提取行业法理合规红线与业务倒排逻辑</span>
+          <ul class="creed-feature-list">
+            <li class="creed-feature-item">
+              <span class="creed-feature-bullet">✓</span>
+              <span><strong>法理合规审计</strong>：自动化提取行业法理红线与业务倒排逻辑，不留风控死角。</span>
             </li>
-            <li class="philo-feature-item">
-              <span class="bullet">▹</span>
-              <span>智能检验闭环：人机红蓝对抗审计，确保产物兼备理论高度与落地实操性</span>
+            <li class="creed-feature-item">
+              <span class="creed-feature-bullet">✓</span>
+              <span><strong>红蓝对抗推演</strong>：AI 与人类架构师多轮对抗审校，确保方案兼备理论高度与实操性。</span>
+            </li>
+            <li class="creed-feature-item">
+              <span class="creed-feature-bullet">✓</span>
+              <span><strong>高精原型直出</strong>：跳过低保真线框草图，直接产出高保真像素级交互原型。</span>
             </li>
           </ul>
-        </article>
-
-        <!-- 理念 3: 极客手搓 DIY -->
-        <article class="philosophy-card">
-          <div class="philo-icon-box">🛠️</div>
-          <h3 class="philo-title">
-            <span>极客 DIY 掌控力 (Radical DIY)</span>
-            <span class="philo-tag">Craftsmanship</span>
-          </h3>
-          <p class="philo-desc">
-            拒绝动辄数百兆庞杂依赖、臃肿黑盒框架的“组件拼接式开发”。以纯原生 HTML5、现代化语义 Vanilla CSS、轻量原生 JS 与系统内置 PowerShell 构建核心。对代码每一处微小执行细节保持透明与绝对支配。
-          </p>
-          <ul class="philo-features">
-            <li class="philo-feature-item">
-              <span class="bullet">▹</span>
-              <span>坚决不装本地第三方运行包，以 Windows 原生自动化脚本处理一切管道</span>
-            </li>
-            <li class="philo-feature-item">
-              <span class="bullet">▹</span>
-              <span>自主掌控每一个动画缓动贝塞尔曲线、响应式断点与按键反馈</span>
-            </li>
-          </ul>
-        </article>
-
-        <!-- 理念 4: 追求卓越品质 -->
-        <article class="philosophy-card">
-          <div class="philo-icon-box">✨</div>
-          <h3 class="philo-title">
-            <span>追求卓越品质 (Pursuit of Excellence)</span>
-            <span class="philo-tag">Industrial Grade</span>
-          </h3>
-          <p class="philo-desc">
-            拒绝粗制滥造的简陋原型与敷衍的最小可行产品（MVP）。每一次方案制定与成果物交付，均恪守工业级精密规范（DEL 标号资产、全中文专业报告、深色高奢视觉层、移动端符号化空间自适应），把每一份交付打造成工程艺术品。
-          </p>
-          <ul class="philo-features">
-            <li class="philo-feature-item">
-              <span class="bullet">▹</span>
-              <span>规范防溢出：严格遵守全屏 320px~430px 窄屏横向零溢出与按钮符号化规范</span>
-            </li>
-            <li class="philo-feature-item">
-              <span class="bullet">▹</span>
-              <span>概念分层消歧：严格隔离 L1 平台门户层与 L2 目标产品层，杜绝路由阻断</span>
-            </li>
-          </ul>
-        </article>
+        </div>
       </div>
     </div>
   </section>
@@ -1562,9 +1407,9 @@
   <!-- ======================================================================
        4. 核心专业服务体系 (Service Matrix)
        ====================================================================== -->
-  <section class="section-block" id="services" style="background: rgba(255, 255, 255, 0.01);">
+  <section class="section-block" id="services" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--vg-border-subtle);">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal-on-scroll">
         <div class="section-eyebrow">SERVICES & CAPABILITIES</div>
         <h2 class="section-title">核心专业服务内容</h2>
         <p class="section-desc">
@@ -1574,58 +1419,66 @@
 
       <div class="service-grid">
         <!-- 服务 1 -->
-        <div class="service-card">
-          <div class="service-num">01 / ARCHITECTURE</div>
-          <h3 class="service-title">战略架构顶层设计与技术路线图制定</h3>
+        <div class="service-card reveal-on-scroll">
+          <div class="service-header">
+            <div class="service-number">01 / ARCHITECTURE</div>
+            <h3 class="service-title">战略架构顶层设计与技术路线图</h3>
+          </div>
           <p class="service-desc">
             深入企业商业模式核心，剖析信息拓扑与数据流转瓶颈，输出具备前瞻性、模块化且解耦的系统要件定义与演进路线图。
           </p>
-          <div class="service-badges">
-            <span class="service-badge">ER 数据模型</span>
-            <span class="service-badge">RBAC 权限设计</span>
-            <span class="service-badge">技术选型审计</span>
+          <div class="service-tags">
+            <span class="service-tag">ER 数据实体模型</span>
+            <span class="service-tag">RBAC 细粒度权限</span>
+            <span class="service-tag">技术路线图规划</span>
           </div>
         </div>
 
         <!-- 服务 2 -->
-        <div class="service-card">
-          <div class="service-num">02 / WORKFLOW</div>
-          <h3 class="service-title">高人效业务 SOP 与合规规约工程化</h3>
+        <div class="service-card reveal-on-scroll">
+          <div class="service-header">
+            <div class="service-number">02 / WORKFLOW</div>
+            <h3 class="service-title">高人效业务 SOP 与合规规约工程化</h3>
+          </div>
           <p class="service-desc">
             将碎片化、依赖个人经验的行业实务梳理为严密的标准作业程序（SOP）。深度融入行业法理风控红线与智能倒排机制。
           </p>
-          <div class="service-badges">
-            <span class="service-badge">标准业务流 SOP</span>
-            <span class="service-badge">法理合规排查</span>
-            <span class="service-badge">动态智能 Checklist</span>
+          <div class="service-tags">
+            <span class="service-tag">标准业务流 SOP</span>
+            <span class="service-tag">行业法理风控排查</span>
+            <span class="service-tag">智能倒排 Checklist</span>
           </div>
         </div>
 
         <!-- 服务 3 -->
-        <div class="service-card">
-          <div class="service-num">03 / PROTOTYPE</div>
-          <h3 class="service-title">高保真沉浸式原型推演与仿真工作台</h3>
+        <div class="service-card reveal-on-scroll">
+          <div class="service-header">
+            <div class="service-number">03 / PROTOTYPE</div>
+            <h3 class="service-title">高保真沉浸式原型推演与仿真工作台</h3>
+          </div>
           <p class="service-desc">
-            拒绝扁平线框图。直接构建涵盖登录门禁、全景 VR 工作台与业务台账的高保真可交互纯静态样板，供投资方与团队直观评审。
+            拒绝扁平线框图。直接构建涵盖门禁登录、全景工作台与业务台账的高保真可交互纯静态样板，供决策层与客户直观体验。
           </p>
-          <div class="service-badges">
-            <span class="service-badge">VR 沉浸空间枢纽</span>
-            <span class="service-badge">业务台账仿真</span>
-            <span class="service-badge">AI 助理体验 Mock</span>
+          <div class="service-tags">
+            <span class="service-tag">沉浸空间控制台</span>
+            <span class="service-tag">业务台账仿真交互</span>
+            <span class="service-tag">AI 助理体验 Mock</span>
           </div>
         </div>
 
         <!-- 服务 4 -->
-        <div class="service-card">
-          <div class="service-num">04 / DELIVERY</div>
-          <h3 class="service-title">零依赖静态交付资产构建与边缘分发</h3>
+        <div class="service-card reveal-on-scroll">
+          <div class="service-header">
+            <div class="service-number">04 / DELIVERY</div>
+            <h3 class="service-title">零依赖静态交付资产构建与边缘分发</h3>
+          </div>
           <p class="service-desc">
             建立从本地 Markdown 规范到纯静态自包含网站的极简自动化管道，配置 GitHub Actions 部署与独立域名 SSL 挂载。
           </p>
-          <div class="service-badges">
-            <span class="service-badge">Edge 边缘网络</span>
-            <span class="service-badge">自包含单文件夹</span>
-            <span class="service-badge">CI/CD 自动化</span>
+          <div class="service-tags">
+            <span class="service-tag">Cloudflare DNS & SSL</span>
+            <span class="service-tag">GitHub Actions 自动化</span>
+            <span class="service-tag">自包含纯静态包</span>
           </div>
         </div>
       </div>
@@ -1633,108 +1486,80 @@
   </section>
 
   <!-- ======================================================================
-       5. 案件展台与公开展示入口 (Case Studies & Project Showcase)
+       5. 案件展台 (Portfolio & Featured Case)
        ====================================================================== -->
-  <section class="section-block" id="cases">
+  <section class="section-block" id="cases" style="border-top: 1px solid var(--vg-border-subtle);">
     <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">PORTFOLIO & SHOWCASE</div>
+      <div class="section-header reveal-on-scroll">
+        <div class="section-eyebrow">PORTFOLIO & CASE STUDIES</div>
         <h2 class="section-title">精选案件清单与展示网站</h2>
         <p class="section-desc">
           所有交付物均以高标准公开展出，支持线上独立域名访问与本地离线浏览双模交互。
         </p>
       </div>
 
-      <!-- 核心重点案例卡片：Sentis 案件 -->
-      <article class="case-card-featured">
-        <div class="case-top-meta">
-          <div class="case-badge-group">
-            <span class="case-badge-active">● 审查就绪 (Review Ready v0.9)</span>
-            <span class="case-badge-cat">高端不动产业务系统规划</span>
-          </div>
-          <div class="case-code-tag">CASE ID: sentis-crm-system</div>
-        </div>
-
-        <div class="case-header-content">
-          <h3>株式会社センティス (SENTIS) 次世代不动产内部综合业务基干系统</h3>
-          <p>
-            基于代表创业计划书及不动产买卖与住宅贷款实务规程，针对少人数精英体制，量身规划集「小红书/私域海外集客、高额不动产（2~10億円）跨国交易风控、全流程智能Checklist与决算倒排」于一体的高人效业务基干管理系统。包含全套 4 篇详尽业务规格书（DEL-03~06）、正面视点 VR 执务室枢纽与台账原型（DEL-01）、AI事务补佐UI（DEL-02）及全套企业 CI/VI 资产包（DEL-07）。
-          </p>
-        </div>
-
-        <!-- 成果物快照条 -->
-        <div class="case-deliverables-pill-grid">
-          <div class="deliverable-pill-item">
-            <div class="pill-code">DEL-01 · 画面样板</div>
-            <div class="pill-title">执务室VR ＆ 业务台账</div>
-            <div class="pill-sub">门禁、工作台与6大台账</div>
-          </div>
-          <div class="deliverable-pill-item">
-            <div class="pill-code">DEL-03~04 · 业务SOP</div>
-            <div class="pill-title">高人效模型与7阶段流</div>
-            <div class="pill-sub">重说35条/37条与反洗钱</div>
-          </div>
-          <div class="deliverable-pill-item">
-            <div class="pill-code">DEL-05 · 架构设计</div>
-            <div class="pill-title">5大模块与7大ER模型</div>
-            <div class="pill-sub">RBAC4级权限与APPI脱敏</div>
-          </div>
-          <div class="deliverable-pill-item">
-            <div class="pill-code">DEL-07 · 品牌资产</div>
-            <div class="pill-title">CI/VI 全规格素材套件</div>
-            <div class="pill-sub">罗盘与S形曲线透明矢量</div>
+      <!-- 核心重点案例：Sentis CRM 商业全案 -->
+      <div class="showcase-featured-wrapper reveal-on-scroll">
+        <!-- 产品大图展视 -->
+        <div class="showcase-visual-box">
+          <img src="./assets/images/sentis-showcase.jpg" alt="Sentis CRM 豪华汽车数字化业务中枢高保真原型展台" loading="lazy">
+          <div class="showcase-live-tag">
+            <span class="pulse-dot"></span>
+            <span>FLAGSHIP CASE · SENTIS CRM</span>
           </div>
         </div>
 
-        <!-- 底部直达行动条 -->
-        <div class="case-action-bar">
-          <div class="case-action-info">
-            <span>🌐 线上部署域名：<strong>vanguard-sentis.evotensor.dev</strong></span>
-          </div>
-          <div class="case-buttons-group">
-            <a href="https://vanguard-sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="btn-launch-primary" title="打开 Sentis 案件线上公开展示网站">
-              <span class="btn-symbol">↗</span>
-              <span class="btn-text">访问线上展示网站</span>
-            </a>
-            <a href="../cases/sentis-crm-system/site/index.html" target="_blank" rel="noopener noreferrer" class="btn-launch-secondary" title="本地离线直接打开">
-              <span class="btn-symbol">📂</span>
-              <span class="btn-text">本地离线直开</span>
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 更多演进案例预告 -->
-      <div class="secondary-cases-grid">
-        <div class="secondary-case-card">
-          <div>
-            <div class="case-badge-group">
-              <span class="service-badge" style="color:var(--vg-accent-indigo);">PLANNING / 规划推演</span>
-            </div>
-            <h4 class="sec-case-title">Quant-Matrix：微架构量化金融资产交易工作台</h4>
-            <p class="sec-case-desc">
-              专注微秒级特征工程调度、多策略回测矩阵可视化与风控限额自动处置的无服务器推演工作台样板。
+        <!-- 详细信息与成果物清单 -->
+        <div class="showcase-body-grid">
+          <div class="showcase-info-col">
+            <h3>Sentis 汽车数字化全景业务中枢 CRM</h3>
+            <p>
+              针对豪华汽车经销与定制改装企业打造的数字化中枢全案。融合客户全生命周期管理、智能业务台账、执务室 VR 全景操控台与工业级合规 SOP 倒排机制。
             </p>
-          </div>
-          <div class="sec-case-footer">
-            <span>资产编号: CASE-PLN-02</span>
-            <span>待解密发布</span>
-          </div>
-        </div>
-
-        <div class="secondary-case-card">
-          <div>
-            <div class="case-badge-group">
-              <span class="service-badge" style="color:var(--vg-accent-cyan);">CONCEPT / 概念设计</span>
+            <div class="showcase-actions">
+              <a href="https://sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="btn-showcase-launch" title="打开 Sentis 案件展示网站" aria-label="查阅在线展示网站">
+                <span>🚀</span>
+                <span class="btn-text">在线展示网站</span>
+              </a>
+              <a href="https://sentis.evotensor.dev/document.html" target="_blank" rel="noopener noreferrer" class="btn-showcase-doc" title="查阅 Sentis 全套设计规格书" aria-label="查阅设计规格书">
+                <span>📄</span>
+                <span class="btn-text">全案设计规格书</span>
+              </a>
             </div>
-            <h4 class="sec-case-title">Aether-Compliance：跨法域多币种数字合规风控引擎</h4>
-            <p class="sec-case-desc">
-              针对跨国贸易与合规支付结算的离线身份核验（eKYC）与资金路径自动化穿透审计模型。
-            </p>
           </div>
-          <div class="sec-case-footer">
-            <span>资产编号: CASE-PLN-03</span>
-            <span>待解密发布</span>
+
+          <div class="showcase-deliverables-col">
+            <div class="deliv-card-item">
+              <div>
+                <div class="deliv-code-badge">DEL-01</div>
+                <div class="deliv-card-title">系统设计与交互规范书</div>
+              </div>
+              <div class="deliv-card-status">● 完整交付</div>
+            </div>
+
+            <div class="deliv-card-item">
+              <div>
+                <div class="deliv-code-badge">DEL-02</div>
+                <div class="deliv-card-title">标准作业程序与法理规约 (SOP)</div>
+              </div>
+              <div class="deliv-card-status">● 完整交付</div>
+            </div>
+
+            <div class="deliv-card-item">
+              <div>
+                <div class="deliv-code-badge">DEL-03</div>
+                <div class="deliv-card-title">数据模型与实体关系规约 (ER)</div>
+              </div>
+              <div class="deliv-card-status">● 完整交付</div>
+            </div>
+
+            <div class="deliv-card-item">
+              <div>
+                <div class="deliv-code-badge">DEL-04</div>
+                <div class="deliv-card-title">高保真沉浸式仿真工作台样板</div>
+              </div>
+              <div class="deliv-card-status">● 完整交付</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1742,63 +1567,42 @@
   </section>
 
   <!-- ======================================================================
-       6. 作者档案与自我评价 (Author Profile & Philosophy)
+       6. 作者档案与工匠宣言 (Craftsman Profile)
        ====================================================================== -->
-  <section class="section-block" id="author" style="background: rgba(255, 255, 255, 0.015);">
+  <section class="section-block" id="author" style="background: rgba(255, 255, 255, 0.01); border-top: 1px solid var(--vg-border-subtle);">
     <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">CREATOR & ARCHITECT</div>
-        <h2 class="section-title">作者信息与自我评价</h2>
+      <div class="section-header reveal-on-scroll">
+        <div class="section-eyebrow">ARCHITECT PROFILE</div>
+        <h2 class="section-title">工匠精神与自我评价</h2>
         <p class="section-desc">
-          一人军团，专注从商业本质到像素落地的系统性闭环。
+          真正的掌控力源自对商业机理的穿透力、底层技术的熟稔与视觉审美的偏执追求。
         </p>
       </div>
 
-      <div class="author-container-card">
-        <!-- 左侧头像与指标 -->
-        <div class="author-badge-col">
-          <div class="author-avatar">V</div>
-          <h3 class="author-name">Vanguard 架构师</h3>
-          <div class="author-role">SOLO ARCHITECT & DIGITAL CRAFTSMAN</div>
-
-          <div class="author-stats">
-            <div class="author-stat-item">
-              <span>技术主张</span>
-              <strong>奥卡姆剃刀 / 纯原生</strong>
-            </div>
-            <div class="author-stat-item">
-              <span>核心范式</span>
-              <strong>Zero-Server / 静态优先</strong>
-            </div>
-            <div class="author-stat-item">
-              <span>交付标准</span>
-              <strong>工业级全生命周期</strong>
-            </div>
-          </div>
+      <div class="artisan-section-grid reveal-on-scroll">
+        <div class="artisan-visual-col">
+          <img src="./assets/images/artisan-craft.jpg" alt="Vanguard 首席架构师工作坊" loading="lazy">
         </div>
-
-        <!-- 右侧自我评价宣言 -->
-        <div class="author-content-col">
-          <h4 class="author-manifesto-title">“拒绝平庸的冗余堆砌，以理性质感定义工程美学”</h4>
-          <p class="author-manifesto-text">
-            作为一名坚持独立思考与全链路操盘的数字化工匠，我始终对软件开发中日趋严重的“过度工程化”保持警惕。我拒绝为了炫技而引入数以百计不可控的外部依赖，拒绝用繁复的微服务架构掩盖业务逻辑的苍白。
-          </p>
-          <p class="author-manifesto-text">
-            在我看来，真正的掌控力源自对<strong>商业机理的穿透力、法律合规的敏锐度、底层原生技术的熟稔，以及对视觉审美每一处微动效的偏执</strong>。借助 Vanguard 工具链与 AI 的深度协同，我以单人身姿建立起媲美传统庞大咨询开发团队的超人效生产力，每一份产物皆为可直接运行、永久持久化的数字资产。
+        <div class="artisan-text-col">
+          <h3>Nick / Vanguard 平台创始人</h3>
+          <div class="artisan-role-sub">PRINCIPAL ARCHITECT & FULL-STACK ARTISAN</div>
+          <p class="artisan-bio">
+            长期深耕于复杂信息架构设计、前沿大模型工程落地与高保真交付体系。坚决反思现代软件工程中日益严重的工具链膨胀与“中间商堆叠”现象。
+            借助 Vanguard 工具链与 AI 的深度协同，我以单人身姿建立起媲美传统大型开发团队的生产力，每一份产物皆为可直接运行、永久持久化的数字资产。
           </p>
 
-          <div class="author-traits-grid">
-            <div class="author-trait-box">
-              <div class="trait-label">⚡ 极度理性与极简</div>
-              <div class="trait-desc">如无必要，勿增实体。用最精炼的结构实现最稳固的系统。</div>
+          <div class="artisan-points-grid">
+            <div class="artisan-point-card">
+              <div class="artisan-point-title">⚡ 极度理性与极简</div>
+              <div class="artisan-point-desc">如无必要勿增实体，用最精炼的结构实现最稳固的系统。</div>
             </div>
-            <div class="author-trait-box">
-              <div class="trait-label">🎯 业务与法务穿透</div>
-              <div class="trait-desc">不做空中楼阁，每一行设计方案深度对齐真实商业与合规风控。</div>
+            <div class="artisan-point-card">
+              <div class="artisan-point-title">🎯 业务与法理穿透</div>
+              <div class="artisan-point-desc">每一行设计方案深度对齐商业利益与合规风控，不做空中楼阁。</div>
             </div>
-            <div class="author-trait-box">
-              <div class="trait-label">💎 像素级视觉美学</div>
-              <div class="trait-desc">信息架构与工业美感相融合，提供震撼第一眼的精致体验。</div>
+            <div class="artisan-point-card">
+              <div class="artisan-point-title">💎 像素级视觉美学</div>
+              <div class="artisan-point-desc">信息架构与工业美感相融合，提供震撼第一眼的精致体验。</div>
             </div>
           </div>
         </div>
@@ -1807,55 +1611,76 @@
   </section>
 
   <!-- ======================================================================
-       7. 页脚与公开声明 (Global Footer)
+       7. 全局页脚 (Global Footer)
        ====================================================================== -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand-side">
-          <div class="footer-brand-title">
-            <img src="./favicon.svg" alt="Vanguard Logo" style="width:24px; height:24px; border-radius:5px; vertical-align:middle; box-shadow:0 2px 8px rgba(37,99,235,0.4);">
-            <span>VANGUARD (先锋) 架构实验室</span>
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-brand-header">
+            <img src="./favicon.svg" alt="Vanguard Logo" style="width:28px; height:28px; border-radius:6px; box-shadow:0 2px 10px rgba(37,99,235,0.4);">
+            <span class="footer-brand-title">VANGUARD (先锋) 架构实验室</span>
           </div>
           <p class="footer-brand-desc">
             面向未来的纯静态极简交付与数字架构工坊。完全开源开放，展示开发理念、核心服务矩阵与真实业务落地案例。
           </p>
         </div>
 
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">平台导航</div>
-          <a href="#creed" class="footer-nav-link">开发理念宣言</a>
-          <a href="#services" class="footer-nav-link">专业服务矩阵</a>
-          <a href="#cases" class="footer-nav-link">精选案件清单</a>
-          <a href="#author" class="footer-nav-link">作者档案与自评</a>
+        <div class="footer-links-col">
+          <div class="footer-col-title">平台导航</div>
+          <a href="#creed" class="footer-link">开发理念</a>
+          <a href="#services" class="footer-link">服务矩阵</a>
+          <a href="#cases" class="footer-link">案件展台</a>
+          <a href="#author" class="footer-link">作者档案</a>
         </div>
 
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">案例直达</div>
-          <a href="https://vanguard-sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="footer-nav-link">Sentis 房产管理系统 (线上) ↗</a>
-          <a href="../cases/sentis-crm-system/site/index.html" target="_blank" rel="noopener noreferrer" class="footer-nav-link">Sentis 案件本地离线门户</a>
-          <a href="../docs/CASES_INDEX.md" target="_blank" rel="noopener noreferrer" class="footer-nav-link">全量案例索引文档</a>
+        <div class="footer-links-col">
+          <div class="footer-col-title">商业案例</div>
+          <a href="https://sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="footer-link">Sentis 汽车数字化 CRM</a>
+          <a href="https://sentis.evotensor.dev/document.html" target="_blank" rel="noopener noreferrer" class="footer-link">Sentis 规格设计书</a>
         </div>
 
-        <div class="footer-nav-col">
-          <div class="footer-nav-title">开发公约</div>
-          <span style="color:var(--vg-text-muted);">零常驻 Server</span>
-          <span style="color:var(--vg-text-muted);">零本地语言运行时</span>
-          <span style="color:var(--vg-text-muted);">移动端横向零溢出</span>
-          <span style="color:var(--vg-text-muted);">Windows 原生自动化</span>
+        <div class="footer-links-col">
+          <div class="footer-col-title">开源技术</div>
+          <a href="https://github.com/QQDDTT/Vanguard" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub 仓库</a>
+          <a href="https://vanguard.evotensor.dev" class="footer-link">平台官方门户</a>
         </div>
       </div>
 
       <div class="footer-bottom-bar">
-        <div>
-          © 2026 Vanguard Platform · Public Architecture Studio · All Rights Reserved.
-        </div>
-        <div>
-          PURE STATIC DRIVEN · EDGE ANYCAST DEPLOYED · ZERO MAINTENANCE CORROSION
-        </div>
+        <div>© 2026 Vanguard Architecture Studio. All Rights Reserved.</div>
+        <div>Built with Radical DIY & Pure Static Standards · Powered by Cloudflare & GitHub Actions</div>
       </div>
     </div>
   </footer>
 
+  <!-- 平滑视差与滚动显示交互脚本 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. IntersectionObserver 视窗平滑渐入效果
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      document.querySelectorAll(".reveal-on-scroll").forEach(el => {
+        observer.observe(el);
+      });
+
+      // 2. 页面载入首屏立即可视元素主动激活
+      setTimeout(() => {
+        document.querySelectorAll(".hero-section .reveal-on-scroll").forEach(el => {
+          el.classList.add("is-visible");
+        });
+      }, 50);
+    });
+  </script>
 </body>
 </html>
