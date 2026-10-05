@@ -271,6 +271,94 @@
       color: var(--text-dim);
       font-size: 0.8rem;
     }
+
+    /* ==========================================================================
+       移动端极简响应式规范断点 (Mobile Responsive & Zero Horizontal Overflow)
+       ========================================================================== */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 14px;
+        overflow-x: hidden;
+      }
+
+      .header-bar {
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+      }
+
+      .hero-desc {
+        font-size: 0.95rem;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .kpi-card {
+        padding: 16px 14px;
+      }
+
+      .kpi-value {
+        font-size: 1.5rem;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .content-box {
+        padding: 16px 14px;
+        min-width: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* 表格内嵌独立横向滚动，避免撑大视口 */
+      .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* 按钮移动端符号化自适应：隐藏文本，只显示图标 */
+      .btn-responsive .btn-text {
+        display: none !important;
+      }
+
+      .btn-responsive {
+        padding: 6px 10px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .brand {
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 <body>

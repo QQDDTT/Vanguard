@@ -22,16 +22,19 @@ Vanguard/
 ├── .agents/                    # Agent 行为规则与开发方针规范
 │   └── rules/
 │       └── AGENTS.md
+├── .github/                    # GitHub Actions 自动化工作流
+│   └── workflows/
+│       └── deploy-portal.yml   # 平台官方网站自动部署至 GitHub Pages
+├── site/                       # Vanguard 平台官方公开静态网站 (完全公开)
+│   └── index.html              # 平台官网主页（开发理念、服务体系、作者档案、案件清单）
+├── index.html                  # 平台根目录无缝直开入口
 ├── docs/                       # 核心通用文档与知识库
 │   ├── templates/              # 案例分析与文档模板
 │   └── guides/                 # 操作指南与规范说明
-├── cases/                      # 业务案例库
+├── cases/                      # 业务案例库 (受 .gitignore 保护，不入主库)
 │   └── example-case/           # 具体案例目录示例
 │       ├── docs/               # 案例文档与原始调研分析 (Markdown)
-│       └── site/               # 针对该案例生成的纯静态网站 (HTML/CSS/JS)
-│           ├── index.html      # 案例展示主页（可直接双击打开）
-│           ├── styles.css      # 视觉样式
-│           └── assets/         # 静态资源与图表
+│       └── site/               # 针对该案例生成的纯静态展示样板 (HTML/CSS/JS)
 └── README.md                   # 项目总览说明
 ```
 

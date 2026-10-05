@@ -1,0 +1,46 @@
+# ==============================================================================
+# Vanguard 平台官方网站自动化部署工作流 (GitHub Actions)
+# 作用: 监听 main 分支变动，自动将 site/ 平台官方网站发布至 GitHub Pages
+# ==============================================================================
+
+name: 部署 Vanguard 平台官网至 GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy-portal.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'vanguard-platform-pages'
+  cancel-in-progress: false
+
+jobs:
+  deploy-portal:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出平台代码资产
+        uses: actions/checkout@v4
+
+      - name: 初始化 GitHub Pages 运行环境
+        uses: actions/configure-pages@v5
+
+      - name: 归档上传 site 平台官网静态资源
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'site'
+
+      - name: 自动化部署至 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
