@@ -1,10 +1,17 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vanguard (先锋) - 极简架构实验室与前沿数字资产工坊</title>
   <meta name="description" content="Vanguard 平台官方门户。秉承前沿部署、AI协同进化、极客DIY掌控与追求卓越的开发理念，提供复杂业务架构设计、业务SOP规约、高保真原型仿真与零运维静态资产体系构建。">
+
+  <!-- Vanguard 官方 Favicon 图标体系 -->
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="shortcut icon" href="./favicon.ico">
 
   <style>
     /* ==========================================================================
@@ -126,17 +133,22 @@
     .brand-badge {
       width: 36px;
       height: 36px;
-      background: var(--vg-gradient-primary);
       border-radius: var(--vg-radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
-      font-family: var(--vg-font-mono);
-      font-size: 18px;
-      font-weight: 800;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);
       flex-shrink: 0;
+      overflow: hidden;
+      background: rgba(14, 19, 32, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .brand-badge img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
     .brand-text-wrap {
@@ -1348,7 +1360,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="./index.html" class="brand-link" title="Vanguard 平台首页">
-        <div class="brand-badge">V</div>
+        <div class="brand-badge"><img src="./favicon.svg" alt="Vanguard Logo" width="36" height="36"></div>
         <div class="brand-text-wrap">
           <span class="brand-title">VANGUARD 先锋平台</span>
           <span class="brand-subtitle">ARCHITECTURE & STRATEGY STUDIO</span>
@@ -1684,7 +1696,7 @@
               <span class="btn-symbol">↗</span>
               <span class="btn-text">访问线上展示网站</span>
             </a>
-            <a href="./cases/sentis-crm-system/site/index.html" target="_blank" rel="noopener noreferrer" class="btn-launch-secondary" title="本地离线直接打开">
+            <a href="../cases/sentis-crm-system/site/index.html" target="_blank" rel="noopener noreferrer" class="btn-launch-secondary" title="本地离线直接打开">
               <span class="btn-symbol">📂</span>
               <span class="btn-text">本地离线直开</span>
             </a>
@@ -1802,7 +1814,7 @@
       <div class="footer-inner">
         <div class="footer-brand-side">
           <div class="footer-brand-title">
-            <span style="display:inline-flex; width:22px; height:22px; background:var(--vg-accent-blue); border-radius:4px; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#fff;">V</span>
+            <img src="./favicon.svg" alt="Vanguard Logo" style="width:24px; height:24px; border-radius:5px; vertical-align:middle; box-shadow:0 2px 8px rgba(37,99,235,0.4);">
             <span>VANGUARD (先锋) 架构实验室</span>
           </div>
           <p class="footer-brand-desc">
@@ -1821,8 +1833,8 @@
         <div class="footer-nav-col">
           <div class="footer-nav-title">案例直达</div>
           <a href="https://vanguard-sentis.evotensor.dev" target="_blank" rel="noopener noreferrer" class="footer-nav-link">Sentis 房产管理系统 (线上) ↗</a>
-          <a href="./cases/sentis-crm-system/site/index.html" target="_blank" rel="noopener noreferrer" class="footer-nav-link">Sentis 案件本地离线门户</a>
-          <a href="./docs/CASES_INDEX.md" target="_blank" rel="noopener noreferrer" class="footer-nav-link">全量案例索引文档</a>
+          <a href="../cases/sentis-crm-system/site/index.html" target="_blank" rel="noopener noreferrer" class="footer-nav-link">Sentis 案件本地离线门户</a>
+          <a href="../docs/CASES_INDEX.md" target="_blank" rel="noopener noreferrer" class="footer-nav-link">全量案例索引文档</a>
         </div>
 
         <div class="footer-nav-col">
