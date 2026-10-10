@@ -20,7 +20,8 @@ docs/
 │   └── static_site_template.html           # 案例纯静态展示网站开箱即用模板
 └── guides/                                 # 实操指引手册
     ├── case_authoring_guide.md             # 案例文档编写与沉淀实操指南
-    └── static_site_delivery_guide.md       # 静态产物生成与交付质检手册
+    ├── static_site_delivery_guide.md       # 静态产物生成与交付质检手册
+    └── architect_portrait_design_guide.md  # 创始人/架构师个人肖像制作与视觉规范指南
 ```
 
 ---
@@ -41,6 +42,7 @@ docs/
 ### 🚀 实操操作指引
 - [案例文档编写与沉淀指南](file:///g:/我的云端硬盘/workspace/Vanguard/docs/guides/case_authoring_guide.md)
 - [静态产物生成与交付指南](file:///g:/我的云端硬盘/workspace/Vanguard/docs/guides/static_site_delivery_guide.md)
+- [架构师个人肖像制作指南](file:///g:/我的云端硬盘/workspace/Vanguard/docs/guides/architect_portrait_design_guide.md)：门户第 5 幕个人肖像的 AI 重绘、实拍布光与工程替换规范。
 
 ---
 

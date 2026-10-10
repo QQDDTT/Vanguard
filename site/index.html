@@ -829,14 +829,46 @@
       aspect-ratio: 4 / 3;
       border-radius: var(--vg-radius-lg);
       overflow: hidden;
-      border: 1px solid var(--vg-border-subtle);
+      border: 1px dashed var(--vg-border-light);
+      background: radial-gradient(circle at center, rgba(56, 189, 248, 0.04) 0%, rgba(11, 15, 23, 0.8) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
     .artisan-portrait-wrap img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      z-index: 2;
+    }
+
+    .artisan-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--vg-text-muted);
+      user-select: none;
+    }
+
+    .artisan-placeholder-icon {
+      width: 44px;
+      height: 44px;
+      stroke: var(--vg-text-dim);
+      opacity: 0.6;
+    }
+
+    .artisan-placeholder-text {
+      font-family: var(--vg-font-mono);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--vg-text-dim);
+      text-transform: uppercase;
     }
 
     .artisan-info-col {
@@ -1248,8 +1280,19 @@
             </div>
 
             <div class="artisan-box-grid slide-reveal reveal-delay-2">
-              <div class="artisan-portrait-wrap">
-                <img src="./assets/images/artisan-craft.jpg" alt="Vanguard 首席架构师工作坊" loading="lazy">
+              <div class="artisan-portrait-wrap" id="artisanPortrait">
+                <!-- ==========================================================
+                     待替换个人照片：
+                     1. 方式一（零改代码）：直接将自己的照片重命名为 artisan-craft.jpg 覆盖到 assets/images/ 目录
+                     2. 方式二：取消下方 img 标签的注释，并将 src 修改为您的新照片路径
+                     ========================================================== -->
+                <!-- <img src="./assets/images/artisan-craft.jpg" alt="Nick - Vanguard 平台创始人" loading="lazy"> -->
+                <div class="artisan-placeholder">
+                  <svg class="artisan-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                  </svg>
+                  <span class="artisan-placeholder-text">PHOTO PENDING</span>
+                </div>
               </div>
 
               <div class="artisan-info-col">
