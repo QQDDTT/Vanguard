@@ -7,7 +7,7 @@ $map = @{
     'portal_artisan_craft_1791177678451.jpg' = 'artisan-craft.jpg'
 }
 
-$destDirs = @('site\assets\images', 'assets\images')
+$destDirs = @('site\assets\images')
 foreach ($d in $destDirs) {
     if (-not (Test-Path $d)) {
         New-Item -ItemType Directory -Path $d -Force | Out-Null

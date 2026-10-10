@@ -25,9 +25,12 @@ Vanguard/
 ├── .github/                    # GitHub Actions 自动化工作流
 │   └── workflows/
 │       └── deploy-portal.yml   # 平台官方网站自动部署至 GitHub Pages
-├── site/                       # Vanguard 平台官方公开静态网站 (完全公开)
-│   └── index.html              # 平台官网主页（开发理念、服务体系、作者档案、案件清单）
-├── index.html                  # 平台根目录无缝直开入口
+├── site/                       # Vanguard 平台官方公开静态网站 (发布至 GitHub Pages)
+│   ├── index.html              # 平台官网主页（开发理念、服务体系、作者档案）
+│   ├── cases.html              # 独立业务案件清单索引
+│   ├── CNAME                   # 自定义域名配置
+│   ├── favicon*                # 网站品牌图标体系
+│   └── assets/images/          # 高精视觉与概念架构图片资产
 ├── docs/                       # 核心通用文档与知识库
 │   ├── templates/              # 案例分析与文档模板
 │   └── guides/                 # 操作指南与规范说明
